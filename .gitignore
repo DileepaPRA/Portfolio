@@ -1,0 +1,24 @@
+node_modules/
+dist/
+build/
+.cache/
+.env*
+*.tsbuildinfo
+*-debug.log*
+logs/
+*.log
+
+# Next.js
+.next/
+out/
+
+# Figma Make (legacy)
+.figma/
+CLAUDE.md
+
+# Reference assets (not needed in production)
+src/imports/
+
+# Platform-managed state
+/.plugins/
+/.opencode-skills/
