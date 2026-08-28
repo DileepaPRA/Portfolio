@@ -141,12 +141,18 @@ export default function AboutSection() {
               {/* Code body */}
               <div className="p-5 flex gap-4 font-mono text-[13px] leading-6 overflow-x-auto scrollbar-hide">
                 {/* Line numbers */}
-                <div className="flex flex-col text-right select-none shrink-0 text-xs" style={{ color: "rgba(255,255,255,0.15)" }}>
+                <div
+                  className="flex flex-col text-right select-none shrink-0 text-xs"
+                  style={{ color: "rgba(255,255,255,0.15)" }}
+                >
                   {PERSONAL_INFO.aboutCodeLines.map((_, i) => (
                     <span
                       key={i}
                       className="leading-6 transition-colors duration-100"
-                      style={{ color: hoveredLine === i ? "rgba(132,204,22,0.5)" : "rgba(255,255,255,0.15)" }}
+                      style={{
+                        color:
+                          hoveredLine === i ? "rgba(132,204,22,0.5)" : "rgba(255,255,255,0.15)",
+                      }}
                     >
                       {i + 1}
                     </span>
@@ -161,7 +167,10 @@ export default function AboutSection() {
                       className="leading-6 rounded px-2 -mx-2 transition-colors duration-100"
                       style={{
                         background: hoveredLine === i ? "rgba(132,204,22,0.07)" : "transparent",
-                        borderLeft: hoveredLine === i ? "2px solid rgba(132,204,22,0.5)" : "2px solid transparent",
+                        borderLeft:
+                          hoveredLine === i
+                            ? "2px solid rgba(132,204,22,0.5)"
+                            : "2px solid transparent",
                         paddingLeft: hoveredLine === i ? "0.375rem" : "0.5rem",
                       }}
                       onMouseEnter={() => setHoveredLine(i)}
@@ -188,9 +197,7 @@ export default function AboutSection() {
             </div>
 
             {/* Bio */}
-            <p className="mt-6 text-muted text-base leading-relaxed">
-              {PERSONAL_INFO.bio}
-            </p>
+            <p className="mt-6 text-muted text-base leading-relaxed">{PERSONAL_INFO.bio}</p>
 
             {/* Quick stats */}
             <div className="mt-6 grid grid-cols-2 gap-4">

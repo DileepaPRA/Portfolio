@@ -18,16 +18,13 @@ export default function Navbar({ activeSection }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const activeColor =
-    NAV_ITEMS.find((n) => n.href === `#${activeSection}`)?.color ?? "#4edea3";
+  const activeColor = NAV_ITEMS.find((n) => n.href === `#${activeSection}`)?.color ?? "#4edea3";
 
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled
-          ? "rgba(8,15,32,0.72)"
-          : "rgba(8,15,32,0.45)",
+        background: scrolled ? "rgba(8,15,32,0.72)" : "rgba(8,15,32,0.45)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
@@ -52,10 +49,7 @@ export default function Navbar({ activeSection }: Props) {
           <span className="font-mono font-bold text-sm tracking-tight text-ink ml-1.5">
             {PERSONAL_INFO.shortName}
           </span>
-          <span
-            className="font-mono font-bold text-sm ml-0.5 blink"
-            style={{ color: activeColor }}
-          >
+          <span className="font-mono font-bold text-sm ml-0.5 blink" style={{ color: activeColor }}>
             ▋
           </span>
         </a>
@@ -114,7 +108,11 @@ export default function Navbar({ activeSection }: Props) {
                 className="py-2.5 px-3 rounded-lg font-mono text-sm tracking-widest font-semibold transition-all duration-200"
                 style={
                   isActive
-                    ? { background: `${item.color}1a`, borderBottom: `2px solid ${item.color}`, color: item.color }
+                    ? {
+                        background: `${item.color}1a`,
+                        borderBottom: `2px solid ${item.color}`,
+                        color: item.color,
+                      }
                     : { color: "#6b80a0" }
                 }
               >

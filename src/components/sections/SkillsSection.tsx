@@ -114,7 +114,10 @@ export default function SkillsSection() {
           </div>
           <div className="flex flex-wrap gap-2">
             {LEARNING_NOW.map((t) => (
-              <span key={t} className="font-mono text-xs text-muted border border-white/8 px-2.5 py-1 rounded-lg">
+              <span
+                key={t}
+                className="font-mono text-xs text-muted border border-white/8 px-2.5 py-1 rounded-lg"
+              >
                 {t}
               </span>
             ))}

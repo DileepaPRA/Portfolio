@@ -49,8 +49,7 @@ export default function Footer() {
         {/* Copyright */}
         <p className="font-mono text-[10px] text-dim flex items-center gap-1.5">
           © {new Date().getFullYear()} Built with{" "}
-          <Heart size={10} className="text-ruby" fill="currentColor" />{" "}
-          & precision
+          <Heart size={10} className="text-ruby" fill="currentColor" /> & precision
         </p>
       </div>
     </footer>

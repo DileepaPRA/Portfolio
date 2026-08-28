@@ -38,10 +38,7 @@ export default function ProjectsSection() {
             <span className="text-purple">#</span>projects
           </h2>
           <div className="h-px bg-white/10 flex-grow" />
-          <span
-            className="font-mono text-sm shrink-0"
-            style={{ color: "rgba(168,85,247,0.45)" }}
-          >
+          <span className="font-mono text-sm shrink-0" style={{ color: "rgba(168,85,247,0.45)" }}>
             {String(activeIdx + 1).padStart(2, "0")}
           </span>
         </motion.div>
@@ -116,10 +113,7 @@ export default function ProjectsSection() {
                   {/* Hashtag keywords */}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-mono text-[11px] text-dim"
-                      >
+                      <span key={tag} className="font-mono text-[11px] text-dim">
                         #{tag.toLowerCase().replace(/[\s.]/g, "")}
                       </span>
                     ))}
@@ -175,19 +169,14 @@ export default function ProjectsSection() {
                 style={{
                   width: 72,
                   height: 52,
-                  outline: i === activeIdx
-                    ? "2px solid rgba(168,85,247,0.8)"
-                    : "2px solid transparent",
+                  outline:
+                    i === activeIdx ? "2px solid rgba(168,85,247,0.8)" : "2px solid transparent",
                   outlineOffset: 2,
                   opacity: i === activeIdx ? 1 : 0.45,
                   transform: i === activeIdx ? "scale(1.05)" : "scale(1)",
                 }}
               >
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  className="w-full h-full object-cover"
-                />
+                <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
               </button>
             ))}
           </div>

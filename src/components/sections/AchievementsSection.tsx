@@ -2,7 +2,16 @@
 
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
-import { Trophy, Shield, Star, ExternalLink, ChevronLeft, ChevronRight, BadgeCheck, Image as ImageIcon } from "lucide-react";
+import {
+  Trophy,
+  Shield,
+  Star,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+  BadgeCheck,
+  Image as ImageIcon,
+} from "lucide-react";
 import { AWARDS, CERTIFICATIONS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
@@ -103,9 +112,7 @@ export default function AchievementsSection() {
                       {award.type}
                     </p>
                     <p className="text-muted text-sm mb-1">{award.org}</p>
-                    {award.note && (
-                      <p className="text-dim text-xs font-mono mb-3">{award.note}</p>
-                    )}
+                    {award.note && <p className="text-dim text-xs font-mono mb-3">{award.note}</p>}
                     <a
                       href={award.cert}
                       target="_blank"
@@ -188,7 +195,10 @@ export default function AchievementsSection() {
                   <div className="flex-grow">
                     <div className="flex items-center justify-between mb-1">
                       <span className="font-mono text-[10px] text-muted">{cert.issuer}</span>
-                      <BadgeCheck size={12} className="text-dim group-hover:text-amber transition-colors" />
+                      <BadgeCheck
+                        size={12}
+                        className="text-dim group-hover:text-amber transition-colors"
+                      />
                     </div>
                     <h4 className="font-display text-sm font-bold text-ink leading-snug mb-1">
                       {cert.title}

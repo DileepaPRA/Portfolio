@@ -43,22 +43,28 @@ export default function UniversityJourneySection() {
     return () => cancelAnimationFrame(autoRef.current);
   }, [isDragging]);
 
-  const onPointerDown = useCallback((e: React.PointerEvent) => {
-    setIsDragging(true);
-    startX.current = e.clientX;
-    startAngle.current = angle;
-    lastX.current = e.clientX;
-    velRef.current = 0;
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-  }, [angle]);
+  const onPointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      setIsDragging(true);
+      startX.current = e.clientX;
+      startAngle.current = angle;
+      lastX.current = e.clientX;
+      velRef.current = 0;
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    },
+    [angle]
+  );
 
-  const onPointerMove = useCallback((e: React.PointerEvent) => {
-    if (!isDragging) return;
-    const delta = e.clientX - startX.current;
-    velRef.current = (e.clientX - lastX.current) * 0.3;
-    lastX.current = e.clientX;
-    setAngle(startAngle.current + delta * 0.35);
-  }, [isDragging]);
+  const onPointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging) return;
+      const delta = e.clientX - startX.current;
+      velRef.current = (e.clientX - lastX.current) * 0.3;
+      lastX.current = e.clientX;
+      setAngle(startAngle.current + delta * 0.35);
+    },
+    [isDragging]
+  );
 
   const onPointerUp = useCallback(() => {
     setIsDragging(false);
@@ -122,8 +128,7 @@ export default function UniversityJourneySection() {
           <div
             className="absolute inset-x-0 top-0 h-16 pointer-events-none z-10"
             style={{
-              background:
-                "linear-gradient(to bottom, #060c1a 0%, transparent 100%)",
+              background: "linear-gradient(to bottom, #060c1a 0%, transparent 100%)",
             }}
           />
 
@@ -169,16 +174,15 @@ export default function UniversityJourneySection() {
                       style={{
                         borderRadius: 14,
                         border: `1.5px solid ${
-                          hovered === i
-                            ? "rgba(224,17,95,0.6)"
-                            : "rgba(255,255,255,0.08)"
+                          hovered === i ? "rgba(224,17,95,0.6)" : "rgba(255,255,255,0.08)"
                         }`,
                         boxShadow:
                           hovered === i
                             ? "0 0 30px rgba(224,17,95,0.35), 0 8px 32px rgba(0,0,0,0.6)"
                             : "0 4px 24px rgba(0,0,0,0.5)",
                         transform: hovered === i ? "scale(1.06)" : "scale(1)",
-                        transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
+                        transition:
+                          "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
                         background: "#111827",
                       }}
                     >
@@ -239,9 +243,7 @@ export default function UniversityJourneySection() {
                 style={{
                   width: isActive ? 18 : 5,
                   height: 5,
-                  background: isActive
-                    ? "#e0115f"
-                    : "rgba(255,255,255,0.15)",
+                  background: isActive ? "#e0115f" : "rgba(255,255,255,0.15)",
                 }}
               />
             );

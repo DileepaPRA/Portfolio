@@ -78,8 +78,7 @@ export default function HeroSection() {
           custom={0.2}
           variants={fadeUp}
         >
-          Hi, I'm{" "}
-          <span className="text-emerald">{PERSONAL_INFO.name}</span>
+          Hi, I&apos;m <span className="text-emerald">{PERSONAL_INFO.name}</span>
         </motion.h1>
 
         <motion.div
@@ -169,7 +168,9 @@ export default function HeroSection() {
             href={PERSONAL_INFO.resumeUrl}
             target={PERSONAL_INFO.resumeUrl.startsWith("http") ? "_blank" : undefined}
             rel={PERSONAL_INFO.resumeUrl.startsWith("http") ? "noopener noreferrer" : undefined}
-            download={PERSONAL_INFO.resumeUrl.endsWith(".pdf") ? "Dileepa_Prabhath_CV.pdf" : undefined}
+            download={
+              PERSONAL_INFO.resumeUrl.endsWith(".pdf") ? "Dileepa_Prabhath_CV.pdf" : undefined
+            }
             className="flex items-center gap-2 px-7 py-3 rounded-xl font-mono text-sm font-bold border border-white/10 bg-white/[0.03] text-ink transition-all duration-300 hover:scale-105 hover:border-white/20 hover:bg-white/[0.06]"
           >
             <FileText size={15} />

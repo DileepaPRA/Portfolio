@@ -11,16 +11,12 @@ export const PERSONAL_INFO = {
   name: "Dileepa Prabhath",
   shortName: "DP",
   title: "Full Stack Developer",
-  roles: [
-    "Full Stack Developer",
-    "Backend Engineer",
-    "AI/ML Enthusiast",
-    "Cybersecurity Explorer",
-  ],
+  roles: ["Full Stack Developer", "Backend Engineer", "AI/ML Enthusiast", "Cybersecurity Explorer"],
   tagline: "IT Undergraduate @ University of Moratuwa",
   location: "Sri Lanka 🇱🇰",
   bio: "Driven by curiosity, passionate about building secure, intelligent, and scalable systems that merge innovation with real-world impact—turning complex ideas into elegant code.",
-  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&auto=format",
+  avatar:
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&auto=format",
   resumeUrl: "#", // Replace with your actual CV/Resume URL (e.g., "/cv.pdf" or Google Drive link)
   stats: [
     { label: "Projects", value: "10+" },
@@ -33,8 +29,16 @@ export const PERSONAL_INFO = {
   },
   aboutCodeLines: [
     { indent: 0, tokens: [{ type: "comment", text: "/**" }] },
-    { indent: 0, tokens: [{ type: "comment", text: " * Self-motivated, hardworking individual." }] },
-    { indent: 0, tokens: [{ type: "comment", text: " * Aspiring full stack developer with strong foundation" }] },
+    {
+      indent: 0,
+      tokens: [{ type: "comment", text: " * Self-motivated, hardworking individual." }],
+    },
+    {
+      indent: 0,
+      tokens: [
+        { type: "comment", text: " * Aspiring full stack developer with strong foundation" },
+      ],
+    },
     { indent: 0, tokens: [{ type: "comment", text: " */" }] },
     { indent: 0, tokens: [] },
     {
@@ -240,12 +244,7 @@ export const SKILLS: Record<string, SkillItem[]> = {
   ],
 };
 
-export const LEARNING_NOW = [
-  "React Three Fiber",
-  "Next.js 15",
-  "LangChain",
-  "Kubernetes",
-];
+export const LEARNING_NOW = ["React Three Fiber", "Next.js 15", "LangChain", "Kubernetes"];
 
 export interface Project {
   id: string;
@@ -262,58 +261,114 @@ export const PROJECTS: Project[] = [
   {
     id: "chert-nodes",
     title: "ChertNodes",
-    description: "Minecraft server hosting platform with automated deployment, real-time monitoring dashboard, and seamless player management.",
+    description:
+      "Minecraft server hosting platform with automated deployment, real-time monitoring dashboard, and seamless player management.",
     tags: ["React", "Flask", "Python", "TypeScript"],
-    langStats: [{ lang: "TS", pct: 60 }, { lang: "PY", pct: 40 }],
+    langStats: [
+      { lang: "TS", pct: 60 },
+      { lang: "PY", pct: 40 },
+    ],
     live: "https://github.com/DileepaPRA",
     repo: "https://github.com/DileepaPRA",
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=720&h=480&fit=crop&auto=format",
+    image:
+      "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=720&h=480&fit=crop&auto=format",
   },
   {
     id: "protectx",
     title: "ProtectX",
-    description: "Advanced Discord anti-crash bot protecting large communities with threat detection, rate-limiting, and automated moderation flows.",
+    description:
+      "Advanced Discord anti-crash bot protecting large communities with threat detection, rate-limiting, and automated moderation flows.",
     tags: ["Node.js", "Discord.js", "JavaScript"],
-    langStats: [{ lang: "JS", pct: 90 }, { lang: "SH", pct: 10 }],
+    langStats: [
+      { lang: "JS", pct: 90 },
+      { lang: "SH", pct: 10 },
+    ],
     live: "https://github.com/DileepaPRA",
     repo: "https://github.com/DileepaPRA",
-    image: "https://images.unsplash.com/photo-1563089145-599997674d42?w=720&h=480&fit=crop&auto=format",
+    image:
+      "https://images.unsplash.com/photo-1563089145-599997674d42?w=720&h=480&fit=crop&auto=format",
   },
   {
     id: "kahoot-viewer",
     title: "Kahoot Answers Viewer",
-    description: "Educational tool to view Kahoot quiz answers instantly. Built with Vue.js + Express backend, designed for developer utility.",
+    description:
+      "Educational tool to view Kahoot quiz answers instantly. Built with Vue.js + Express backend, designed for developer utility.",
     tags: ["Vue.js", "Express", "JavaScript"],
-    langStats: [{ lang: "VUE", pct: 80 }, { lang: "JS", pct: 20 }],
+    langStats: [
+      { lang: "VUE", pct: 80 },
+      { lang: "JS", pct: 20 },
+    ],
     live: "https://github.com/DileepaPRA",
     repo: "https://github.com/DileepaPRA",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=720&h=480&fit=crop&auto=format",
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=720&h=480&fit=crop&auto=format",
   },
   {
     id: "project-4",
     title: "More Coming Soon",
-    description: "Real projects with full source code, live demos, and detailed documentation. Add your actual projects here.",
+    description:
+      "Real projects with full source code, live demos, and detailed documentation. Add your actual projects here.",
     tags: ["React", "TypeScript", "Node.js"],
-    langStats: [{ lang: "TS", pct: 70 }, { lang: "JS", pct: 30 }],
+    langStats: [
+      { lang: "TS", pct: 70 },
+      { lang: "JS", pct: 30 },
+    ],
     live: "https://github.com/DileepaPRA",
     repo: "https://github.com/DileepaPRA",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=720&h=480&fit=crop&auto=format",
+    image:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=720&h=480&fit=crop&auto=format",
   },
 ];
 
 export const UNIVERSITY_IMAGES = [
-  { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=500&h=340&fit=crop&auto=format", caption: "Campus Life" },
-  { src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500&h=340&fit=crop&auto=format", caption: "Orientation" },
-  { src: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=500&h=340&fit=crop&auto=format", caption: "Study Sessions" },
-  { src: "https://images.unsplash.com/photo-1562774053-701939374585?w=500&h=340&fit=crop&auto=format", caption: "Computer Lab" },
-  { src: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=500&h=340&fit=crop&auto=format", caption: "Group Projects" },
-  { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=340&fit=crop&auto=format", caption: "Hackathon Night" },
-  { src: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=500&h=340&fit=crop&auto=format", caption: "Presentations" },
-  { src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=340&fit=crop&auto=format", caption: "Team Collaboration" },
-  { src: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=500&h=340&fit=crop&auto=format", caption: "Design Lab" },
-  { src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=340&fit=crop&auto=format", caption: "Research Work" },
-  { src: "https://images.unsplash.com/photo-1544531585-9847b68c8c86?w=500&h=340&fit=crop&auto=format", caption: "Social Events" },
-  { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&h=340&fit=crop&auto=format", caption: "Friendships" },
+  {
+    src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=500&h=340&fit=crop&auto=format",
+    caption: "Campus Life",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500&h=340&fit=crop&auto=format",
+    caption: "Orientation",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=500&h=340&fit=crop&auto=format",
+    caption: "Study Sessions",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1562774053-701939374585?w=500&h=340&fit=crop&auto=format",
+    caption: "Computer Lab",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=500&h=340&fit=crop&auto=format",
+    caption: "Group Projects",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=340&fit=crop&auto=format",
+    caption: "Hackathon Night",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=500&h=340&fit=crop&auto=format",
+    caption: "Presentations",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=340&fit=crop&auto=format",
+    caption: "Team Collaboration",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=500&h=340&fit=crop&auto=format",
+    caption: "Design Lab",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=340&fit=crop&auto=format",
+    caption: "Research Work",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1544531585-9847b68c8c86?w=500&h=340&fit=crop&auto=format",
+    caption: "Social Events",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&h=340&fit=crop&auto=format",
+    caption: "Friendships",
+  },
 ];
 
 export const AWARDS = [

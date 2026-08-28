@@ -4,7 +4,10 @@ import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../icons";
 import { SOCIAL_LINKS } from "../../lib/data";
 
-const SIDEBAR_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; style?: React.CSSProperties }>> = {
+const SIDEBAR_ICONS: Record<
+  string,
+  React.ComponentType<{ size?: number; className?: string; style?: React.CSSProperties }>
+> = {
   github: GithubIcon,
   linkedin: LinkedinIcon,
   email: Mail,

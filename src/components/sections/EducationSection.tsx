@@ -51,9 +51,7 @@ export default function EducationSection() {
                   style={{
                     background: "#060c1a",
                     borderColor: item.current ? "#3b82f6" : "#384d6c",
-                    boxShadow: item.current
-                      ? "0 0 18px rgba(59, 130, 246, 0.6)"
-                      : "none",
+                    boxShadow: item.current ? "0 0 18px rgba(59, 130, 246, 0.6)" : "none",
                   }}
                 >
                   <div
@@ -66,9 +64,7 @@ export default function EducationSection() {
               <div
                 className="glass p-7 group hover:border-blue/25 transition-all duration-300"
                 style={{
-                  boxShadow: item.current
-                    ? "0 4px 30px rgba(59, 130, 246, 0.06)"
-                    : "none",
+                  boxShadow: item.current ? "0 4px 30px rgba(59, 130, 246, 0.06)" : "none",
                 }}
               >
                 {/* Corner decoration */}
@@ -162,7 +158,10 @@ export default function EducationSection() {
               {PERSONAL_INFO.academicStanding.title}
             </p>
             <p className="text-muted text-sm">
-              Consistently on the <span className="text-blue font-semibold">{PERSONAL_INFO.academicStanding.highlight}</span>{" "}
+              Consistently on the{" "}
+              <span className="text-blue font-semibold">
+                {PERSONAL_INFO.academicStanding.highlight}
+              </span>{" "}
               — L1S1, L1S2, L2S1 at University of Moratuwa.
             </p>
           </div>

@@ -7,9 +7,7 @@ export default function NotFound() {
       style={{ background: "#060c1a", color: "#dce4f5" }}
     >
       <p className="font-mono text-sm text-teal mb-2">&gt;_ error: 404</p>
-      <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
-        Page Not Found
-      </h1>
+      <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">Page Not Found</h1>
       <p className="font-mono text-muted text-sm max-w-md mb-8">
         The requested system path does not exist or has been relocated.
       </p>

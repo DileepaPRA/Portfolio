@@ -79,8 +79,8 @@ export default function ContactSection() {
             transition={{ duration: 0.7 }}
           >
             <p className="text-muted mb-8 max-w-md leading-relaxed">
-              Open to new opportunities — career roles, freelance projects, or
-              collaborations. Have a question or an idea? Let's connect.
+              Open to new opportunities — career roles, freelance projects, or collaborations. Have
+              a question or an idea? Let&apos;s connect.
             </p>
 
             {/* Info terminal */}
@@ -105,7 +105,11 @@ export default function ContactSection() {
                     className="flex items-center gap-3 font-mono text-sm text-muted transition-colors group hover:text-ink"
                     style={{ "--item-color": color } as React.CSSProperties}
                   >
-                    <Icon size={15} className="group-hover:scale-110 transition-transform" style={{ color }} />
+                    <Icon
+                      size={15}
+                      className="group-hover:scale-110 transition-transform"
+                      style={{ color }}
+                    />
                     <span className="group-hover:underline">{label}</span>
                   </a>
                 ))}
@@ -114,8 +118,14 @@ export default function ContactSection() {
                   <a
                     href={PERSONAL_INFO.resumeUrl}
                     target={PERSONAL_INFO.resumeUrl.startsWith("http") ? "_blank" : undefined}
-                    rel={PERSONAL_INFO.resumeUrl.startsWith("http") ? "noopener noreferrer" : undefined}
-                    download={PERSONAL_INFO.resumeUrl.endsWith(".pdf") ? "Dileepa_Prabhath_CV.pdf" : undefined}
+                    rel={
+                      PERSONAL_INFO.resumeUrl.startsWith("http") ? "noopener noreferrer" : undefined
+                    }
+                    download={
+                      PERSONAL_INFO.resumeUrl.endsWith(".pdf")
+                        ? "Dileepa_Prabhath_CV.pdf"
+                        : undefined
+                    }
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-mono text-sm font-bold transition-all hover:scale-[1.02] hover:shadow-[0_0_24px_rgba(0,212,180,0.25)]"
                     style={{
                       background: "linear-gradient(135deg, #00d4b4, #00b89c)",
@@ -150,8 +160,20 @@ export default function ContactSection() {
 
               <form onSubmit={handleSubmit} className="p-6 space-y-5">
                 {[
-                  { key: "name", id: "contact-name", label: "$> enter_name", type: "text", placeholder: "John Doe" },
-                  { key: "email", id: "contact-email", label: "$> enter_email", type: "email", placeholder: "john@example.com" },
+                  {
+                    key: "name",
+                    id: "contact-name",
+                    label: "$> enter_name",
+                    type: "text",
+                    placeholder: "John Doe",
+                  },
+                  {
+                    key: "email",
+                    id: "contact-email",
+                    label: "$> enter_email",
+                    type: "email",
+                    placeholder: "john@example.com",
+                  },
                 ].map(({ key, id, label, type, placeholder }) => (
                   <div key={key}>
                     <label
