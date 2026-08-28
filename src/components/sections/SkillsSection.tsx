@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Terminal, Layers, Cpu, Database, Cloud, Wrench } from "lucide-react";
-import { SKILLS, LEARNING_NOW } from "../../lib/data";
+import { SKILLS, LEARNING_NOW, SECTION_COLORS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
 
@@ -22,7 +22,7 @@ export default function SkillsSection() {
       data-section="skills"
       className="relative py-28 px-6 md:px-12 overflow-hidden lg:pl-20"
     >
-      <SectionAmbient color="#4edea3" variant="d" icons={SECTION_ICONS.skills} />
+      <SectionAmbient color={SECTION_COLORS.skills} variant="d" icons={SECTION_ICONS.skills} />
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <motion.div

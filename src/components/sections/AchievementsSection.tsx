@@ -12,7 +12,7 @@ import {
   BadgeCheck,
   Image as ImageIcon,
 } from "lucide-react";
-import { AWARDS, CERTIFICATIONS } from "../../lib/data";
+import { AWARDS, CERTIFICATIONS, SECTION_COLORS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
 
@@ -43,7 +43,11 @@ export default function AchievementsSection() {
       data-section="achievements"
       className="relative py-28 px-6 md:px-12 overflow-hidden lg:pl-20"
     >
-      <SectionAmbient color="#e0115f" variant="c" icons={SECTION_ICONS.achievements} />
+      <SectionAmbient
+        color={SECTION_COLORS.achievements}
+        variant="c"
+        icons={SECTION_ICONS.achievements}
+      />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}

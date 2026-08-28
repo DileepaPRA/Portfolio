@@ -133,8 +133,8 @@ export const SECTION_COLORS: Record<string, string> = {
   education: "#3b82f6",
   skills: "#10b981",
   projects: "#a855f7",
-  university: "#e0115f",
-  achievements: "#f59e0b",
+  university: "#5E004B",
+  achievements: "#E94A1E",
   contact: "#00d4b4",
 };
 

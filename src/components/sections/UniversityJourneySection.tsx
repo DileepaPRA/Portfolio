@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "motion/react";
-import { UNIVERSITY_IMAGES } from "../../lib/data";
+import { UNIVERSITY_IMAGES, SECTION_COLORS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
 
@@ -81,7 +81,11 @@ export default function UniversityJourneySection() {
       data-section="university"
       className="relative py-28 px-6 md:px-12 overflow-hidden lg:pl-20"
     >
-      <SectionAmbient color="#f59e0b" variant="b" icons={SECTION_ICONS.university} />
+      <SectionAmbient
+        color={SECTION_COLORS.university}
+        variant="b"
+        icons={SECTION_ICONS.university}
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
