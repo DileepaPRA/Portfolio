@@ -156,39 +156,76 @@ export const NAV_ITEMS = [
   { label: "CONTACT", href: "#contact", color: "#00d4b4" },
 ];
 
+export interface StatMetric {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}
+
+export interface SemGPA {
+  sem: string;
+  gpa: string;
+}
+
 export interface TimelineItem {
   period: string;
-  degree: string;
+  version: string;
+  commitHash: string;
+  tagLabel?: string;
   institution: string;
+  degree: string;
   meta: string;
-  description: string;
+  description?: string;
   current: boolean;
   logo: string;
-  badges: string[];
+  badges?: string[];
+  academicStanding?: string;
+  stats?: StatMetric[];
+  semesterGPAs?: SemGPA[];
+  alSubjects?: string;
 }
 
 export const TIMELINE: TimelineItem[] = [
   {
-    period: "2024 – Present",
-    degree: "B.Sc (Hons) in Information Technology",
+    period: "2024 – PRESENT",
+    version: "v2.0",
+    commitHash: "h0n5IT",
+    tagLabel: "CURRENT",
     institution: "University of Moratuwa",
-    meta: "CGPA: 3.96 · Second Year",
+    degree: "B.Sc (Hons) in Information Technology",
+    meta: "CGPA: 3.96 · Third Year",
     description:
-      "Pursuing a strong foundation in software engineering and emerging technologies while maintaining academic excellence. Courses include Data Structures, Algorithms, Software Engineering, AI, and Network Security.",
+      "Pursuing a strong foundation in software engineering and emerging technologies while maintaining academic excellence.",
     current: true,
-    logo: "https://images.unsplash.com/photo-1562774053-701939374585?w=120&h=120&fit=crop&auto=format",
-    badges: ["CGPA 3.96", "Dean's List", "Second Year"],
+    logo: "https://upload.wikimedia.org/wikipedia/en/6/60/University_of_Moratuwa_logo.png",
+    badges: ["CGPA 3.96", "Dean's List", "Third Year"],
+    academicStanding:
+      "Consistently on the Dean's List — L1S1, L1S2, L2S1 at University of Moratuwa.",
+    stats: [
+      { label: "CGPA", value: "3.96", highlight: true },
+      { label: "YEAR", value: "THIRD" },
+    ],
+    semesterGPAs: [
+      { sem: "L1S1", gpa: "3.95" },
+      { sem: "L1S2", gpa: "3.94" },
+      { sem: "L2S1", gpa: "4.00" },
+    ],
   },
   {
     period: "2011 – 2023",
-    degree: "G.C.E Advanced Level — Physical Science",
+    version: "v1.0",
+    commitHash: "phyBdl",
+    tagLabel: "FOUNDATION",
     institution: "Badulla Central College",
-    meta: "Z-Score: 1.5075",
+    degree: "G.C.E. Advanced Level (A/L) Physical Science",
+    meta: "Physical Science · Z-Score 1.5075",
     description:
-      "Combined Maths: B · Physics: B · Chemistry: B. Secured a strong Z-score enabling admission to the University of Moratuwa.",
+      "Successfully passed the G.C.E. Advanced Level Examination on first attempt in the Physical Science stream.",
     current: false,
-    logo: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=120&h=120&fit=crop&auto=format",
-    badges: ["Z-Score 1.5075", "Physical Science"],
+    logo: "https://bmmv.edu.lk/images/logo.png",
+    badges: ["Physical Science", "Z-Score 1.5075", "District Rank 105"],
+    stats: [{ label: "DISTRICT RANK", value: "105" }],
+    alSubjects: "Combined Maths: B · Physics: B · Chemistry: B",
   },
 ];
 
@@ -201,13 +238,13 @@ export const SKILLS: Record<string, SkillItem[]> = {
   Programming: [
     { name: "Java" },
     { name: "JavaScript" },
-    { name: "TypeScript", primary: true },
-    { name: "Python", primary: true },
+    { name: "TypeScript" },
+    { name: "Python" },
     { name: "C" },
   ],
   Frontend: [
     { name: "React", primary: true },
-    { name: "Next.js", primary: true },
+    { name: "Next.js" },
     { name: "Vue.js" },
     { name: "HTML5" },
     { name: "CSS3" },
@@ -215,19 +252,14 @@ export const SKILLS: Record<string, SkillItem[]> = {
   ],
   Backend: [
     { name: "Spring Boot", primary: true },
-    { name: "Express.js", primary: true },
+    { name: "Express.js" },
     { name: "REST APIs" },
     { name: "JWT" },
-    { name: "Docker", primary: true },
+    { name: "Docker" },
   ],
-  Databases: [
-    { name: "MySQL" },
-    { name: "MSSQL" },
-    { name: "MongoDB", primary: true },
-    { name: "Redis" },
-  ],
+  Databases: [{ name: "MySQL" }, { name: "MSSQL" }, { name: "MongoDB" }, { name: "Redis" }],
   "Cloud & DevOps": [
-    { name: "AWS S3", primary: true },
+    { name: "AWS S3" },
     { name: "Render" },
     { name: "Netlify" },
     { name: "Aiven Cloud" },
@@ -244,7 +276,7 @@ export const SKILLS: Record<string, SkillItem[]> = {
   ],
 };
 
-export const LEARNING_NOW = ["React Three Fiber", "Next.js 15", "LangChain", "Kubernetes"];
+export const LEARNING_NOW = ["PostgreSQL", "Kubernetes", "RAG"];
 
 export interface Project {
   id: string;
