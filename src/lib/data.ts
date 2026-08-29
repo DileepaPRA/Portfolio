@@ -245,7 +245,6 @@ export const SKILLS: Record<string, SkillItem[]> = {
   Frontend: [
     { name: "React", primary: true },
     { name: "Next.js" },
-    { name: "Vue.js" },
     { name: "HTML5" },
     { name: "CSS3" },
     { name: "Tailwind CSS" },
@@ -263,7 +262,7 @@ export const SKILLS: Record<string, SkillItem[]> = {
     { name: "Render" },
     { name: "Netlify" },
     { name: "Aiven Cloud" },
-    { name: "CI/CD" },
+    { name: "GitHub Actions" },
   ],
   "Tools & Platforms": [
     { name: "Git" },

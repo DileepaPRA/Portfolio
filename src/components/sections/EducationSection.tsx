@@ -262,9 +262,23 @@ export default function EducationSection() {
                       )}
                     </AnimatePresence>
 
-                    {/* Corner hash */}
-                    <div className="absolute top-3 right-4 font-mono text-[9px] text-blue/30 uppercase tracking-widest pointer-events-none z-10">
-                      {"// " + item.commitHash}
+                    {/* Top Right Version Tag & Commit */}
+                    <div className="absolute top-3.5 right-4 flex items-center gap-2 font-mono z-10">
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-blue/15 border border-blue/30 text-blue font-bold tracking-wider">
+                        {item.version}
+                      </span>
+                      <span className="text-[11px] text-muted">
+                        commit{" "}
+                        <motion.span
+                          className="text-ink/80 font-medium"
+                          animate={{
+                            color: isHovered ? "#93c5fd" : "rgba(226,232,240,0.8)",
+                          }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {item.commitHash}
+                        </motion.span>
+                      </span>
                     </div>
 
                     <div className="relative z-10 p-5 md:p-6">
@@ -313,28 +327,9 @@ export default function EducationSection() {
 
                         {/* Content */}
                         <div className="lg:col-span-9">
-                          {/* Version + commit */}
-                          <div className="flex flex-wrap items-center gap-2 mb-2">
-                            <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-blue/15 border border-blue/30 text-blue font-bold tracking-wider">
-                              {item.version}
-                            </span>
-                            <span className="font-mono text-[11px] text-muted">
-                              commit{" "}
-                              <motion.span
-                                className="text-ink/80"
-                                animate={{
-                                  color: isHovered ? "#93c5fd" : "rgba(226,232,240,0.8)",
-                                }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                {item.commitHash}
-                              </motion.span>
-                            </span>
-                          </div>
-
                           {/* Degree (main) + Institution (sub) */}
                           <motion.h3
-                            className="font-display text-xl md:text-2xl font-extrabold leading-tight"
+                            className="font-display text-xl md:text-2xl font-extrabold leading-tight pr-24 sm:pr-36"
                             animate={{ color: isHovered ? "#93c5fd" : "#e2e8f0" }}
                             transition={{ duration: 0.2 }}
                           >
