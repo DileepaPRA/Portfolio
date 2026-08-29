@@ -671,7 +671,7 @@ export default function SkillsSection() {
             <div className="flex items-center gap-2">
               <Network size={12} className="text-emerald/40" />
               <span>
-                System topology modeled using{" "}
+                Fact - System topology modeled using{" "}
                 <span className="text-ink/75 font-medium">Barker&apos;s ERD Notation</span>
               </span>
             </div>
