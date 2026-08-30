@@ -21,27 +21,86 @@ export default function PortfolioPage() {
   const [dustColor, setDustColor] = useState<[number, number, number]>([78, 222, 163]);
 
   useEffect(() => {
-    const sections = document.querySelectorAll<HTMLElement>("[data-section]");
+    let ticking = false;
 
-    // rootMargin shrinks the detection window to a band around the viewport center.
-    // This fires when a section enters the middle 30% of the screen — works for
-    // sections of any height, including ones taller than the viewport.
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute("data-section") ?? "hero";
-            setActiveSection(id);
-            const colorHex = SECTION_COLORS[id];
-            if (colorHex) setDustColor(hexToRgb(colorHex));
-          }
+    const updateActiveSection = () => {
+      const sections = document.querySelectorAll<HTMLElement>("[data-section]");
+      if (!sections.length) return;
+
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 1. Top of page edge case -> Hero
+      if (scrollY < 120) {
+        setActiveSection("hero");
+        const colorHex = SECTION_COLORS.hero;
+        if (colorHex) setDustColor(hexToRgb(colorHex));
+        return;
+      }
+
+      // 2. Bottom of page edge case -> Contact
+      if (scrollY + viewportHeight >= documentHeight - 80) {
+        setActiveSection("contact");
+        const colorHex = SECTION_COLORS.contact;
+        if (colorHex) setDustColor(hexToRgb(colorHex));
+        return;
+      }
+
+      // 3. Focal line: 42% down the screen (accounting for fixed navbar)
+      const focalLine = viewportHeight * 0.42;
+      let matchedId: string | null = null;
+      let closestDistance = Infinity;
+      let fallbackId = "hero";
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const id = section.getAttribute("data-section") ?? "hero";
+
+        // Section directly intersects the viewport focal line
+        if (rect.top <= focalLine && rect.bottom >= focalLine) {
+          matchedId = id;
+        }
+
+        // Fallback: track distance from section center to focal line
+        const sectionCenter = (rect.top + rect.bottom) / 2;
+        const dist = Math.abs(sectionCenter - focalLine);
+        if (dist < closestDistance) {
+          closestDistance = dist;
+          fallbackId = id;
+        }
+      });
+
+      const finalId = matchedId || fallbackId;
+
+      setActiveSection((prev) => {
+        if (prev !== finalId) {
+          const colorHex = SECTION_COLORS[finalId];
+          if (colorHex) setDustColor(hexToRgb(colorHex));
+          return finalId;
+        }
+        return prev;
+      });
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateActiveSection();
+          ticking = false;
         });
-      },
-      { rootMargin: "-35% 0px -35% 0px", threshold: 0 }
-    );
+        ticking = true;
+      }
+    };
 
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    updateActiveSection();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (

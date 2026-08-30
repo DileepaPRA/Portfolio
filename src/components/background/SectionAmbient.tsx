@@ -129,11 +129,28 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
   const dimsRef = useRef({ w: 0, h: 0 });
   // Cached icon centers (updated on resize)
   const iconPosRef = useRef<{ x: number; y: number }[]>([]);
+  const isVisibleRef = useRef<boolean>(true);
   // icons prop stable ref — avoid stale closure in RAF
   const iconsRef = useRef(icons);
   useEffect(() => {
     iconsRef.current = icons;
   });
+
+  // Observe container visibility to pause RAF loop when off-screen
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // ResizeObserver: update dims, blob sizes, and icon positions
   useEffect(() => {
@@ -172,6 +189,10 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
     const t0 = performance.now();
 
     const tick = (now: number) => {
+      raf = requestAnimationFrame(tick);
+
+      if (!isVisibleRef.current) return;
+
       const t = (now - t0) / 1000;
       const { w, h } = dimsRef.current;
 
@@ -238,8 +259,6 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
           iconEl.style.opacity = String(maxInfluence * 0.18);
         });
       }
-
-      raf = requestAnimationFrame(tick);
     };
 
     raf = requestAnimationFrame(tick);

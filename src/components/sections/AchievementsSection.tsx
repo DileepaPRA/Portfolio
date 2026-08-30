@@ -121,16 +121,16 @@ function PointerBridge({
   );
 }
 
-// Generous buffer multiplier to ensure an endless continuous conveyor
-const REPEAT_FACTOR = 30;
+// Optimized buffer multiplier for seamless infinite continuous conveyor with minimal DOM weight
+const REPEAT_FACTOR = 5;
 
 export default function AchievementsSection() {
   const repeatedAwards = Array.from({ length: REPEAT_FACTOR }, () => AWARDS).flat();
   const repeatedCerts = Array.from({ length: REPEAT_FACTOR }, () => CERTIFICATIONS).flat();
 
   // Anchor in the central buffer zone
-  const awardMiddleOffset = AWARDS.length * 10;
-  const certMiddleOffset = CERTIFICATIONS.length * 10;
+  const awardMiddleOffset = AWARDS.length * 2;
+  const certMiddleOffset = CERTIFICATIONS.length * 2;
 
   const [awardIndex, setAwardIndex] = useState<number>(awardMiddleOffset);
   const [certIndex, setCertIndex] = useState<number>(certMiddleOffset);
@@ -158,17 +158,19 @@ export default function AchievementsSection() {
       if (itemsPerView === 1) {
         setAwardStepW(containerWidth + bridgeW);
       } else {
-        setAwardStepW((containerWidth + bridgeW) / itemsPerView);
+        const measuredStep = (containerWidth + bridgeW) / itemsPerView;
+        setAwardStepW(measuredStep);
       }
     }
     if (certContainerRef.current) {
       const containerWidth = certContainerRef.current.getBoundingClientRect().width;
       const bridgeW = w >= 640 ? 48 : 32;
-      const itemsPerView = w >= 1024 ? 4 : w >= 768 ? 3 : w >= 640 ? 2 : 1;
+      const itemsPerView = w >= 1024 ? 4 : w >= 640 ? 2 : 1;
       if (itemsPerView === 1) {
         setCertStepW(containerWidth + bridgeW);
       } else {
-        setCertStepW((containerWidth + bridgeW) / itemsPerView);
+        const measuredStep = (containerWidth + bridgeW) / itemsPerView;
+        setCertStepW(measuredStep);
       }
     }
   }, []);
@@ -190,7 +192,7 @@ export default function AchievementsSection() {
 
   // Seamless silent index recentering on transition end (never reaches bounds)
   const handleAwardTransitionEnd = () => {
-    if (awardIndex >= AWARDS.length * 20 || awardIndex <= AWARDS.length * 3) {
+    if (awardIndex >= AWARDS.length * 3.5 || awardIndex <= AWARDS.length * 0.5) {
       const normIndex = ((awardIndex % AWARDS.length) + AWARDS.length) % AWARDS.length;
       setAwardNoTransition(true);
       setAwardIndex(awardMiddleOffset + normIndex);
@@ -203,7 +205,7 @@ export default function AchievementsSection() {
   };
 
   const handleCertTransitionEnd = () => {
-    if (certIndex >= CERTIFICATIONS.length * 20 || certIndex <= CERTIFICATIONS.length * 3) {
+    if (certIndex >= CERTIFICATIONS.length * 3.5 || certIndex <= CERTIFICATIONS.length * 0.5) {
       const normIndex =
         ((certIndex % CERTIFICATIONS.length) + CERTIFICATIONS.length) % CERTIFICATIONS.length;
       setCertNoTransition(true);

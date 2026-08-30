@@ -56,7 +56,7 @@ export default function DustCanvas({ sectionColor }: Props) {
       canvas.height = window.innerHeight;
     }
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", resize, { passive: true });
 
     // Spawn particles
     particlesRef.current = Array.from({ length: 95 }, () => ({
@@ -91,11 +91,15 @@ export default function DustCanvas({ sectionColor }: Props) {
         }
       }
     };
-    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
 
     function draw() {
       if (!canvas || !ctx) return;
       rafRef.current = requestAnimationFrame(draw);
+
+      // Skip heavy particle painting when tab is not active in foreground
+      if (document.hidden) return;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Smooth color lerp

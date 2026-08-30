@@ -4,8 +4,14 @@ import path from "node:path";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  compress: true,
   outputFileTracingRoot: path.join(__dirname),
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
+  },
   images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: "https",
@@ -20,6 +26,9 @@ const nextConfig: NextConfig = {
         hostname: "bmmv.edu.lk",
       },
     ],
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react", "motion/react"],
   },
 };
 

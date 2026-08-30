@@ -37,6 +37,20 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Touch & tap responsiveness */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Tactile micro-click feedback for buttons */
+button:active:not(:disabled) {
+  transform: scale(0.98);
+  transition: transform 0.08s ease;
 }
 
 /* Subtle grid background */
