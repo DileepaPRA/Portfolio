@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
+import avatarImg from "../../../public/images/profile/Avatar.jpg";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
 import { PERSONAL_INFO } from "../../lib/data";
@@ -94,10 +96,12 @@ export default function AboutSection() {
                   boxShadow: "0 0 0 6px rgba(132,204,22,0.12), 0 0 30px rgba(132,204,22,0.45)",
                 }}
               >
-                <div className="scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <img
-                  src={PERSONAL_INFO.avatar}
+                <div className="scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
+                <Image
+                  src={avatarImg}
                   alt={PERSONAL_INFO.name}
+                  placeholder="blur"
+                  priority
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
               </div>

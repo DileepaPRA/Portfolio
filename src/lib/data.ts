@@ -15,8 +15,7 @@ export const PERSONAL_INFO = {
   tagline: "IT Undergraduate @ University of Moratuwa",
   location: "Sri Lanka 🇱🇰",
   bio: "Driven by curiosity, passionate about building secure, intelligent, and scalable systems that merge innovation with real-world impact—turning complex ideas into elegant code.",
-  avatar:
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&auto=format",
+  avatar: "/images/profile/Avatar.jpg",
   resumeUrl: "#", // Replace with your actual CV/Resume URL (e.g., "/cv.pdf" or Google Drive link)
   stats: [
     { label: "Projects", value: "10+" },
