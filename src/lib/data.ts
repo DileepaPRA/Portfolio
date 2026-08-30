@@ -461,4 +461,12 @@ export const CERTIFICATIONS = [
     image: null as string | null,
     cert: "https://github.com/DileepaPRA",
   },
+  {
+    id: "aws-cloud-practitioner",
+    title: "AWS Cloud Practitioner Essentials",
+    issuer: "Amazon Web Services (AWS)",
+    year: "2024",
+    image: null as string | null,
+    cert: "https://github.com/DileepaPRA",
+  },
 ];

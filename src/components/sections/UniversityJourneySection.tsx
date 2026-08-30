@@ -405,7 +405,7 @@ export default function UniversityJourneySection() {
     <section
       id="university"
       data-section="university"
-      className="relative py-28 px-6 md:px-12 overflow-hidden lg:pl-20 select-none"
+      className="relative py-28 px-6 md:px-12 overflow-hidden lg:pl-20"
     >
       <SectionAmbient
         color={SECTION_COLORS.university}

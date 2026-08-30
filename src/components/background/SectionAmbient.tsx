@@ -166,7 +166,7 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [variant]);
 
-  // RAF: FM blob animation + icon proximity lighting
+  // RAF: Organic Liquid Fluid Dynamics + Proximity Lighting
   useEffect(() => {
     let raf: number;
     const t0 = performance.now();
@@ -182,18 +182,35 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
         const el = blobRefs.current[i];
         if (!el || w === 0) return;
 
+        // Multi-frequency turbulent fluid currents with cross-eddy drift
         const x =
           b.rx1 * w * Math.sin(b.fx1 * t + b.mx1 * Math.sin(b.fmx1 * t + b.px1)) +
-          b.rx2 * w * Math.sin(b.fx2 * t + b.mx2 * Math.sin(b.fmx2 * t)) +
-          b.rx3 * w * Math.sin(b.fx3 * t + b.px3);
+          b.rx2 * w * Math.cos(b.fx2 * t * 0.82 + b.mx2 * Math.sin(b.fmx2 * t * 1.15)) +
+          b.rx3 * w * Math.sin(b.fx3 * t * 1.35 + b.px3 + 0.35 * Math.sin(t * 0.16 + i)) +
+          0.035 * w * Math.cos(t * 0.09 + i * 1.4);
+
         const y =
-          b.ry1 * h * Math.sin(b.fy1 * t + b.my1 * Math.sin(b.fmy1 * t + b.py1)) +
-          b.ry2 * h * Math.sin(b.fy2 * t + b.my2 * Math.sin(b.fmy2 * t)) +
-          b.ry3 * h * Math.sin(b.fy3 * t + b.py3);
+          b.ry1 * h * Math.cos(b.fy1 * t + b.my1 * Math.sin(b.fmy1 * t + b.py1)) +
+          b.ry2 * h * Math.sin(b.fy2 * t * 0.88 + b.my2 * Math.cos(b.fmy2 * t * 0.72)) +
+          b.ry3 * h * Math.cos(b.fy3 * t * 1.25 + b.py3 + 0.35 * Math.cos(t * 0.13 + i)) +
+          0.035 * h * Math.sin(t * 0.08 + i * 1.2);
 
-        el.style.transform = `translate(${x}px, ${y}px)`;
+        // 8-point organic liquid surface tension morphing (continuous non-repeating droplet deformation)
+        const morph1 = 50 + 20 * Math.sin(t * 0.42 + i * 1.7 + 0.2 * Math.cos(t * 0.2 + i));
+        const morph2 = 50 + 18 * Math.cos(t * 0.36 + i * 2.3 + 0.3 * Math.sin(t * 0.25));
+        const morph3 = 50 + 19 * Math.sin(t * 0.48 + i * 0.9 + 0.2 * Math.cos(t * 0.3));
+        const morph4 = 50 + 17 * Math.cos(t * 0.39 + i * 3.1 + 0.3 * Math.sin(t * 0.22));
 
-        // Blob CSS position is its top-left corner; add radius to get actual center.
+        el.style.borderRadius = `${morph1}% ${100 - morph1}% ${morph2}% ${100 - morph2}% / ${morph3}% ${morph4}% ${100 - morph4}% ${100 - morph3}%`;
+
+        // Fluid viscous rotation & hydrodynamic stretching along velocity current
+        const rot = Math.sin(t * 0.2 + i * 1.3) * 28 + t * (i % 2 === 0 ? 3.2 : -3.2);
+        const scaleX = 1 + 0.14 * Math.sin(t * 0.55 + i * 1.4);
+        const scaleY = 1 + 0.14 * Math.cos(t * 0.45 + i * 2.2);
+
+        el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rot}deg) scale(${scaleX}, ${scaleY})`;
+
+        // Blob center tracking
         const r = b.sizeFrac * w * 0.5;
         centers.push({
           x: (parseFloat(b.baseLeft) / 100) * w + x + r,
@@ -213,14 +230,11 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
           let maxInfluence = 0;
           for (const c of centers) {
             const dist = Math.hypot(pos.x - c.x, pos.y - c.y);
-            // Icon lights up only when the blob's visible body overlaps it.
-            // Zone = blob radius: icon is dark outside, glows inside.
-            const t = Math.max(0, 1 - dist / c.r);
-            const influence = t * t * (3 - 2 * t); // smoothstep
+            const tDist = Math.max(0, 1 - dist / c.r);
+            const influence = tDist * tDist * (3 - 2 * tDist); // smoothstep
             if (influence > maxInfluence) maxInfluence = influence;
           }
 
-          // Invisible at rest; faint white when blob sweeps over (max 0.18)
           iconEl.style.opacity = String(maxInfluence * 0.18);
         });
       }
@@ -243,6 +257,10 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
         pointerEvents: "none",
         zIndex: 0,
         overflow: "hidden",
+        maskImage:
+          "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
+        WebkitMaskImage:
+          "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
       }}
     >
       {/* Blobs */}
@@ -261,7 +279,7 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
             borderRadius: "50%",
             background: `rgba(${cr},${cg},${cb},${b.opacity})`,
             filter: `blur(${b.blur}px)`,
-            willChange: "transform",
+            willChange: "transform, border-radius",
           }}
         />
       ))}
