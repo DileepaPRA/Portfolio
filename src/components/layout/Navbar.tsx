@@ -20,13 +20,19 @@ export default function Navbar({ activeSection }: Props) {
 
   const activeColor = NAV_ITEMS.find((n) => n.href === `#${activeSection}`)?.color ?? "#4edea3";
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? "rgba(8,15,32,0.72)" : "rgba(8,15,32,0.45)",
-        backdropFilter: "blur(24px)",
-        WebkitBackdropFilter: "blur(24px)",
+        background: scrolled ? "rgba(8,15,32,0.94)" : "rgba(8,15,32,0.88)",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
         boxShadow: "0 1px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.05)",
       }}
@@ -39,7 +45,11 @@ export default function Navbar({ activeSection }: Props) {
 
       <div className="flex items-center justify-between h-14 px-6 md:px-8 max-w-[1440px] mx-auto lg:pl-24">
         {/* Logo */}
-        <a href="#hero" className="flex items-center gap-1 group">
+        <a
+          href="#hero"
+          onClick={(e) => handleNavClick(e, "#hero")}
+          className="flex items-center gap-1 group"
+        >
           <span
             className="font-mono font-bold text-sm tracking-tight transition-colors duration-300"
             style={{ color: activeColor }}
@@ -62,6 +72,7 @@ export default function Navbar({ activeSection }: Props) {
               <a
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="relative px-3 py-1.5 font-mono text-[11px] tracking-widest font-semibold rounded-md transition-all duration-200"
                 style={
                   isActive
@@ -104,7 +115,10 @@ export default function Navbar({ activeSection }: Props) {
               <a
                 key={item.href}
                 href={item.href}
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => {
+                  setMobileOpen(false);
+                  handleNavClick(e, item.href);
+                }}
                 className="py-2.5 px-3 rounded-lg font-mono text-sm tracking-widest font-semibold transition-all duration-200"
                 style={
                   isActive

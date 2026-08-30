@@ -257,6 +257,7 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
         pointerEvents: "none",
         zIndex: 0,
         overflow: "hidden",
+        contain: "content",
         maskImage:
           "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
         WebkitMaskImage:

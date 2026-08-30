@@ -129,7 +129,7 @@ export const SOCIALS = {
 
 export const SECTION_COLORS: Record<string, string> = {
   hero: "#4edea3",
-  about: "#84cc16",
+  about: "#5a8e0d5c",
   education: "#3b82f6",
   skills: "#10b981",
   projects: "#a855f7",

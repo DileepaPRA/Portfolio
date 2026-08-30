@@ -620,7 +620,7 @@ export default function SkillsSection() {
 
           {/* ── LEARNING NOW (Continuous Learning Buffer) ── */}
           <motion.div
-            className="mt-8 rounded-2xl border p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 backdrop-blur-xl transition-all"
+            className="mt-8 rounded-2xl border p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

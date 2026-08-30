@@ -182,5 +182,11 @@ export default function DustCanvas({ sectionColor }: Props) {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 z-0 pointer-events-none"
+      style={{ contain: "strict", willChange: "transform" }}
+    />
+  );
 }

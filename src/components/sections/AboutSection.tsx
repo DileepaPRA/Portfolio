@@ -119,8 +119,7 @@ export default function AboutSection() {
               onMouseLeave={handleMouseLeave}
               className="rounded-xl overflow-hidden border border-white/[0.06] cursor-default select-none transition-transform duration-100"
               style={{
-                background: "rgba(5,8,18,0.92)",
-                backdropFilter: "blur(16px)",
+                background: "rgba(5,8,18,0.96)",
                 willChange: "transform",
               }}
             >

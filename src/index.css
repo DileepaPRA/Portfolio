@@ -27,11 +27,7 @@
 html,
 body,
 #root {
-  height: 100%;
-}
-
-html {
-  scroll-behavior: smooth;
+  min-height: 100%;
 }
 
 body {
@@ -41,21 +37,6 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #060c1a;
-}
-::-webkit-scrollbar-thumb {
-  background: #1e2d4e;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #4edea3;
 }
 
 /* Subtle grid background */
@@ -68,9 +49,7 @@ body {
 
 /* Glassmorphism cards */
 .glass {
-  background: rgba(11, 21, 37, 0.55);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(11, 21, 37, 0.82);
   border: 1px solid rgba(255, 255, 255, 0.055);
   border-radius: 16px;
   transition:
@@ -84,8 +63,7 @@ body {
 
 /* Terminal window chrome */
 .terminal {
-  background: rgba(5, 10, 22, 0.85);
-  backdrop-filter: blur(14px);
+  background: rgba(5, 10, 22, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 12px;
   overflow: hidden;

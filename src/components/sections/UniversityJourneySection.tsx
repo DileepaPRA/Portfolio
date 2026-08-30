@@ -1,32 +1,11 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, RotateCcw, Sparkles, ChevronLeft, ChevronRight, Crosshair } from "lucide-react";
 import { UNIVERSITY_IMAGES, SECTION_COLORS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
-
-// ── 3D Sphere Projected Node Interface with 3D Spatial Physics ──
-interface ProjectedPhoto {
-  id: string;
-  index: number;
-  src: string;
-  caption?: string;
-  locLabel: string;
-  lat: number;
-  lon: number;
-  x: number;
-  y: number;
-  z: number;
-  scale: number;
-  alpha: number;
-  tiltX: number;
-  tiltY: number;
-  sheenPos: number;
-  brightness: number;
-  blurAmount: string;
-}
 
 // ── Subtle 3D Orbital Floating Data Bits ──
 const ORBITAL_DATA_BITS = [
@@ -39,6 +18,8 @@ const ORBITAL_DATA_BITS = [
   { text: "UoM", lat: 0.18, lon: 5.15, distMult: 1.17 },
 ];
 
+const GOLDEN_RATIO = (1 + Math.sqrt(5)) / 2;
+
 export default function UniversityJourneySection() {
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
@@ -46,113 +27,43 @@ export default function UniversityJourneySection() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Rotation angles (Euler angles in radians)
   const rotX = useRef<number>(0.15);
   const rotY = useRef<number>(0);
   const velX = useRef<number>(0);
-  const velY = useRef<number>(0.0032); // Continuous gentle auto-spin
+  const velY = useRef<number>(0.0032);
 
   // Drag interaction refs
   const isDragging = useRef<boolean>(false);
   const lastMousePos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const hoveredIdxRef = useRef<number | null>(null);
+  const isSectionVisible = useRef<boolean>(true);
 
   const animFrameRef = useRef<number>(0);
-
-  // 3D Projected nodes state for HTML cards
-  const [projectedNodes, setProjectedNodes] = useState<ProjectedPhoto[]>([]);
-
   const total = UNIVERSITY_IMAGES.length;
 
-  // ── Calculate 3D sphere positions using Fibonacci Sphere Distribution with Tangent Normal Physics ──
-  const update3DPositions = useCallback(
-    (sphereRadius: number, centerX: number, centerY: number) => {
-      const rx = rotX.current;
-      const ry = rotY.current;
+  // Keep hoveredIdxRef in sync with React state for RAF loop access
+  useEffect(() => {
+    hoveredIdxRef.current = hoveredIdx;
+  }, [hoveredIdx]);
 
-      const cosRx = Math.cos(rx);
-      const sinRx = Math.sin(rx);
-      const cosRy = Math.cos(ry);
-      const sinRy = Math.sin(ry);
+  // Observe section visibility to pause 3D loop when off-screen
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
 
-      const goldenRatio = (1 + Math.sqrt(5)) / 2;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isSectionVisible.current = entry.isIntersecting;
+      },
+      { rootMargin: "300px" }
+    );
 
-      const projected: ProjectedPhoto[] = UNIVERSITY_IMAGES.map((imgData, index) => {
-        // Fibonacci Sphere Distribution (evenly distributes N points on a 3D sphere)
-        const theta = 2 * Math.PI * index * (1 - 1 / goldenRatio);
-        const phi = Math.acos(1 - (2 * (index + 0.5)) / total);
-
-        const lat = Math.PI / 2 - phi;
-        const lon = theta % (2 * Math.PI);
-
-        // Spherical to Cartesian Coordinates (unit sphere)
-        const uX = Math.cos(lat) * Math.sin(lon);
-        const uY = Math.sin(lat);
-        const uZ = Math.cos(lat) * Math.cos(lon);
-
-        // Rotate around Y-axis
-        const x1 = uX * cosRy + uZ * sinRy;
-        const y1 = uY;
-        const z1 = -uX * sinRy + uZ * cosRy;
-
-        // Rotate around X-axis
-        const x2 = x1;
-        const y2 = y1 * cosRx - z1 * sinRx;
-        const z2 = y1 * sinRx + z1 * cosRx;
-
-        // Perspective Projection & Smooth continuous scaling factor
-        const fov = 650;
-        const scale = fov / (fov + z2 * sphereRadius);
-        const screenX = centerX + x2 * sphereRadius * scale;
-        const screenY = centerY - y2 * sphereRadius * scale;
-
-        // Realistic Tangent Normal 3D Tilt angles (tangent to sphere surface curvature)
-        const clampedX2 = Math.max(-0.95, Math.min(0.95, x2));
-        const clampedY2 = Math.max(-0.95, Math.min(0.95, y2));
-        const tiltY = -Math.asin(clampedX2) * (180 / Math.PI) * 0.38;
-        const tiltX = Math.asin(clampedY2) * (180 / Math.PI) * 0.38;
-
-        // Realistic Glare & Sheen sweep based on light position
-        const sheenPos = Math.round((clampedX2 + 1) * 50);
-
-        // Realistic Atmospheric Depth Shading (brightness & blur falloff)
-        const normalizedZ = (z2 + 1) / 2;
-        const alpha = Math.max(0.2, Math.min(1, 0.25 + 0.75 * normalizedZ));
-        const brightness = Math.max(
-          0.48,
-          Math.min(1.08, 0.52 + (0.52 * Math.max(0, z2 + 0.3)) / 1.3)
-        );
-        const blurAmount = z2 < -0.3 ? `${((-z2 - 0.3) * 2.8).toFixed(1)}px` : "0px";
-
-        const locLabel = `LOC[#${String(index + 1).padStart(2, "0")}]`;
-
-        return {
-          id: `photo-${index}`,
-          index,
-          src: imgData.src,
-          caption: imgData.caption || `Memory ${index + 1}`,
-          locLabel,
-          lat,
-          lon,
-          x: screenX,
-          y: screenY,
-          z: z2,
-          scale,
-          alpha,
-          tiltX,
-          tiltY,
-          sheenPos,
-          brightness,
-          blurAmount,
-        };
-      });
-
-      // Sort by depth (z ascending, so frontmost items render on top)
-      projected.sort((a, b) => a.z - b.z);
-      setProjectedNodes(projected);
-    },
-    [total]
-  );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Main 3D Armillary Wireframe Canvas & Rotation Loop
   useEffect(() => {
@@ -178,15 +89,19 @@ export default function UniversityJourneySection() {
     window.addEventListener("resize", resizeCanvas);
 
     const renderLoop = () => {
-      if (!containerRef.current) return;
+      animFrameRef.current = requestAnimationFrame(renderLoop);
+
+      if (!isSectionVisible.current || !containerRef.current) return;
+
       const { clientWidth: width, clientHeight: height } = containerRef.current;
       const centerX = width / 2;
       const centerY = height / 2;
       const sphereRadius = Math.min(width, height) * 0.38;
+      const currentHovered = hoveredIdxRef.current;
 
       // ── Inertia & Rotation physics ──
       if (!isDragging.current) {
-        if (autoRotate && hoveredIdx === null) {
+        if (autoRotate && currentHovered === null) {
           velY.current = velY.current * 0.95 + 0.0028 * 0.05;
         } else {
           velY.current *= 0.92;
@@ -200,18 +115,68 @@ export default function UniversityJourneySection() {
         rotX.current = Math.max(-0.6, Math.min(0.6, rotX.current));
       }
 
-      // Update React state positions for DOM nodes
-      update3DPositions(sphereRadius, centerX, centerY);
-
-      // ── DRAW 3D WIREFRAME ARMILLARY SPHERE ON CANVAS ──
-      ctx.clearRect(0, 0, width, height);
-
       const rx = rotX.current;
       const ry = rotY.current;
       const cosRx = Math.cos(rx);
       const sinRx = Math.sin(rx);
       const cosRy = Math.cos(ry);
       const sinRy = Math.sin(ry);
+
+      // ── Direct DOM updates for 3D Cards (ZERO React re-renders) ──
+      UNIVERSITY_IMAGES.forEach((_, index) => {
+        const theta = 2 * Math.PI * index * (1 - 1 / GOLDEN_RATIO);
+        const phi = Math.acos(1 - (2 * (index + 0.5)) / total);
+
+        const lat = Math.PI / 2 - phi;
+        const lon = theta % (2 * Math.PI);
+
+        const uX = Math.cos(lat) * Math.sin(lon);
+        const uY = Math.sin(lat);
+        const uZ = Math.cos(lat) * Math.cos(lon);
+
+        const x1 = uX * cosRy + uZ * sinRy;
+        const y1 = uY;
+        const z1 = -uX * sinRy + uZ * cosRy;
+
+        const x2 = x1;
+        const y2 = y1 * cosRx - z1 * sinRx;
+        const z2 = y1 * sinRx + z1 * cosRx;
+
+        const fov = 650;
+        const scale = fov / (fov + z2 * sphereRadius);
+        const screenX = centerX + x2 * sphereRadius * scale;
+        const screenY = centerY - y2 * sphereRadius * scale;
+
+        const clampedX2 = Math.max(-0.95, Math.min(0.95, x2));
+        const clampedY2 = Math.max(-0.95, Math.min(0.95, y2));
+        const tiltY = -Math.asin(clampedX2) * (180 / Math.PI) * 0.38;
+        const tiltX = Math.asin(clampedY2) * (180 / Math.PI) * 0.38;
+
+        const alpha = Math.max(0.2, Math.min(1, 0.25 + 0.75 * ((z2 + 1) / 2)));
+        const brightness = Math.max(
+          0.48,
+          Math.min(1.08, 0.52 + (0.52 * Math.max(0, z2 + 0.3)) / 1.3)
+        );
+        const blurAmount = z2 < -0.3 ? `${((-z2 - 0.3) * 2.8).toFixed(1)}px` : "0px";
+
+        const cardEl = cardRefs.current[index];
+        if (cardEl) {
+          const isHovered = currentHovered === index;
+          const hoverScale = isHovered ? 1.18 : 1;
+          const curTiltX = isHovered ? 0 : tiltX;
+          const curTiltY = isHovered ? 0 : tiltY;
+
+          cardEl.style.transform = `translate3d(${screenX}px, ${screenY}px, 0) translate(-50%, -50%) perspective(1000px) rotateX(${curTiltX}deg) rotateY(${curTiltY}deg) scale(${scale * hoverScale})`;
+          cardEl.style.zIndex = String(Math.round((z2 + 2) * 100) + (isHovered ? 500 : 0));
+          cardEl.style.opacity = String(alpha);
+          cardEl.style.filter = isHovered
+            ? "brightness(1.1) drop-shadow(0 0 16px rgba(251,23,111,0.6))"
+            : `brightness(${brightness}) blur(${blurAmount})`;
+        }
+      });
+
+      // ── DRAW 3D WIREFRAME ARMILLARY SPHERE ON CANVAS ──
+      ctx.clearRect(0, 0, width, height);
 
       // Project 3D point helper
       const projectPoint = (uX: number, uY: number, uZ: number) => {
@@ -337,8 +302,6 @@ export default function UniversityJourneySection() {
           ctx.fillText(bit.text, pt.x + 5, pt.y);
         }
       });
-
-      animFrameRef.current = requestAnimationFrame(renderLoop);
     };
 
     animFrameRef.current = requestAnimationFrame(renderLoop);
@@ -347,7 +310,7 @@ export default function UniversityJourneySection() {
       cancelAnimationFrame(animFrameRef.current);
       window.removeEventListener("resize", resizeCanvas);
     };
-  }, [autoRotate, hoveredIdx, update3DPositions]);
+  }, [autoRotate, total]);
 
   // 360° Pointer Drag & Spin Handlers on Stage Container
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -476,77 +439,52 @@ export default function UniversityJourneySection() {
 
           {/* ── 3D FLOATING PHOTO TILES WITH REALISTIC SURFACE TILT & DEPTH SHADING ── */}
           <div className="absolute inset-0 pointer-events-none z-10">
-            {projectedNodes.map((node) => {
-              const isHovered = hoveredIdx === node.index;
-              const isForeground = node.z > -0.2;
-              const hoverScale = isHovered ? 1.18 : 1;
+            {UNIVERSITY_IMAGES.map((imgData, index) => {
+              const isHovered = hoveredIdx === index;
 
               return (
                 <div
-                  key={node.id}
+                  key={`photo-card-${index}`}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
                   style={{
                     position: "absolute",
                     left: 0,
                     top: 0,
-                    transform: `translate3d(${node.x}px, ${node.y}px, 0) translate(-50%, -50%) perspective(1000px) rotateX(${isHovered ? 0 : node.tiltX}deg) rotateY(${isHovered ? 0 : node.tiltY}deg) scale(${node.scale * hoverScale})`,
+                    transform: "translate3d(-2000px, -2000px, 0)",
                     transformOrigin: "center center",
                     willChange: "transform, opacity, filter",
-                    zIndex: Math.round((node.z + 2) * 100) + (isHovered ? 500 : 0),
-                    opacity: node.alpha,
-                    filter: isHovered
-                      ? "brightness(1.1) drop-shadow(0 0 16px rgba(251,23,111,0.6))"
-                      : `brightness(${node.brightness}) blur(${node.blurAmount})`,
+                    opacity: 0,
                     transition: isHovered
                       ? "transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease"
                       : "filter 0.15s ease",
                   }}
-                  className="pointer-events-auto cursor-pointer group select-none"
-                  onMouseEnter={() => setHoveredIdx(node.index)}
+                  className="pointer-events-auto cursor-pointer group"
+                  onMouseEnter={() => setHoveredIdx(index)}
                   onMouseLeave={() => setHoveredIdx(null)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setSelectedIdx(node.index);
+                    setSelectedIdx(index);
                   }}
                 >
-                  {/* Photo Tile Card (Fixed Base Dimension with Realistic 3D Lighting & Glass Glare) */}
+                  {/* Photo Tile Card */}
                   <div
                     className="relative w-[140px] h-[94px] rounded-xl overflow-hidden border transition-[border-color,box-shadow] duration-200 shadow-2xl"
                     style={{
                       background: "rgba(6, 12, 24, 0.95)",
-                      borderColor: isHovered
-                        ? "#fb176f"
-                        : isForeground
-                          ? "rgba(251, 23, 111, 0.6)"
-                          : "rgba(255, 255, 255, 0.12)",
+                      borderColor: isHovered ? "#fb176f" : "rgba(251, 23, 111, 0.6)",
                       boxShadow: isHovered
                         ? "0 0 32px rgba(251, 23, 111, 0.85), 0 0 12px #fb176f"
-                        : isForeground
-                          ? `0 14px 28px rgba(0,0,0,0.7), 0 0 14px rgba(251,23,111,${Math.max(0.1, node.z * 0.35).toFixed(2)})`
-                          : "0 4px 12px rgba(0,0,0,0.6)",
+                        : "0 14px 28px rgba(0,0,0,0.7), 0 0 14px rgba(251,23,111,0.25)",
                     }}
                   >
                     {/* Image View */}
                     <img
-                      src={node.src}
-                      alt={node.caption || `University Photo ${node.index + 1}`}
+                      src={imgData.src}
+                      alt={imgData.caption || `University Photo ${index + 1}`}
                       draggable={false}
-                      className="w-full h-full object-cover select-none pointer-events-none"
-                    />
-
-                    {/* Realistic Dynamic Glare / Glass Sheen Reflection */}
-                    <div
-                      className="absolute inset-0 pointer-events-none opacity-40 mix-blend-overlay"
-                      style={{
-                        background: `linear-gradient(125deg, transparent 0%, rgba(255,255,255,0.4) ${node.sheenPos}%, transparent ${node.sheenPos + 24}%)`,
-                      }}
-                    />
-
-                    {/* Atmospheric Vignette & Depth Shadow */}
-                    <div
-                      className="absolute inset-0 pointer-events-none"
-                      style={{
-                        background: `radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,${Math.max(0.08, 0.5 - node.z * 0.4)}) 100%)`,
-                      }}
+                      className="w-full h-full object-cover pointer-events-none"
                     />
 
                     {/* Glowing Bracketed Corners [ ] */}

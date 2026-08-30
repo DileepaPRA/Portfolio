@@ -212,7 +212,7 @@ export default function EducationSection() {
 
                   {/* ── Release Card ── */}
                   <motion.div
-                    className="flex-1 relative rounded-2xl border backdrop-blur-xl overflow-hidden cursor-default"
+                    className="flex-1 relative rounded-2xl border overflow-hidden cursor-default"
                     animate={{
                       borderColor: isHovered
                         ? "rgba(59,130,246,0.55)"

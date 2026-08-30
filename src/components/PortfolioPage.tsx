@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import LoadingScreen from "./layout/LoadingScreen";
 import DustCanvas from "./background/DustCanvas";
 import Navbar from "./layout/Navbar";
 import SocialSidebar from "./layout/SocialSidebar";
@@ -48,6 +49,9 @@ export default function PortfolioPage() {
       className="min-h-screen overflow-x-hidden relative"
       style={{ background: "#060c1a", color: "#dce4f5" }}
     >
+      {/* Boot Splash Loading Screen */}
+      <LoadingScreen />
+
       {/* Layered background: grid → dust particles */}
       <div className="fixed inset-0 grid-bg pointer-events-none z-0" />
       <DustCanvas sectionColor={dustColor} />
