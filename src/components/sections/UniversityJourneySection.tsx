@@ -30,14 +30,13 @@ interface ProjectedPhoto {
 
 // ── Subtle 3D Orbital Floating Data Bits ──
 const ORBITAL_DATA_BITS = [
-  { text: "0x7F", lat: 0.15, lon: 0.4, distMult: 1.15 },
-  { text: "01", lat: -0.45, lon: 1.2, distMult: 1.12 },
-  { text: "0x4A", lat: 0.52, lon: 2.1, distMult: 1.18 },
-  { text: "UoM", lat: -0.22, lon: 2.85, distMult: 1.14 },
-  { text: "0xFF", lat: 0.38, lon: 3.65, distMult: 1.16 },
-  { text: "10", lat: -0.58, lon: 4.45, distMult: 1.13 },
-  { text: "0x2E", lat: 0.18, lon: 5.15, distMult: 1.17 },
-  { text: "0b11", lat: -0.32, lon: 5.95, distMult: 1.15 },
+  { text: "UoM", lat: 0.15, lon: 0.4, distMult: 1.15 },
+  { text: "FIT", lat: -0.45, lon: 1.2, distMult: 1.12 },
+  { text: "UoM", lat: 0.52, lon: 2.1, distMult: 1.18 },
+  { text: "FIT", lat: -0.22, lon: 2.85, distMult: 1.14 },
+  { text: "UOM", lat: 0.38, lon: 3.65, distMult: 1.16 },
+  { text: "FIT", lat: -0.58, lon: 4.45, distMult: 1.13 },
+  { text: "UoM", lat: 0.18, lon: 5.15, distMult: 1.17 },
 ];
 
 export default function UniversityJourneySection() {
