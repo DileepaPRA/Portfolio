@@ -133,7 +133,7 @@ export const SECTION_COLORS: Record<string, string> = {
   education: "#3b82f6",
   skills: "#10b981",
   projects: "#a855f7",
-  university: "#5E004B",
+  university: "#fb176f",
   achievements: "#E94A1E",
   contact: "#00d4b4",
 };
@@ -151,7 +151,7 @@ export const NAV_ITEMS = [
   { label: "EDU", href: "#education", color: "#3b82f6" },
   { label: "SKILLS", href: "#skills", color: "#10b981" },
   { label: "PROJECTS", href: "#projects", color: "#a855f7" },
-  { label: "JOURNEY", href: "#university", color: "#e0115f" },
+  { label: "JOURNEY", href: "#university", color: "#fb176f" },
   { label: "AWARDS", href: "#achievements", color: "#f59e0b" },
   { label: "CONTACT", href: "#contact", color: "#00d4b4" },
 ];
@@ -357,7 +357,7 @@ export const UNIVERSITY_IMAGES = [
     caption: "Campus Life",
   },
   {
-    src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500&h=340&fit=crop&auto=format",
+    src: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=500&h=340&fit=crop&auto=format",
     caption: "Orientation",
   },
   {
