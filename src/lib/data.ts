@@ -423,6 +423,16 @@ export const AWARDS = [
     icon: "shield",
   },
   {
+    id: "coderush",
+    title: "Top 20 - 2024",
+    type: "Coding Hackthon",
+    org: "University of Moratuwa,INTECS",
+    year: "2024",
+    image: null as string | null,
+    cert: "https://github.com/DileepaPRA",
+    icon: "shield",
+  },
+  {
     id: "deans-list",
     title: "Dean's List",
     type: "Academic Excellence Award",
@@ -468,4 +478,13 @@ export const CERTIFICATIONS = [
     image: null as string | null,
     cert: "https://github.com/DileepaPRA",
   },
+  {
+    id: "c-solo",
+    title: "C Intermediate",
+    issuer: "SoloLearn",
+    year: "2024",
+    image: null as string | null,
+    cert: "https://github.com/DileepaPRA",
+  },
+
 ];

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { motion } from "motion/react";
 import {
   Trophy,
   ExternalLink,
@@ -31,8 +30,8 @@ function PointerBridge({
   const reverseActive = hoveredDir === "prev" || isHighlighted;
 
   return (
-    <div className="shrink-0 flex flex-col items-center justify-center w-8 sm:w-12 h-full my-auto select-none px-0.5 z-10">
-      <div className="w-full relative flex flex-col items-center gap-3 py-4">
+    <div className="w-full h-full flex flex-col items-center justify-center select-none px-0.5 z-10">
+      <div className="w-full relative flex flex-col items-center justify-center gap-3.5">
         {/* Forward Pointer (*next ──▶) */}
         <button
           type="button"
@@ -121,56 +120,63 @@ function PointerBridge({
   );
 }
 
-// Optimized buffer multiplier for seamless infinite continuous conveyor with minimal DOM weight
-const REPEAT_FACTOR = 5;
+// 3x Buffer: Left Set (0), Center Set (1), Right Set (2) for 100% unidirectional continuous sliding
+const BUFFER_SETS = 3;
 
 export default function AchievementsSection() {
-  const repeatedAwards = Array.from({ length: REPEAT_FACTOR }, () => AWARDS).flat();
-  const repeatedCerts = Array.from({ length: REPEAT_FACTOR }, () => CERTIFICATIONS).flat();
+  const repeatedAwards = Array.from({ length: BUFFER_SETS }, () => AWARDS).flat();
+  const repeatedCerts = Array.from({ length: BUFFER_SETS }, () => CERTIFICATIONS).flat();
 
-  // Anchor in the central buffer zone
-  const awardMiddleOffset = AWARDS.length * 2;
-  const certMiddleOffset = CERTIFICATIONS.length * 2;
+  const awardBaseOffset = AWARDS.length;
+  const certBaseOffset = CERTIFICATIONS.length;
 
-  const [awardIndex, setAwardIndex] = useState<number>(awardMiddleOffset);
-  const [certIndex, setCertIndex] = useState<number>(certMiddleOffset);
+  const [awardIndex, setAwardIndex] = useState<number>(awardBaseOffset);
+  const [certIndex, setCertIndex] = useState<number>(certBaseOffset);
+
   const [awardNoTransition, setAwardNoTransition] = useState<boolean>(false);
   const [certNoTransition, setCertNoTransition] = useState<boolean>(false);
 
   const [awardStepW, setAwardStepW] = useState<number>(380);
   const [certStepW, setCertStepW] = useState<number>(290);
+  const [awardCardW, setAwardCardW] = useState<number>(332);
+  const [certCardW, setCertCardW] = useState<number>(242);
+  const [bridgeW, setBridgeW] = useState<number>(48);
 
   const [hoveredAward, setHoveredAward] = useState<number | null>(null);
   const [hoveredCert, setHoveredCert] = useState<number | null>(null);
 
   const awardContainerRef = useRef<HTMLDivElement>(null);
   const certContainerRef = useRef<HTMLDivElement>(null);
-  const awardFirstCardRef = useRef<HTMLDivElement>(null);
-  const certFirstCardRef = useRef<HTMLDivElement>(null);
 
   // Sub-pixel exact step measurement for 100% boundary symmetry
   const measureSteps = useCallback(() => {
     const w = typeof window !== "undefined" ? window.innerWidth : 1200;
+    const bridge = w >= 640 ? 48 : 32;
+    setBridgeW(bridge);
+
     if (awardContainerRef.current) {
       const containerWidth = awardContainerRef.current.getBoundingClientRect().width;
-      const bridgeW = w >= 640 ? 48 : 32;
       const itemsPerView = w >= 1024 ? 3 : w >= 640 ? 2 : 1;
       if (itemsPerView === 1) {
-        setAwardStepW(containerWidth + bridgeW);
+        setAwardStepW(containerWidth + bridge);
+        setAwardCardW(containerWidth);
       } else {
-        const measuredStep = (containerWidth + bridgeW) / itemsPerView;
-        setAwardStepW(measuredStep);
+        const step = (containerWidth + bridge) / itemsPerView;
+        setAwardStepW(step);
+        setAwardCardW(step - bridge);
       }
     }
+
     if (certContainerRef.current) {
       const containerWidth = certContainerRef.current.getBoundingClientRect().width;
-      const bridgeW = w >= 640 ? 48 : 32;
       const itemsPerView = w >= 1024 ? 4 : w >= 640 ? 2 : 1;
       if (itemsPerView === 1) {
-        setCertStepW(containerWidth + bridgeW);
+        setCertStepW(containerWidth + bridge);
+        setCertCardW(containerWidth);
       } else {
-        const measuredStep = (containerWidth + bridgeW) / itemsPerView;
-        setCertStepW(measuredStep);
+        const step = (containerWidth + bridge) / itemsPerView;
+        setCertStepW(step);
+        setCertCardW(step - bridge);
       }
     }
   }, []);
@@ -190,12 +196,12 @@ export default function AchievementsSection() {
     };
   }, [measureSteps]);
 
-  // Seamless silent index recentering on transition end (never reaches bounds)
+  // Seamless invisible silent recentering on transition end (never hits buffer boundaries)
   const handleAwardTransitionEnd = () => {
-    if (awardIndex >= AWARDS.length * 3.5 || awardIndex <= AWARDS.length * 0.5) {
-      const normIndex = ((awardIndex % AWARDS.length) + AWARDS.length) % AWARDS.length;
+    if (awardIndex >= AWARDS.length * 2 || awardIndex < AWARDS.length) {
+      const normalized = ((awardIndex % AWARDS.length) + AWARDS.length) % AWARDS.length;
       setAwardNoTransition(true);
-      setAwardIndex(awardMiddleOffset + normIndex);
+      setAwardIndex(awardBaseOffset + normalized);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setAwardNoTransition(false);
@@ -205,11 +211,11 @@ export default function AchievementsSection() {
   };
 
   const handleCertTransitionEnd = () => {
-    if (certIndex >= CERTIFICATIONS.length * 3.5 || certIndex <= CERTIFICATIONS.length * 0.5) {
-      const normIndex =
+    if (certIndex >= CERTIFICATIONS.length * 2 || certIndex < CERTIFICATIONS.length) {
+      const normalized =
         ((certIndex % CERTIFICATIONS.length) + CERTIFICATIONS.length) % CERTIFICATIONS.length;
       setCertNoTransition(true);
-      setCertIndex(certMiddleOffset + normIndex);
+      setCertIndex(certBaseOffset + normalized);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setCertNoTransition(false);
@@ -245,9 +251,11 @@ export default function AchievementsSection() {
   const nextCert = () => setCertIndex((prev) => prev + 1);
   const prevCert = () => setCertIndex((prev) => prev - 1);
 
-  const activeAwardDot = ((awardIndex % AWARDS.length) + AWARDS.length) % AWARDS.length;
-  const activeCertDot =
-    ((certIndex % CERTIFICATIONS.length) + CERTIFICATIONS.length) % CERTIFICATIONS.length;
+  const numAwards = AWARDS.length;
+  const numCerts = CERTIFICATIONS.length;
+
+  const activeAwardDot = ((awardIndex % numAwards) + numAwards) % numAwards;
+  const activeCertDot = ((certIndex % numCerts) + numCerts) % numCerts;
 
   return (
     <section
@@ -257,44 +265,60 @@ export default function AchievementsSection() {
     >
       <SectionAmbient
         color={SECTION_COLORS.achievements}
-        variant="c"
+        variant="d"
         icons={SECTION_ICONS.achievements}
       />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
-        <motion.div
-          className="mb-14 space-y-2"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex items-center gap-4">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-ink flex items-center gap-3">
-              <span className="text-amber font-mono">#</span>achievements
-            </h2>
-            <div className="h-px bg-white/10 flex-grow max-w-xs" />
-          </div>
-          <p className="text-muted text-sm">
-            Verified recognitions, competitive hackathons, and certifications.
-          </p>
-        </motion.div>
+        <div className="flex items-center gap-4 mb-4">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-ink flex items-center gap-3">
+            <span className="text-amber font-mono">#</span>achievements-and-certifications
+          </h2>
+          <div className="h-px bg-white/10 flex-grow max-w-xs" />
+        </div>
+        <p className="text-muted text-sm mb-12">
+          Recognitions, hackathons, academic excellence, and technical credentials.
+        </p>
 
-        {/* ── 1. AWARDS & HONORS: ENDLESS CONVEYOR LOOP (3 VISIBLE ON DESKTOP) ── */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-6">
-            <Trophy size={22} className="text-amber" />
-            <h3 className="font-display text-xl font-bold text-ink">Awards & Honors</h3>
+        {/* ── 1. AWARDS & HONORS ── */}
+        <div className="mb-14">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <Trophy size={18} className="text-amber" />
+              <h3 className="font-mono text-sm font-bold text-ink uppercase tracking-wider">
+                Honors & Recognitions
+              </h3>
+            </div>
+
+            {/* Manual navigation arrows */}
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={prevAward}
+                aria-label="Previous award"
+                className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center text-muted hover:text-amber hover:border-amber/40 hover:bg-amber/10 transition-all cursor-pointer active:scale-95"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={nextAward}
+                aria-label="Next award"
+                className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center text-muted hover:text-amber hover:border-amber/40 hover:bg-amber/10 transition-all cursor-pointer active:scale-95"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
           </div>
 
-          {/* Carousel Viewport Container */}
+          {/* Awards Carousel Stage */}
           <div
-            className="relative group/carousel"
+            className="relative"
             onMouseEnter={() => setIsAwardPaused(true)}
             onMouseLeave={() => setIsAwardPaused(false)}
           >
-            {/* Floating Left Looping Carousel Button */}
+            {/* Floating Left Carousel Button */}
             <button
               type="button"
               onClick={prevAward}
@@ -305,7 +329,7 @@ export default function AchievementsSection() {
               <ChevronLeft size={20} />
             </button>
 
-            {/* Floating Right Looping Carousel Button */}
+            {/* Floating Right Carousel Button */}
             <button
               type="button"
               onClick={nextAward}
@@ -318,7 +342,7 @@ export default function AchievementsSection() {
 
             {/* Overflow Mask Container */}
             <div ref={awardContainerRef} className="w-full overflow-hidden pb-4 pt-1 rounded-2xl">
-              {/* Continuous Sliding Ribbon Track */}
+              {/* Continuous Sliding Ribbon Track (100% Unidirectional Smooth Sliding) */}
               <div
                 onTransitionEnd={handleAwardTransitionEnd}
                 className="flex items-stretch will-change-transform"
@@ -326,36 +350,41 @@ export default function AchievementsSection() {
                   transform: `translate3d(-${awardIndex * awardStepW}px, 0, 0)`,
                   transition: awardNoTransition
                     ? "none"
-                    : "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+                    : "transform 0.55s cubic-bezier(0.25, 1, 0.5, 1)",
                 }}
               >
                 {repeatedAwards.map((award, i) => {
-                  const origIdx = i % AWARDS.length;
+                  const origIdx = i % numAwards;
                   const isHovered = hoveredAward === i;
                   const isBridgeHighlighted =
                     hoveredAward !== null && (hoveredAward === i || hoveredAward === i - 1);
 
                   const nodeAddr = `0x${(0x7fa0 + origIdx * 0x18).toString(16).toUpperCase()}`;
-                  const prevOrigIdx = (origIdx - 1 + AWARDS.length) % AWARDS.length;
-                  const nextOrigIdx = (origIdx + 1) % AWARDS.length;
+                  const prevOrigIdx = (origIdx - 1 + numAwards) % numAwards;
+                  const nextOrigIdx = (origIdx + 1) % numAwards;
                   const prevAddr = `0x${(0x7fa0 + prevOrigIdx * 0x18).toString(16).toUpperCase()}`;
                   const nextAddr = `0x${(0x7fa0 + nextOrigIdx * 0x18).toString(16).toUpperCase()}`;
 
                   return (
-                    <React.Fragment key={`${award.id}-rep-${i}`}>
+                    <React.Fragment key={`${award.id}-pos-${i}`}>
                       {/* Inter-Node Pointer Bridge Conduit */}
                       {i > 0 && (
-                        <PointerBridge
-                          isHighlighted={isBridgeHighlighted}
-                          onForwardClick={nextAward}
-                          onReverseClick={prevAward}
-                        />
+                        <div
+                          style={{ width: `${bridgeW}px` }}
+                          className="shrink-0 self-stretch flex flex-col justify-center items-center"
+                        >
+                          <PointerBridge
+                            isHighlighted={isBridgeHighlighted}
+                            onForwardClick={nextAward}
+                            onReverseClick={prevAward}
+                          />
+                        </div>
                       )}
 
-                      {/* Card Element */}
+                      {/* Award Card Item */}
                       <div
-                        ref={i === 0 ? awardFirstCardRef : null}
-                        className="shrink-0 w-full sm:w-[calc((100%-3rem)/2)] lg:w-[calc((100%-6rem)/3)] group"
+                        style={{ width: `${awardCardW}px` }}
+                        className="shrink-0 h-full group"
                         onMouseEnter={() => setHoveredAward(i)}
                         onMouseLeave={() => setHoveredAward(null)}
                       >
@@ -366,7 +395,7 @@ export default function AchievementsSection() {
                               : "border-white/10 hover:border-amber/30"
                           }`}
                         >
-                          {/* Top Memory Node Header (Circular Pointer Links) */}
+                          {/* Top Memory Node Header */}
                           <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-white/[0.08] font-mono text-[10px]">
                             <div className="flex items-center gap-1.5 text-amber font-bold">
                               <span
@@ -456,7 +485,7 @@ export default function AchievementsSection() {
                 }}
                 className="rounded-full transition-all duration-300 cursor-pointer"
                 style={{
-                  width: i === activeAwardDot ? 22 : 6,
+                  width: i === activeAwardDot ? 24 : 6,
                   height: 6,
                   background: i === activeAwardDot ? "#f59e0b" : "rgba(255,255,255,0.15)",
                 }}
@@ -465,22 +494,44 @@ export default function AchievementsSection() {
           </div>
         </div>
 
-        {/* ── 2. CREDENTIALS & CERTIFICATIONS: ENDLESS CONVEYOR LOOP (4 VISIBLE ON DESKTOP) ── */}
+        {/* ── 2. PROFESSIONAL CERTIFICATIONS ── */}
         <div>
-          <div className="flex items-center gap-3 mb-6">
-            <BadgeCheck size={22} className="text-amber" />
-            <h3 className="font-display text-xl font-bold text-ink">
-              Credentials & Certifications
-            </h3>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <BadgeCheck size={18} className="text-amber" />
+              <h3 className="font-mono text-sm font-bold text-ink uppercase tracking-wider">
+                Certifications & Credentials
+              </h3>
+            </div>
+
+            {/* Manual navigation arrows */}
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={prevCert}
+                aria-label="Previous certification"
+                className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center text-muted hover:text-amber hover:border-amber/40 hover:bg-amber/10 transition-all cursor-pointer active:scale-95"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={nextCert}
+                aria-label="Next certification"
+                className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center text-muted hover:text-amber hover:border-amber/40 hover:bg-amber/10 transition-all cursor-pointer active:scale-95"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
           </div>
 
-          {/* Carousel Viewport Container */}
+          {/* Certifications Carousel Stage */}
           <div
-            className="relative group/carousel"
+            className="relative"
             onMouseEnter={() => setIsCertPaused(true)}
             onMouseLeave={() => setIsCertPaused(false)}
           >
-            {/* Floating Left Looping Carousel Button */}
+            {/* Floating Left Carousel Button */}
             <button
               type="button"
               onClick={prevCert}
@@ -491,7 +542,7 @@ export default function AchievementsSection() {
               <ChevronLeft size={20} />
             </button>
 
-            {/* Floating Right Looping Carousel Button */}
+            {/* Floating Right Carousel Button */}
             <button
               type="button"
               onClick={nextCert}
@@ -504,7 +555,7 @@ export default function AchievementsSection() {
 
             {/* Overflow Mask Container */}
             <div ref={certContainerRef} className="w-full overflow-hidden pb-4 pt-1 rounded-2xl">
-              {/* Continuous Sliding Ribbon Track */}
+              {/* Continuous Sliding Ribbon Track (100% Unidirectional Smooth Sliding) */}
               <div
                 onTransitionEnd={handleCertTransitionEnd}
                 className="flex items-stretch will-change-transform"
@@ -512,35 +563,40 @@ export default function AchievementsSection() {
                   transform: `translate3d(-${certIndex * certStepW}px, 0, 0)`,
                   transition: certNoTransition
                     ? "none"
-                    : "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+                    : "transform 0.55s cubic-bezier(0.25, 1, 0.5, 1)",
                 }}
               >
                 {repeatedCerts.map((cert, i) => {
-                  const origIdx = i % CERTIFICATIONS.length;
+                  const origIdx = i % numCerts;
                   const isHovered = hoveredCert === i;
                   const isBridgeHighlighted =
                     hoveredCert !== null && (hoveredCert === i || hoveredCert === i - 1);
 
                   const nodeAddr = `0x${(0x8100 + origIdx * 0x10).toString(16).toUpperCase()}`;
-                  const prevOrigIdx = (origIdx - 1 + CERTIFICATIONS.length) % CERTIFICATIONS.length;
-                  const nextOrigIdx = (origIdx + 1) % CERTIFICATIONS.length;
+                  const prevOrigIdx = (origIdx - 1 + numCerts) % numCerts;
+                  const nextOrigIdx = (origIdx + 1) % numCerts;
                   const prevAddr = `0x${(0x8100 + prevOrigIdx * 0x10).toString(16).toUpperCase()}`;
                   const nextAddr = `0x${(0x8100 + nextOrigIdx * 0x10).toString(16).toUpperCase()}`;
 
                   return (
-                    <React.Fragment key={`${cert.id}-rep-${i}`}>
+                    <React.Fragment key={`${cert.id}-pos-${i}`}>
                       {/* Inter-Node Pointer Bridge Conduit */}
                       {i > 0 && (
-                        <PointerBridge
-                          isHighlighted={isBridgeHighlighted}
-                          onForwardClick={nextCert}
-                          onReverseClick={prevCert}
-                        />
+                        <div
+                          style={{ width: `${bridgeW}px` }}
+                          className="shrink-0 self-stretch flex flex-col justify-center items-center"
+                        >
+                          <PointerBridge
+                            isHighlighted={isBridgeHighlighted}
+                            onForwardClick={nextCert}
+                            onReverseClick={prevCert}
+                          />
+                        </div>
                       )}
 
                       <div
-                        ref={i === 0 ? certFirstCardRef : null}
-                        className="shrink-0 w-full sm:w-[calc((100%-3rem)/2)] md:w-[calc((100%-6rem)/3)] lg:w-[calc((100%-9rem)/4)] group"
+                        style={{ width: `${certCardW}px` }}
+                        className="shrink-0 h-full group"
                         onMouseEnter={() => setHoveredCert(i)}
                         onMouseLeave={() => setHoveredCert(null)}
                       >
