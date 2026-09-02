@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ["lucide-react", "motion/react"],
+    optimizePackageImports: ["lucide-react", "motion"],
   },
 };
 

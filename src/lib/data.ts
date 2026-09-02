@@ -11,7 +11,7 @@ export const PERSONAL_INFO = {
   name: "Dileepa Prabhath",
   shortName: "DP",
   title: "Full Stack Developer",
-  roles: ["Full Stack Developer", "Backend Engineer", "AI/ML Enthusiast", "Cybersecurity Explorer"],
+  roles: ["Full Stack Developer", "Backend Engineer"],
   tagline: "IT Undergraduate @ University of Moratuwa",
   location: "Sri Lanka 🇱🇰",
   bio: "Driven by curiosity, passionate about building secure, intelligent, and scalable systems that merge innovation with real-world impact—turning complex ideas into elegant code.",
@@ -280,8 +280,8 @@ export interface Project {
   id: string;
   title: string;
   description: string;
+  technologies: string[];
   tags: string[];
-  langStats: { lang: string; pct: number }[];
   live: string;
   repo: string;
   image: string;
@@ -289,64 +289,92 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: "chert-nodes",
-    title: "ChertNodes",
+    id: "serve-sync",
+    title: "ServeSync (CraveHouse)",
     description:
-      "Minecraft server hosting platform with automated deployment, real-time monitoring dashboard, and seamless player management.",
-    tags: ["React", "Flask", "Python", "TypeScript"],
-    langStats: [
-      { lang: "TS", pct: 60 },
-      { lang: "PY", pct: 40 },
-    ],
-    live: "https://github.com/DileepaPRA",
-    repo: "https://github.com/DileepaPRA",
-    image:
-      "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=720&h=480&fit=crop&auto=format",
+      "Multi-branch restaurant platform supporting QR and online ordering, automated table reservations, and real-time operations across restaurant staff.",
+    technologies: ["React", "Spring Boot", "MySQL", "JavaScript", "Redis"],
+    tags: ["Restaurant", "QROrdering", "FullStack", "MultiBranch"],
+    live: "https://cravehouse.netlify.app/",
+    repo: "https://github.com/Byte-knight-team/BK_SP_Backend",
+    image: "/images/projects/ServeSync(CraveHouse).jpg",
   },
   {
-    id: "protectx",
-    title: "ProtectX",
+    id: "split-rx",
+    title: "SplitRx",
     description:
-      "Advanced Discord anti-crash bot protecting large communities with threat detection, rate-limiting, and automated moderation flows.",
-    tags: ["Node.js", "Discord.js", "JavaScript"],
-    langStats: [
-      { lang: "JS", pct: 90 },
-      { lang: "SH", pct: 10 },
-    ],
-    live: "https://github.com/DileepaPRA",
-    repo: "https://github.com/DileepaPRA",
-    image:
-      "https://images.unsplash.com/photo-1563089145-599997674d42?w=720&h=480&fit=crop&auto=format",
+      "Next-generation medical prescription system designed to eliminate security vulnerabilities in how prescriptions are handled. It protects against identity theft, prescription fraud, and data leaks.",
+    technologies: ["Next.js", "TypeScript", "Express.js", "PostgreSQL"],
+    tags: ["Security", "Healthcare", "FraudPrevention", "FullStack"],
+    live: "",
+    repo: "https://github.com/genzipher1-0-codestormers/SplitRx",
+    image: "/images/projects/SplitRx.png",
   },
   {
-    id: "kahoot-viewer",
-    title: "Kahoot Answers Viewer",
+    id: "agro-sense",
+    title: "AgroSense",
     description:
-      "Educational tool to view Kahoot quiz answers instantly. Built with Vue.js + Express backend, designed for developer utility.",
-    tags: ["Vue.js", "Express", "JavaScript"],
-    langStats: [
-      { lang: "VUE", pct: 80 },
-      { lang: "JS", pct: 20 },
-    ],
-    live: "https://github.com/DileepaPRA",
-    repo: "https://github.com/DileepaPRA",
-    image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=720&h=480&fit=crop&auto=format",
+      "Agricultural intelligence platform providing real-time weather alerts, market pricing analytics, and automated crop risk advisory.",
+    technologies: ["Spring Boot", "React", "JavaScript", "MySQL"],
+    tags: ["Agriculture", "FullStack", "AIML", "AgriTech"],
+    live: "https://agrof-repo.vercel.app/",
+    repo: "https://github.com/Fourth-X-Born/agro-sense-AI-backend",
+    image: "/images/projects/AgroSense.jpg",
   },
   {
-    id: "project-4",
-    title: "More Coming Soon",
+    id: "cash-master",
+    title: "CashMaster 6688",
     description:
-      "Real projects with full source code, live demos, and detailed documentation. Add your actual projects here.",
-    tags: ["React", "TypeScript", "Node.js"],
-    langStats: [
-      { lang: "TS", pct: 70 },
-      { lang: "JS", pct: 30 },
-    ],
-    live: "https://github.com/DileepaPRA",
-    repo: "https://github.com/DileepaPRA",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=720&h=480&fit=crop&auto=format",
+      "AI-powered embedded system for identifying and sorting Sri Lankan currency denominations in real-time with actuator hardware control.",
+    technologies: ["Python", "TensorFlow Lite", "MobileNetV2", "Raspberry Pi", "Arduino", "OpenCV"],
+    tags: ["EmbeddedSystems", "IoT", "AIML", "ComputerVision"],
+    live: "",
+    repo: "https://github.com/DileepaPRA/Group_Project_CashMaster_6688",
+    image: "/images/projects/CashMaster_6688.jpeg",
+  },
+  {
+    id: "chef-claude",
+    title: "Chef Claude",
+    description:
+      "AI-powered culinary web application that generates personalized recipes from user-provided ingredients using Google Gemini.",
+    technologies: ["React", "Gemini API", "Express.js", "Tailwind CSS"],
+    tags: ["FoodTech", "GenerativeAI", "FullStack", "WebApp"],
+    live: "",
+    repo: "https://github.com/DileepaPRA/Chef-Claude",
+    image: "/images/projects/Chef-Claude.png",
+  },
+  {
+    id: "foregoal",
+    title: "ForeGoal — FIFA 2026 Prediction Engine",
+    description:
+      "FIFA World Cup 2026 prediction and match outcome simulation engine powered by machine learning models and interactive visual analytics.",
+    technologies: ["Python", "Streamlit", "NumPy", "Pandas", "Matplotlib", "scikit-learn"],
+    tags: ["Prediction", "DataVisualization", "MachineLearning", "SportsAnalytics"],
+    live: "",
+    repo: "https://github.com/DileepaPRA/ForeGoal",
+    image: "/images/projects/Foregoal.jpg",
+  },
+  {
+    id: "portfolio",
+    title: "Personal Portfolio",
+    description:
+      "Modern cybernetic developer portfolio engineered from scratch for high performance, smooth 60fps micro-interactions, responsive window architecture, and dark-mode glassmorphism.",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    tags: ["Portfolio", "Frontend", "UIUX", "Performance"],
+    live: "",
+    repo: "https://github.com/DileepaPRA/Portfolio",
+    image: "/images/projects/Portfolio.jpg?v=2",
+  },
+  {
+    id: "lyntra",
+    title: "Lyntra",
+    description:
+      "Modern collaborative knowledge-sharing platform for developers, students, and tech communities.",
+    technologies: ["Next.js", "Spring Boot", "React", "TypeScript"],
+    tags: ["KnowledgeSharing", "FullStack", "WebApp", "Collaboration"],
+    live: "",
+    repo: "https://github.com/DileepaPRA/lyntra-api",
+    image: "/images/projects/Lyntra.png",
   },
 ];
 
@@ -409,28 +437,25 @@ export const AWARDS = [
     org: "University of Colombo (UCSC)",
     year: "2024",
     image: "/images/awards/Genzipher Winner.jpg",
-    cert: "https://github.com/DileepaPRA",
-    icon: "trophy",
+    cert: "https://drive.google.com/file/d/1xV1Hry2JOGClJBOtseNhSO4CiK6p1yR8/view?usp=sharing",
   },
   {
     id: "cryptx",
     title: "Participant — CryptX 2.0",
     type: "CTF Hackathon",
     org: "University of Sri Jayewardenepura",
-    year: "2024",
-    image: null as string | null,
-    cert: "https://github.com/DileepaPRA",
-    icon: "shield",
+    year: "2026",
+    image: "/images/awards/CryptX.jpg",
+    cert: "https://drive.google.com/file/d/1uu2rhn_RH5CULN2290WTY1ROCSFOlHkm/view?usp=sharing",
   },
   {
     id: "coderush",
     title: "Top 20 - CodeRush 2024",
-    type: "Coding Hackthon",
-    org: "University of Moratuwa,INTECS",
+    type: "Coding Hackathon",
+    org: "University of Moratuwa, INTECS",
     year: "2024",
     image: "/images/awards/CodeRush24.png",
-    cert: "https://github.com/DileepaPRA",
-    icon: "shield",
+    cert: "https://www.hackerrank.com/contests/fit-coderush-2024/leaderboard?limit=50&page=1",
   },
   {
     id: "deans-list",
@@ -441,7 +466,15 @@ export const AWARDS = [
     image: null as string | null,
     cert: "https://github.com/DileepaPRA",
     note: "Levels: L1S1, L1S2, L2S1",
-    icon: "star",
+  },
+  {
+    id: "Fit-Expo",
+    title: "	Participant - Fit Expo 2024",
+    type: "Exhibition",
+    org: "University of Moratuwa",
+    year: "2025",
+    image: "/images/awards/FitExpo.jpeg",
+    cert: "https://drive.google.com/file/d/1kxhIhFUz3F_a7u79Qrv7pK3uTrEJwg85/view?usp=sharing",
   },
 ];
 
@@ -452,7 +485,7 @@ export const CERTIFICATIONS = [
     issuer: "Cisco Academy",
     year: "2023",
     image: "/images/certifications/Cisco Network Technicial.png",
-    cert: "https://github.com/DileepaPRA",
+    cert: "https://www.credly.com/badges/db8380cc-ffdf-4b91-ae7e-153e6fd92f58/public_url",
   },
   {
     id: "fcc-web",
@@ -460,7 +493,7 @@ export const CERTIFICATIONS = [
     issuer: "freeCodeCamp",
     year: "2023",
     image: "/images/certifications/FreeCodeCamp.png",
-    cert: "https://github.com/DileepaPRA",
+    cert: "https://www.freecodecamp.org/certification/fcc-cece4546-7f12-4035-8846-3a437567e3c4/responsive-web-design",
   },
   {
     id: "cisco-cyber",
@@ -468,7 +501,7 @@ export const CERTIFICATIONS = [
     issuer: "Cisco Academy",
     year: "2023",
     image: "/images/certifications/Cisco Introduction Cybersecurity Path.png",
-    cert: "https://github.com/DileepaPRA",
+    cert: "https://www.credly.com/badges/dfa134e3-4370-4757-aa34-16d0d9820de8/public_url",
   },
   {
     id: "aws-cloud-practitioner",
@@ -476,7 +509,7 @@ export const CERTIFICATIONS = [
     issuer: "Amazon Web Services (AWS)",
     year: "2024",
     image: "/images/certifications/AWS Cloud Practitioner.png",
-    cert: "https://github.com/DileepaPRA",
+    cert: "https://drive.google.com/file/d/1HkT073fADDscy0txx9fEwmRKlTQDrRTh/view?usp=sharing",
   },
   {
     id: "c-solo",
@@ -484,6 +517,6 @@ export const CERTIFICATIONS = [
     issuer: "SoloLearn",
     year: "2024",
     image: "/images/certifications/SoloLearn C Intermidiate.jpg",
-    cert: "https://github.com/DileepaPRA",
+    cert: "https://www.sololearn.com/certificates/CC-N0Q43SY2",
   },
 ];

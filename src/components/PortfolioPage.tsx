@@ -5,6 +5,7 @@ import LoadingScreen from "./layout/LoadingScreen";
 import DustCanvas from "./background/DustCanvas";
 import Navbar from "./layout/Navbar";
 import SocialSidebar from "./layout/SocialSidebar";
+import ScrollToTop from "./layout/ScrollToTop";
 import Footer from "./layout/Footer";
 import HeroSection from "./sections/HeroSection";
 import AboutSection from "./sections/AboutSection";
@@ -118,6 +119,7 @@ export default function PortfolioPage() {
       {/* Fixed chrome */}
       <Navbar activeSection={activeSection} />
       <SocialSidebar />
+      <ScrollToTop />
 
       {/* Page content */}
       <main className="relative z-10">

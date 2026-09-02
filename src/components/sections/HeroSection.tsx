@@ -18,29 +18,40 @@ export default function HeroSection() {
   const [roleIdx, setRoleIdx] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const roles = PERSONAL_INFO.roles;
-    const current = roles[roleIdx];
-    const speed = isDeleting ? 40 : 80;
+    if (!roles || roles.length === 0) return;
+    const current = roles[roleIdx % roles.length];
 
-    timerRef.current = setTimeout(() => {
-      if (!isDeleting) {
-        setDisplayText(current.slice(0, displayText.length + 1));
-        if (displayText.length === current.length - 1) {
-          setTimeout(() => setIsDeleting(true), 1600);
-        }
+    let timeout: NodeJS.Timeout;
+
+    if (!isDeleting) {
+      if (displayText.length < current.length) {
+        // Typing forward
+        timeout = setTimeout(() => {
+          setDisplayText(current.slice(0, displayText.length + 1));
+        }, 85);
       } else {
-        setDisplayText(current.slice(0, displayText.length - 1));
-        if (displayText.length === 0) {
-          setIsDeleting(false);
-          setRoleIdx((i) => (i + 1) % roles.length);
-        }
+        // Full word typed -> Pause before deleting
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2000);
       }
-    }, speed);
+    } else {
+      if (displayText.length > 0) {
+        // Deleting backward
+        timeout = setTimeout(() => {
+          setDisplayText(current.slice(0, displayText.length - 1));
+        }, 45);
+      } else {
+        // Finished deleting -> Advance to next role and restart typing
+        setIsDeleting(false);
+        setRoleIdx((prev) => (prev + 1) % roles.length);
+      }
+    }
 
-    return () => clearTimeout(timerRef.current);
+    return () => clearTimeout(timeout);
   }, [displayText, isDeleting, roleIdx]);
 
   const fadeUp = {

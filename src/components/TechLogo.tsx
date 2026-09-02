@@ -825,6 +825,435 @@ export default function TechLogo({ name, size = 16, className = "" }: TechLogoPr
     );
   }
 
+  // Spring Boot / Spring
+  if (
+    normName === "spring boot" ||
+    normName === "spring-boot" ||
+    normName === "spring" ||
+    normName === "springboot"
+  ) {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path
+          d="M21.5 8.7c-.5-.9-1.2-1.6-2.1-2.1l-6-3.5c-1-.6-2.1-.6-3.1 0l-6 3.5c-.9.5-1.6 1.2-2.1 2.1-.5.9-.6 2-.3 3 .3 1 .9 1.8 1.8 2.3l6 3.5c.5.3 1 .4 1.6.4s1.1-.1 1.6-.4l6-3.5c.9-.5 1.5-1.3 1.8-2.3.4-1 .3-2.1-.2-3z"
+          fill="#6DB33F"
+        />
+        <path
+          d="M9.8 15.5c-2.2 0-4-1.8-4-4s1.8-4 4-4c1.4 0 2.6.7 3.3 1.8l-1.6 1c-.4-.6-1-.9-1.7-.9-1.2 0-2.2 1-2.2 2.2s1 2.2 2.2 2.2c.9 0 1.6-.5 2-1.3h-2v-1.7h3.8c.1.4.1.7.1 1.1 0 2-1.7 3.6-3.9 3.6z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    );
+  }
+
+  // Next.js
+  if (normName === "next.js" || normName === "nextjs" || normName === "next") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="10.5"
+          fill="#000000"
+          stroke="rgba(255,255,255,0.2)"
+          strokeWidth="1"
+        />
+        <path
+          d="M15.5 8.5v7M8.5 8.5v7l7.5-9"
+          stroke="#FFFFFF"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  }
+
+  // MySQL
+  if (normName === "mysql") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <rect width="24" height="24" rx="3" fill="#00758F" />
+        <path
+          d="M18.8 11.2c-.3-.8-.9-1.4-1.6-1.7-.8-.4-1.7-.4-2.5 0-.4.2-.8.5-1.1.9-.3-.5-.7-.9-1.2-1.1-.9-.4-1.9-.4-2.8 0-.8.4-1.4 1.1-1.7 2-.3.9-.3 1.9.1 2.8.4.8 1.1 1.4 2 1.7.6.2 1.2.2 1.8.1.3.5.7.9 1.2 1.1.9.4 1.9.4 2.8 0 .8-.4 1.4-1.1 1.7-2 .4-.9.4-1.9.1-2.8z"
+          fill="#F29111"
+        />
+        <circle cx="12" cy="12" r="2.5" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // Redis
+  if (normName === "redis") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path
+          d="M21 7.5L12 3 3 7.5 12 12l9-4.5zM3 12l9 4.5 9-4.5M3 16.5l9 4.5 9-4.5"
+          stroke="#DC382D"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="rgba(220, 56, 45, 0.15)"
+        />
+      </svg>
+    );
+  }
+
+  // Express.js
+  if (normName === "express.js" || normName === "express" || normName === "expressjs") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <rect
+          width="24"
+          height="24"
+          rx="4"
+          fill="#181818"
+          stroke="rgba(255,255,255,0.2)"
+          strokeWidth="1"
+        />
+        <path
+          d="M6 16V8h6M6 12h5M14 8l4 8M18 8l-4 8"
+          stroke="#FFFFFF"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  }
+
+  // Tailwind CSS
+  if (normName === "tailwind" || normName === "tailwind css" || normName === "tailwindcss") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path
+          d="M12 6c-3.6 0-5.4 1.8-5.4 5.4 1.2-1.8 2.7-2.4 4.5-1.8.9.3 1.6 1 2.3 1.7 1.2 1.2 2.6 2.7 5.6 2.7 3.6 0 5.4-1.8 5.4-5.4-1.2 1.8-2.7 2.4-4.5 1.8-.9-.3-1.6-1-2.3-1.7C16.4 7.5 15 6 12 6zM6.6 12C3 12 1.2 13.8 1.2 17.4c1.2-1.8 2.7-2.4 4.5-1.8.9.3 1.6 1 2.3 1.7 1.2 1.2 2.6 2.7 5.6 2.7 3.6 0 5.4-1.8 5.4-5.4-1.2 1.8-2.7 2.4-4.5 1.8-.9-.3-1.6-1-2.3-1.7C11 13.5 9.6 12 6.6 12z"
+          fill="#38BDF8"
+        />
+      </svg>
+    );
+  }
+
+  // TensorFlow / TensorFlow Lite
+  if (
+    normName === "tensorflow" ||
+    normName === "tensorflow lite" ||
+    normName === "tflite" ||
+    normName === "tf"
+  ) {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path d="M12 2l9 5.2v5.2l-4-2.3V7.8L12 4.9 7 7.8v2.3L3 12.4V7.2L12 2z" fill="#FF6F00" />
+        <path d="M12 9.5l4 2.3v4.6l-4 2.3-4-2.3v-4.6l4-2.3z" fill="#FF9100" />
+        <path d="M12 22l-9-5.2v-5.2l4 2.3v2.3l5 2.9 5-2.9v-2.3l4-2.3v5.2L12 22z" fill="#FFA726" />
+      </svg>
+    );
+  }
+
+  // Raspberry Pi
+  if (normName === "raspberry pi" || normName === "raspberrypi" || normName === "rpi") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path
+          d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3c0-.6-.2-1.1-.5-1.5-.7.5-1.5.8-2.5.8s-1.8-.3-2.5-.8c-.3.4-.5.9-.5 1.5z"
+          fill="#6DA04B"
+        />
+        <circle cx="12" cy="14" r="7" fill="#C51A4A" />
+        <circle cx="9.5" cy="12.5" r="2.2" fill="#E33869" />
+        <circle cx="14.5" cy="12.5" r="2.2" fill="#E33869" />
+        <circle cx="12" cy="16.5" r="2.2" fill="#E33869" />
+      </svg>
+    );
+  }
+
+  // Arduino
+  if (normName === "arduino") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path
+          d="M6.5 7C3.5 7 1 9.2 1 12s2.5 5 5.5 5c2.3 0 4.2-1.3 5-3.3.8 2 2.7 3.3 5 3.3 3 0 5.5-2.2 5.5-5s-2.5-5-5.5-5c-2.3 0-4.2 1.3-5 3.3-.8-2-2.7-3.3-5-3.3zm0 2c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3zm11 0c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3z"
+          fill="#00979D"
+        />
+        <path
+          d="M5 12h3M15.5 12h3M17 10.5v3"
+          stroke="#FFFFFF"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+
+  // OpenCV
+  if (normName === "opencv") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <circle cx="12" cy="7" r="4" stroke="#EA4335" strokeWidth="2.5" fill="none" />
+        <circle cx="7" cy="16" r="4" stroke="#34A853" strokeWidth="2.5" fill="none" />
+        <circle cx="17" cy="16" r="4" stroke="#4285F4" strokeWidth="2.5" fill="none" />
+      </svg>
+    );
+  }
+
+  // Google Gemini API / Gemini
+  if (
+    normName === "gemini-api" ||
+    normName === "gemini api" ||
+    normName === "gemini" ||
+    normName === "google gemini"
+  ) {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path
+          d="M12 2C12 7.5 7.5 12 2 12c5.5 0 10 4.5 10 10 0-5.5 4.5-10 10-10-5.5 0-10-4.5-10-10z"
+          fill="url(#gemini_grad)"
+        />
+        <defs>
+          <linearGradient
+            id="gemini_grad"
+            x1="2"
+            y1="2"
+            x2="22"
+            y2="22"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#1BA1E3" />
+            <stop offset="0.5" stopColor="#7B61FF" />
+            <stop offset="1" stopColor="#FF776F" />
+          </linearGradient>
+        </defs>
+      </svg>
+    );
+  }
+
+  // Streamlit
+  if (normName === "streamlit") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path
+          d="M8.5 6.5l3.5 5.5-3.5 5.5h-5l3.5-5.5-3.5-5.5h5zm7 0l5 8-2.5 4h-5l5-8-2.5-4z"
+          fill="#FF4B4B"
+        />
+      </svg>
+    );
+  }
+
+  // scikit-learn
+  if (normName === "scikit-learn" || normName === "sklearn") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <circle cx="8" cy="12" r="5" fill="#3499CD" fillOpacity="0.85" />
+        <circle cx="16" cy="12" r="5" fill="#F7931E" fillOpacity="0.85" />
+        <path d="M12 8.5a5 5 0 010 7 5 5 0 010-7z" fill="#E8741B" />
+      </svg>
+    );
+  }
+
+  // NumPy
+  if (normName === "numpy") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <rect width="24" height="24" rx="3" fill="#013243" />
+        <path
+          d="M6 18V6l6 12V6M14 6v12h4"
+          stroke="#4DABCF"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+
+  // Pandas
+  if (normName === "pandas") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <rect x="5" y="4" width="3.5" height="16" rx="1.5" fill="#150458" />
+        <rect x="10.25" y="8" width="3.5" height="12" rx="1.5" fill="#E70488" />
+        <rect x="15.5" y="4" width="3.5" height="16" rx="1.5" fill="#00D4B4" />
+      </svg>
+    );
+  }
+
+  // Matplotlib
+  if (normName === "matplotlib") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <circle cx="12" cy="12" r="9" stroke="#11557C" strokeWidth="2.5" fill="none" />
+        <path d="M12 3a9 9 0 019 9h-9V3z" fill="#FF8800" />
+      </svg>
+    );
+  }
+
+  // Framer Motion
+  if (normName === "framer motion" || normName === "framer") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path d="M4 2h16v8H12L4 2zM4 10h8l8 8H4v-8zM4 18l8 4v-4H4z" fill="#0055FF" />
+      </svg>
+    );
+  }
+
+  // Discord.js / Discord
+  if (normName === "discord.js" || normName === "discord") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <path
+          d="M19.3 5.3A16.6 16.6 0 0015.2 4a.1.1 0 00-.1.1c-.2.4-.4.8-.5 1.2a15.3 15.3 0 00-5.2 0A9 9 0 008.9 4a.1.1 0 00-.1-.1 16.6 16.6 0 00-4.1 1.4.1.1 0 000 .1C2.1 9.2 1.4 13 1.7 16.7a.1.1 0 00.1.1 16.7 16.7 0 005.1 2.6.1.1 0 00.1 0c.4-.6.8-1.2 1.1-1.8a.1.1 0 00-.1-.1 11 11 0 01-1.6-.8.1.1 0 010-.2c.1-.1.3-.2.4-.3a.1.1 0 01.1 0c3.3 1.5 6.9 1.5 10.2 0a.1.1 0 01.1 0c.1.1.3.2.4.3a.1.1 0 010 .2c-.5.3-1 .6-1.6.8a.1.1 0 00-.1.1c.3.6.7 1.2 1.1 1.8a.1.1 0 00.1 0 16.7 16.7 0 005.1-2.6.1.1 0 00.1-.1c.4-4.3-.7-8.1-3-11.4a.1.1 0 000-.1zM8.5 14.3c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm7 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"
+          fill="#5865F2"
+        />
+      </svg>
+    );
+  }
+
+  // MobileNetV2 / Computer Vision / ML
+  if (normName === "mobilenetv2" || normName === "mobilenet" || normName === "computer vision") {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+      >
+        <circle cx="12" cy="12" r="3" fill="#00D4B4" />
+        <path
+          d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.2 2.2M16.2 16.2l2.2 2.2M5.6 18.4l2.2-2.2M16.2 7.8l2.2-2.2"
+          stroke="#00D4B4"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+
   // Generic fallback code icon
   return (
     <svg
