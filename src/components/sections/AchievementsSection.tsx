@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useRef, useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Trophy,
   ExternalLink,
@@ -9,6 +11,8 @@ import {
   BadgeCheck,
   Image as ImageIcon,
   Repeat,
+  X,
+  ZoomIn,
 } from "lucide-react";
 import { AWARDS, CERTIFICATIONS, SECTION_COLORS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
@@ -144,6 +148,13 @@ export default function AchievementsSection() {
 
   const [hoveredAward, setHoveredAward] = useState<number | null>(null);
   const [hoveredCert, setHoveredCert] = useState<number | null>(null);
+
+  const [selectedPhoto, setSelectedPhoto] = useState<{
+    src: string;
+    title: string;
+    subtitle?: string;
+    cert?: string;
+  } | null>(null);
 
   const awardContainerRef = useRef<HTMLDivElement>(null);
   const certContainerRef = useRef<HTMLDivElement>(null);
@@ -414,17 +425,46 @@ export default function AchievementsSection() {
                             </div>
                           </div>
 
-                          {/* Photo Slot */}
+                          {/* Photo Slot (Click to Expand Modal) */}
                           <div
-                            className="w-full h-36 rounded-xl border border-white/8 flex items-center justify-center relative overflow-hidden shrink-0 mb-4"
+                            onClick={() => {
+                              if (award.image) {
+                                setSelectedPhoto({
+                                  src: award.image,
+                                  title: award.title,
+                                  subtitle: `${award.type} • ${award.org} (${award.year})`,
+                                  cert: award.cert,
+                                });
+                              }
+                            }}
+                            role={award.image ? "button" : undefined}
+                            tabIndex={award.image ? 0 : undefined}
+                            title={award.image ? "Click to expand photo" : undefined}
+                            className={`w-full h-36 rounded-xl border border-white/8 flex items-center justify-center relative overflow-hidden shrink-0 mb-4 transition-all duration-300 ${
+                              award.image
+                                ? "cursor-pointer hover:border-amber/60 hover:shadow-[0_0_20px_rgba(245,158,11,0.25)] group/photo"
+                                : ""
+                            }`}
                             style={{ background: "rgba(245, 158, 11, 0.05)" }}
                           >
                             {award.image ? (
-                              <img
-                                src={award.image}
-                                alt={award.title}
-                                className="w-full h-full object-cover"
-                              />
+                              <>
+                                <div className="skeleton-shimmer opacity-30" />
+                                <Image
+                                  src={award.image}
+                                  alt={award.title}
+                                  fill
+                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
+                                  loading="lazy"
+                                  className="object-cover transition-transform duration-300 group-hover/photo:scale-105"
+                                />
+                                {/* Zoom Icon Overlay on Hover */}
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-black/40 backdrop-blur-[1px]">
+                                  <div className="p-2 rounded-full bg-amber/20 border border-amber/60 text-amber shadow-lg">
+                                    <ZoomIn size={18} />
+                                  </div>
+                                </div>
+                              </>
                             ) : (
                               <div className="flex flex-col items-center gap-1.5 text-dim">
                                 <ImageIcon size={24} />
@@ -433,7 +473,7 @@ export default function AchievementsSection() {
                                 </span>
                               </div>
                             )}
-                            <div className="scan-line opacity-20" />
+                            <div className="scan-line opacity-20 pointer-events-none" />
                           </div>
 
                           {/* Content */}
@@ -625,20 +665,44 @@ export default function AchievementsSection() {
 
                           {/* Logo Slot */}
                           <div>
+                            {/* Logo Slot (Click to Expand Modal) */}
                             <div
-                              className="w-12 h-12 rounded-xl border border-white/8 flex items-center justify-center relative overflow-hidden mb-3"
+                              onClick={() => {
+                                if (cert.image) {
+                                  setSelectedPhoto({
+                                    src: cert.image,
+                                    title: cert.title,
+                                    subtitle: `${cert.issuer} (${cert.year})`,
+                                    cert: cert.cert,
+                                  });
+                                }
+                              }}
+                              role={cert.image ? "button" : undefined}
+                              tabIndex={cert.image ? 0 : undefined}
+                              title={cert.image ? "Click to view credential badge" : undefined}
+                              className={`w-12 h-12 rounded-xl border border-white/8 flex items-center justify-center relative overflow-hidden mb-3 transition-all duration-300 ${
+                                cert.image
+                                  ? "cursor-pointer hover:border-amber/60 hover:scale-105 hover:shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+                                  : ""
+                              }`}
                               style={{ background: "rgba(245, 158, 11, 0.06)" }}
                             >
                               {cert.image ? (
-                                <img
-                                  src={cert.image}
-                                  alt={cert.issuer}
-                                  className="w-full h-full object-contain p-1"
-                                />
+                                <>
+                                  <div className="skeleton-shimmer opacity-20" />
+                                  <Image
+                                    src={cert.image}
+                                    alt={cert.issuer}
+                                    fill
+                                    sizes="96px"
+                                    loading="lazy"
+                                    className="object-contain p-1"
+                                  />
+                                </>
                               ) : (
                                 <ImageIcon size={18} className="text-dim" />
                               )}
-                              <div className="scan-line opacity-15" />
+                              <div className="scan-line opacity-15 pointer-events-none" />
                             </div>
 
                             <div className="flex items-center justify-between mb-1">
@@ -708,6 +772,96 @@ export default function AchievementsSection() {
           </div>
         </div>
       </div>
+
+      {/* ── HIGH-RES ACHIEVEMENT / CREDENTIAL LIGHTBOX MODAL ── */}
+      <AnimatePresence>
+        {selectedPhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedPhoto(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl"
+          >
+            <motion.div
+              initial={{ scale: 0.92, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.92, y: 20, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-3xl rounded-3xl border-2 border-amber/50 overflow-hidden shadow-2xl flex flex-col"
+              style={{
+                background:
+                  "linear-gradient(150deg, rgba(25,18,8,0.98) 0%, rgba(6,10,22,0.99) 100%)",
+                boxShadow: "0 25px 80px -15px rgba(245,158,11,0.5), 0 0 30px rgba(245,158,11,0.25)",
+              }}
+            >
+              {/* Modal Titlebar */}
+              <div
+                className="px-6 py-4 border-b border-amber/30 flex items-center justify-between"
+                style={{ background: "rgba(16, 12, 6, 0.9)" }}
+              >
+                <div className="flex items-center gap-3 pr-4 truncate">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber shadow-[0_0_8px_#f59e0b] shrink-0" />
+                  <div className="truncate">
+                    <h3 className="font-display text-base font-bold text-ink truncate">
+                      {selectedPhoto.title}
+                    </h3>
+                    {selectedPhoto.subtitle && (
+                      <p className="font-mono text-[11px] text-amber/80 truncate">
+                        {selectedPhoto.subtitle}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setSelectedPhoto(null)}
+                  aria-label="Close modal"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-muted hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Modal Full-Res Photo Body */}
+              <div className="relative p-4 sm:p-8 flex items-center justify-center bg-black/60 min-h-[300px] md:min-h-[420px]">
+                <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl max-h-[70vh] flex items-center justify-center bg-black/40">
+                  <Image
+                    src={selectedPhoto.src}
+                    alt={selectedPhoto.title}
+                    width={1200}
+                    height={800}
+                    sizes="(max-width: 1024px) 95vw, 1000px"
+                    priority
+                    className="max-h-[65vh] w-auto max-w-full object-contain"
+                  />
+                </div>
+              </div>
+
+              {/* Modal Footer Link */}
+              {selectedPhoto.cert && (
+                <div
+                  className="px-6 py-3 border-t border-amber/20 flex items-center justify-between"
+                  style={{ background: "rgba(16, 12, 6, 0.8)" }}
+                >
+                  <span className="font-mono text-[11px] text-dim">VERIFIED CREDENTIAL</span>
+                  <a
+                    href={selectedPhoto.cert}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 font-mono text-xs text-amber hover:underline transition-colors"
+                  >
+                    <span>View Verification</span>
+                    <ExternalLink size={12} />
+                  </a>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

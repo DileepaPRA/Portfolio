@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { X, RotateCcw, Sparkles, ChevronLeft, ChevronRight, Crosshair } from "lucide-react";
 import { UNIVERSITY_IMAGES, SECTION_COLORS } from "../../lib/data";
@@ -479,13 +480,19 @@ export default function UniversityJourneySection() {
                         : "0 14px 28px rgba(0,0,0,0.7), 0 0 14px rgba(251,23,111,0.25)",
                     }}
                   >
-                    {/* Image View */}
-                    <img
-                      src={imgData.src}
-                      alt={imgData.caption || `University Photo ${index + 1}`}
-                      draggable={false}
-                      className="w-full h-full object-cover pointer-events-none"
-                    />
+                    {/* Image View with Shimmer Placeholder */}
+                    <div className="absolute inset-0 bg-surface/80">
+                      <div className="skeleton-shimmer opacity-40" />
+                      <Image
+                        src={imgData.src}
+                        alt={imgData.caption || `University Photo ${index + 1}`}
+                        fill
+                        sizes="280px"
+                        loading="lazy"
+                        draggable={false}
+                        className="w-full h-full object-cover pointer-events-none"
+                      />
+                    </div>
 
                     {/* Glowing Bracketed Corners [ ] */}
                     <div
@@ -567,18 +574,16 @@ export default function UniversityJourneySection() {
 
                 {/* Modal Full-Res Photo Body */}
                 <div className="relative p-4 sm:p-8 flex items-center justify-center bg-black/60 min-h-[360px] md:min-h-[480px]">
-                  <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl max-h-[70vh]">
-                    <img
+                  <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl max-h-[70vh] flex items-center justify-center bg-black/40">
+                    <Image
                       src={activePhoto.src}
                       alt={activePhoto.caption || "University Photo"}
+                      width={1200}
+                      height={800}
+                      sizes="(max-width: 1024px) 95vw, 1000px"
+                      priority
                       className="max-h-[65vh] w-auto max-w-full object-contain"
                     />
-
-                    {/* Corner Cyber Brackets */}
-                    <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-ruby" />
-                    <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-ruby" />
-                    <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-ruby" />
-                    <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-ruby" />
                   </div>
 
                   {/* Previous / Next Lightbox Controls */}

@@ -352,52 +352,52 @@ export const PROJECTS: Project[] = [
 
 export const UNIVERSITY_IMAGES = [
   {
-    src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=500&h=340&fit=crop&auto=format",
-    caption: "Campus Life",
+    src: "/images/journey/genzipher.jpg",
+    caption: "GenZipher CTF & Hackathon",
   },
   {
-    src: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=500&h=340&fit=crop&auto=format",
-    caption: "Orientation",
+    src: "/images/journey/CODERUSH (1).jpg",
+    caption: "CodeRush Hackathon 2024",
   },
   {
-    src: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=500&h=340&fit=crop&auto=format",
-    caption: "Study Sessions",
+    src: "/images/journey/FIT Expo.jpg",
+    caption: "FIT Future Careers Expo",
   },
   {
-    src: "https://images.unsplash.com/photo-1562774053-701939374585?w=500&h=340&fit=crop&auto=format",
-    caption: "Computer Lab",
+    src: "/images/journey/genzipher 2.jpg",
+    caption: "GenZipher Champions",
   },
   {
-    src: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=500&h=340&fit=crop&auto=format",
-    caption: "Group Projects",
+    src: "/images/journey/DMC1.jpeg",
+    caption: "DMC Project Session",
   },
   {
-    src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=340&fit=crop&auto=format",
-    caption: "Hackathon Night",
+    src: "/images/journey/Hardware Project.jpg",
+    caption: "Hardware Project Lab",
   },
   {
-    src: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=500&h=340&fit=crop&auto=format",
-    caption: "Presentations",
+    src: "/images/journey/SP_Interim.jpg",
+    caption: "Software Project Interim Demo",
   },
   {
-    src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=340&fit=crop&auto=format",
-    caption: "Team Collaboration",
+    src: "/images/journey/epic_lanka.jpg",
+    caption: "Industry Visit — Epic Lanka",
   },
   {
-    src: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=500&h=340&fit=crop&auto=format",
-    caption: "Design Lab",
+    src: "/images/journey/DMC2.jpeg",
+    caption: "DMC Team Discussion",
   },
   {
-    src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=340&fit=crop&auto=format",
-    caption: "Research Work",
+    src: "/images/journey/HW Project 2.jpeg",
+    caption: "Hardware Development",
   },
   {
-    src: "https://images.unsplash.com/photo-1544531585-9847b68c8c86?w=500&h=340&fit=crop&auto=format",
-    caption: "Social Events",
+    src: "/images/journey/SP Project 2.jpeg",
+    caption: "Software Project Team",
   },
   {
-    src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&h=340&fit=crop&auto=format",
-    caption: "Friendships",
+    src: "/images/journey/SLRMUN.jpg",
+    caption: "SLRMUN Conference",
   },
 ];
 
@@ -408,7 +408,7 @@ export const AWARDS = [
     type: "CTF & Development Hackathon",
     org: "University of Colombo (UCSC)",
     year: "2024",
-    image: null as string | null,
+    image: "/images/awards/Genzipher Winner.jpg",
     cert: "https://github.com/DileepaPRA",
     icon: "trophy",
   },
@@ -424,11 +424,11 @@ export const AWARDS = [
   },
   {
     id: "coderush",
-    title: "Top 20 - 2024",
+    title: "Top 20 - CodeRush 2024",
     type: "Coding Hackthon",
     org: "University of Moratuwa,INTECS",
     year: "2024",
-    image: null as string | null,
+    image: "/images/awards/CodeRush24.png",
     cert: "https://github.com/DileepaPRA",
     icon: "shield",
   },
@@ -451,7 +451,7 @@ export const CERTIFICATIONS = [
     title: "Network Technician Career Path",
     issuer: "Cisco Academy",
     year: "2023",
-    image: null as string | null,
+    image: "/images/certifications/Cisco Network Technicial.png",
     cert: "https://github.com/DileepaPRA",
   },
   {
@@ -459,7 +459,7 @@ export const CERTIFICATIONS = [
     title: "Responsive Web Design",
     issuer: "freeCodeCamp",
     year: "2023",
-    image: null as string | null,
+    image: "/images/certifications/FreeCodeCamp.png",
     cert: "https://github.com/DileepaPRA",
   },
   {
@@ -467,7 +467,7 @@ export const CERTIFICATIONS = [
     title: "Introduction to Cybersecurity",
     issuer: "Cisco Academy",
     year: "2023",
-    image: null as string | null,
+    image: "/images/certifications/Cisco Introduction Cybersecurity Path.png",
     cert: "https://github.com/DileepaPRA",
   },
   {
@@ -475,7 +475,7 @@ export const CERTIFICATIONS = [
     title: "AWS Cloud Practitioner Essentials",
     issuer: "Amazon Web Services (AWS)",
     year: "2024",
-    image: null as string | null,
+    image: "/images/certifications/AWS Cloud Practitioner.png",
     cert: "https://github.com/DileepaPRA",
   },
   {
@@ -483,8 +483,7 @@ export const CERTIFICATIONS = [
     title: "C Intermediate",
     issuer: "SoloLearn",
     year: "2024",
-    image: null as string | null,
+    image: "/images/certifications/SoloLearn C Intermidiate.jpg",
     cert: "https://github.com/DileepaPRA",
   },
-
 ];

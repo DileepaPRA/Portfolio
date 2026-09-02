@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ChevronLeft,
@@ -424,15 +425,19 @@ export default function ProjectsSection() {
                   className="flex flex-col md:flex-row"
                 >
                   {/* Left: Project Image */}
-                  <div className="relative md:w-[52%] h-64 md:h-auto min-h-[300px] shrink-0 overflow-hidden group">
-                    <img
+                  <div className="relative md:w-[52%] h-64 md:h-auto min-h-[300px] shrink-0 overflow-hidden group bg-surface/60">
+                    <div className="skeleton-shimmer opacity-30" />
+                    <Image
                       src={project.image}
                       alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 600px"
+                      loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     {/* Subtle Dark Overlay Gradient */}
-                    <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-r from-transparent to-[#0b1525]/90 hidden md:block" />
-                    <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#0b1525]/90 to-transparent md:hidden" />
+                    <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-r from-transparent to-[#0b1525]/90 hidden md:block pointer-events-none" />
+                    <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#0b1525]/90 to-transparent md:hidden pointer-events-none" />
                   </div>
 
                   {/* Right: Project Details & Actions */}
@@ -540,10 +545,14 @@ export default function ProjectsSection() {
                     boxShadow: isSelected ? "0 0 15px rgba(168,85,247,0.4)" : "none",
                   }}
                 >
-                  <img
+                  <div className="skeleton-shimmer opacity-20" />
+                  <Image
                     src={p.image}
                     alt={p.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    fill
+                    sizes="150px"
+                    loading="lazy"
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                 </button>
               );

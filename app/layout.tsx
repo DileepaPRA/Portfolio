@@ -61,6 +61,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/images/logo_no_bg.png",
+    shortcut: "/images/logo_no_bg.png",
+    apple: "/images/logo_no_bg.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -73,6 +78,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
+        <link rel="icon" href="/images/logo_no_bg.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/logo_no_bg.png" />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
