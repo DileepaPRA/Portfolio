@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Sora, Inter, JetBrains_Mono } from "next/font/google";
 import "@/index.css";
+import { PERSONAL_INFO } from "@/lib/data";
+import JsonLd from "@/components/seo/JsonLd";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -24,6 +26,10 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(PERSONAL_INFO.siteUrl || "https://dilee.vercel.app/"),
+  alternates: {
+    canonical: "/",
+  },
   title: "Dileepa Prabhath — Full Stack Developer",
   description:
     "Portfolio of Dileepa Prabhath — IT undergraduate at the University of Moratuwa. Full stack developer, backend engineer, and AI/ML enthusiast building secure, scalable systems.",
@@ -31,12 +37,15 @@ export const metadata: Metadata = {
     "Dileepa Prabhath",
     "Full Stack Developer",
     "Backend Engineer",
+    "Software Engineer",
     "Portfolio",
     "University of Moratuwa",
     "React",
     "Next.js",
     "TypeScript",
     "Spring Boot",
+    "Java",
+    "Python",
     "AI/ML",
     "Cybersecurity",
   ],
@@ -45,21 +54,37 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://dileepaprabhath.dev",
+    url: PERSONAL_INFO.siteUrl,
     title: "Dileepa Prabhath — Full Stack Developer",
     description:
       "IT undergraduate at the University of Moratuwa. Building secure, scalable, and intelligent systems.",
     siteName: "Dileepa Prabhath Portfolio",
+    images: [
+      {
+        url: "/images/projects/Portfolio.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dileepa Prabhath — Full Stack Developer Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dileepa Prabhath — Full Stack Developer",
     description:
       "IT undergraduate at the University of Moratuwa. Building secure, scalable, and intelligent systems.",
+    images: ["/images/projects/Portfolio.jpg"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   icons: {
     icon: "/images/logo_no_bg.png",
@@ -106,6 +131,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
+        <JsonLd />
       </head>
       <body>{children}</body>
     </html>
