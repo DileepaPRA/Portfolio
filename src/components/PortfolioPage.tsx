@@ -22,6 +22,16 @@ export default function PortfolioPage() {
   const [dustColor, setDustColor] = useState<[number, number, number]>([78, 222, 163]);
 
   useEffect(() => {
+    // Ensure fresh page load starts at the very top (Hero section) unless a URL hash is present
+    if (typeof window !== "undefined" && !window.location.hash) {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
+  useEffect(() => {
     let ticking = false;
 
     const updateActiveSection = () => {
@@ -105,10 +115,7 @@ export default function PortfolioPage() {
   }, []);
 
   return (
-    <div
-      className="min-h-screen overflow-x-hidden relative"
-      style={{ background: "#060c1a", color: "#dce4f5" }}
-    >
+    <div className="min-h-screen overflow-x-hidden relative bg-void text-ink transition-colors duration-300">
       {/* Boot Splash Loading Screen */}
       <LoadingScreen />
 

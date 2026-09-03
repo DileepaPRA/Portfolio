@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+:root {
   --color-void: #060c1a;
   --color-surface: #0b1525;
   --color-raised: #111d34;
@@ -8,8 +8,8 @@
   --color-ink: #dce4f5;
   --color-muted: #6b80a0;
   --color-dim: #384d6c;
-  --color-border: rgba(255, 255, 255, 0.05);
-  --color-border-hi: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-border-hi: rgba(255, 255, 255, 0.14);
 
   --color-emerald: #4edea3;
   --color-blue: #3b82f6;
@@ -18,6 +18,67 @@
   --color-amber: #f59e0b;
   --color-teal: #00d4b4;
   --color-lime: #84cc16;
+
+  --glass-bg: rgba(11, 21, 37, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-shadow: 0 1px 32px rgba(0, 0, 0, 0.25);
+  --terminal-bg: rgba(5, 10, 22, 0.95);
+  --grid-color: rgba(255, 255, 255, 0.018);
+  --card-dark-fill: rgba(6, 19, 28, 0.95);
+  --nav-bg: rgba(8, 15, 32, 0.9);
+  --sidebar-bg: rgba(8, 16, 32, 0.85);
+}
+
+html.light {
+  --color-void: #f8fafc;
+  --color-surface: rgba(255, 255, 255, 0.85);
+  --color-raised: #ffffff;
+  --color-elevated: #e2e8f0;
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-dim: #64748b;
+  --color-border: rgba(15, 23, 42, 0.08);
+  --color-border-hi: rgba(15, 23, 42, 0.16);
+
+  --color-emerald: #059669;
+  --color-blue: #2563eb;
+  --color-purple: #7c3aed;
+  --color-ruby: #e11d48;
+  --color-amber: #d97706;
+  --color-teal: #0d9488;
+  --color-lime: #65a30d;
+
+  /* Crystalline Realistic Frosted Glass */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-shadow:
+    0 16px 36px -10px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 1px 0 rgba(15, 23, 42, 0.03);
+  --terminal-bg: rgba(255, 255, 255, 0.85);
+  --grid-color: rgba(15, 23, 42, 0.035);
+  --card-dark-fill: rgba(255, 255, 255, 0.78);
+  --nav-bg: rgba(255, 255, 255, 0.68);
+  --sidebar-bg: rgba(255, 255, 255, 0.8);
+}
+
+@theme {
+  --color-void: var(--color-void);
+  --color-surface: var(--color-surface);
+  --color-raised: var(--color-raised);
+  --color-elevated: var(--color-elevated);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-dim: var(--color-dim);
+  --color-border: var(--color-border);
+  --color-border-hi: var(--color-border-hi);
+
+  --color-emerald: var(--color-emerald);
+  --color-blue: var(--color-blue);
+  --color-purple: var(--color-purple);
+  --color-ruby: var(--color-ruby);
+  --color-amber: var(--color-amber);
+  --color-teal: var(--color-teal);
+  --color-lime: var(--color-lime);
 
   --font-display: var(--font-display), "Sora", sans-serif;
   --font-body: var(--font-body), "Inter", sans-serif;
@@ -31,13 +92,29 @@ body,
 }
 
 body {
-  background-color: #060c1a;
-  color: #dce4f5;
+  background-color: var(--color-void);
+  color: var(--color-ink);
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Cybernetic Neon Text Selection */
+::selection {
+  background-color: rgba(78, 222, 163, 0.35);
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(78, 222, 163, 0.8);
+}
+
+html.light ::selection {
+  background-color: rgba(5, 150, 105, 0.25);
+  color: #0f172a;
+  text-shadow: none;
 }
 
 /* Touch & tap responsiveness */
@@ -45,6 +122,32 @@ button,
 a {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+}
+
+/* Sleek Cyber/Modern Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Firefox scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
 }
 
 /* Tactile micro-click feedback for buttons */
@@ -56,31 +159,138 @@ button:active:not(:disabled) {
 /* Subtle grid background */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
   background-size: 48px 48px;
+  transition: background-image 0.3s ease;
 }
 
 /* Glassmorphism cards */
 .glass {
-  background: rgba(11, 21, 37, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.055);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   transition:
+    background 0.3s ease,
     border-color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
 .glass:hover {
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-border-hi);
+}
+
+html.light .glass {
+  box-shadow:
+    0 14px 38px -10px rgba(15, 23, 42, 0.08),
+    0 2px 6px -1px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 /* Terminal window chrome */
 .terminal {
-  background: rgba(5, 10, 22, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--terminal-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   overflow: hidden;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+html.light .terminal {
+  box-shadow:
+    0 16px 44px -12px rgba(15, 23, 42, 0.1),
+    0 2px 6px -1px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Realistic Floating Liquid Glass Pill (Matching Movie Streaming UI Pill) */
+.liquid-glass-pill {
+  background: rgba(10, 18, 34, 0.72);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 20px 45px -10px rgba(0, 0, 0, 0.55),
+    0 4px 12px -2px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+html.light .liquid-glass-pill {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-top: 1.5px solid #ffffff;
+  box-shadow:
+    0 16px 36px -8px rgba(15, 23, 42, 0.08),
+    0 4px 12px -2px rgba(15, 23, 42, 0.04),
+    inset 0 1.5px 1.5px 0 #ffffff,
+    inset 0 -1px 1px 0 rgba(15, 23, 42, 0.03);
+}
+
+/* Chromatic Liquid Glass Refraction Sheen across top edge */
+.liquid-glass-pill::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 12%,
+    rgba(96, 165, 250, 0.55) 28%,
+    rgba(192, 132, 252, 0.6) 50%,
+    rgba(78, 222, 163, 0.55) 72%,
+    rgba(255, 255, 255, 0.3) 88%,
+    transparent 100%
+  );
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Soft ambient glossy glass reflection on top half */
+.liquid-glass-pill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 6%;
+  right: 6%;
+  height: 50%;
+  border-radius: 9999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.02) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure contents sit cleanly above the glass highlights */
+.liquid-glass-pill > * {
+  position: relative;
+  z-index: 3;
 }
 
 /* Section label style */

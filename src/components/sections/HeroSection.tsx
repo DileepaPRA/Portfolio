@@ -132,13 +132,13 @@ export default function HeroSection() {
                 target={external ? "_blank" : undefined}
                 rel={external ? "noopener noreferrer" : undefined}
                 aria-label={label}
-                className="group flex items-center gap-2 px-4 py-2 rounded-xl border border-white/8 bg-white/[0.025] text-muted font-mono text-xs tracking-wide transition-all duration-300 hover:scale-105"
+                className="group flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-surface/70 backdrop-blur-md text-muted font-mono text-xs tracking-wide transition-all duration-300 hover:scale-105 shadow-sm"
                 style={{ "--glow": color } as React.CSSProperties}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget;
                   el.style.color = "var(--glow)";
                   el.style.borderColor = `${color}50`;
-                  el.style.background = `${color}12`;
+                  el.style.background = `${color}15`;
                   el.style.boxShadow = `0 0 20px ${color}28`;
                 }}
                 onMouseLeave={(e) => {
@@ -182,7 +182,7 @@ export default function HeroSection() {
             download={
               PERSONAL_INFO.resumeUrl.endsWith(".pdf") ? "Dileepa_Prabhath_CV.pdf" : undefined
             }
-            className="flex items-center gap-2 px-7 py-3 rounded-xl font-mono text-sm font-bold border border-white/10 bg-white/[0.03] text-ink transition-all duration-300 hover:scale-105 hover:border-white/20 hover:bg-white/[0.06]"
+            className="flex items-center gap-2 px-7 py-3 rounded-xl font-mono text-sm font-bold border border-border bg-surface/70 backdrop-blur-md text-ink transition-all duration-300 hover:scale-105 hover:border-border-hi shadow-sm"
           >
             <FileText size={15} />
             Download CV

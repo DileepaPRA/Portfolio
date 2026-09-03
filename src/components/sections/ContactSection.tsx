@@ -84,8 +84,8 @@ export default function ContactSection() {
             </p>
 
             {/* Info terminal */}
-            <div className="terminal">
-              <div className="flex items-center justify-between px-4 py-2.5 bg-black/30 border-b border-white/5">
+            <div className="terminal rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-2.5 bg-surface/60 border-b border-border backdrop-blur-md">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                   <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
@@ -114,7 +114,7 @@ export default function ContactSection() {
                   </a>
                 ))}
 
-                <div className="pt-4 border-t border-white/5">
+                <div className="pt-4 border-t border-border">
                   <a
                     href={PERSONAL_INFO.resumeUrl}
                     target={PERSONAL_INFO.resumeUrl.startsWith("http") ? "_blank" : undefined}
@@ -147,8 +147,8 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            <div className="terminal">
-              <div className="flex items-center justify-between px-4 py-2.5 bg-black/30 border-b border-white/5">
+            <div className="terminal rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-2.5 bg-surface/60 border-b border-border backdrop-blur-md">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                   <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
@@ -188,7 +188,7 @@ export default function ContactSection() {
                       placeholder={placeholder}
                       value={form[key as keyof typeof form]}
                       onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
-                      className="w-full bg-transparent border-0 border-b border-white/10 py-2 font-mono text-sm text-ink placeholder-dim/50 outline-none transition-colors focus:border-teal"
+                      className="w-full bg-transparent border-0 border-b border-border py-2 font-mono text-sm text-ink placeholder:text-muted/50 outline-none transition-colors focus:border-teal"
                       required
                     />
                   </div>
@@ -207,7 +207,7 @@ export default function ContactSection() {
                     placeholder="Hello world..."
                     value={form.message}
                     onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                    className="w-full bg-transparent border-0 border-b border-white/10 py-2 font-mono text-sm text-ink placeholder-dim/50 outline-none resize-none transition-colors focus:border-teal"
+                    className="w-full bg-transparent border-0 border-b border-border py-2 font-mono text-sm text-ink placeholder:text-muted/50 outline-none resize-none transition-colors focus:border-teal"
                     required
                   />
                 </div>

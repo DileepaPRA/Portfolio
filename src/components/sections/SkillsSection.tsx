@@ -2,7 +2,17 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import { Terminal, Layers, Cpu, Database, Cloud, Wrench, Sparkles, Network } from "lucide-react";
+import {
+  Terminal,
+  Layers,
+  Cpu,
+  Database,
+  Cloud,
+  Wrench,
+  Sparkles,
+  Network,
+  Zap,
+} from "lucide-react";
 import { LEARNING_NOW, SECTION_COLORS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
@@ -620,15 +630,14 @@ export default function SkillsSection() {
 
           {/* ── LEARNING NOW (Continuous Learning Buffer) ── */}
           <motion.div
-            className="mt-8 rounded-2xl border p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all"
+            className="mt-8 rounded-2xl border border-teal/30 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all glass"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
             style={{
-              background: "rgba(6, 12, 26, 0.8)",
-              borderColor: "rgba(0, 212, 180, 0.35)",
-              boxShadow: "0 0 20px rgba(0, 212, 180, 0.08)",
+              background: "var(--card-dark-fill)",
+              boxShadow: "var(--glass-shadow)",
             }}
           >
             <div className="flex items-center gap-3">
@@ -648,28 +657,21 @@ export default function SkillsSection() {
 
             <div className="flex flex-wrap gap-2.5">
               {LEARNING_NOW.map((t) => (
-                <motion.div
-                  key={t}
-                  whileHover={{ scale: 1.04, y: -1 }}
-                  className="flex items-center gap-2 font-mono text-[13px] font-semibold text-ink/95 border border-teal/30 bg-teal/[0.06] px-3 py-1.5 rounded-lg hover:border-teal/60 transition-colors cursor-default select-none shadow-sm"
-                >
-                  <TechLogo name={t} size={17} />
-                  <span>{t}</span>
-                </motion.div>
+                <LearningBadge key={t} name={t} />
               ))}
             </div>
           </motion.div>
 
           {/* ── SUBTLE BARKER NOTATION FACT NOTE ── */}
           <motion.div
-            className="mt-6 flex flex-wrap items-center justify-between gap-3 px-2 text-[11px] font-mono text-muted/50 border-t border-white/5 pt-4"
+            className="mt-6 flex flex-wrap items-center justify-between gap-3 px-2 text-[11px] font-mono text-muted border-t border-border pt-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="flex items-center gap-2">
-              <Network size={12} className="text-emerald/40" />
+              <Network size={12} className="text-emerald/60" />
               <span>
                 Fact - System topology modeled using{" "}
                 <span className="text-ink/75 font-medium">Barker&apos;s ERD Notation</span>
@@ -695,8 +697,71 @@ export default function SkillsSection() {
   );
 }
 
+const TECH_BRAND_COLORS: Record<string, string> = {
+  // Programming
+  Java: "#f89820",
+  TypeScript: "#3178c6",
+  JavaScript: "#f7df1e",
+  Python: "#3776ab",
+  C: "#659ad2",
+  // Frontend
+  React: "#61dafb",
+  "Next.js": "#ffffff",
+  HTML5: "#e34f26",
+  CSS3: "#1572b6",
+  "Tailwind CSS": "#06b6d4",
+  // Backend
+  "Spring Boot": "#6db33f",
+  "Express.js": "#ffffff",
+  "REST APIs": "#00d4b4",
+  JWT: "#d63aff",
+  Docker: "#2496ed",
+  // Databases
+  MySQL: "#4479a1",
+  MSSQL: "#cc292b",
+  MongoDB: "#47a248",
+  Redis: "#dc382d",
+  // Cloud & DevOps
+  "AWS S3": "#ff9900",
+  Render: "#46e3b7",
+  Netlify: "#00c7b7",
+  "Aiven Cloud": "#ff3554",
+  "GitHub Actions": "#2088ff",
+  // Tools & Platforms
+  Git: "#f05032",
+  GitHub: "#ffffff",
+  Postman: "#ff6c37",
+  Figma: "#f24e1e",
+  Blender: "#ea7600",
+  TensorFlow: "#ff6f00",
+  "Google Colab": "#f9ab00",
+  // Learning Now & Extended
+  Flutter: "#02569b",
+  Dart: "#0175c2",
+  FastAPI: "#009688",
+  GraphQL: "#e10098",
+  Prisma: "#2d3748",
+  Kubernetes: "#326ce5",
+  "TensorFlow Lite": "#ff6f00",
+  "Raspberry Pi": "#c51a4a",
+  Arduino: "#00979d",
+  OpenCV: "#5c3ee8",
+  "Google Gemini API": "#1ba1e2",
+  Streamlit: "#ff4b4b",
+  "scikit-learn": "#f7931e",
+  NumPy: "#013243",
+  Pandas: "#150458",
+  Matplotlib: "#11557c",
+  "Framer Motion": "#ff0055",
+  "Discord.js": "#5865f2",
+};
+
+export function getTechBrandColor(name: string): string {
+  return TECH_BRAND_COLORS[name] || "#4edea3";
+}
+
 {
-  /* ── BARKER TABLE CARD COMPONENT (Enhanced Size & Compact Proportions) ── */
+  /* ── MAGNETIC BARKER TABLE CARD COMPONENT ── */
 }
 interface BarkerTableCardProps {
   data: BarkerTableData;
@@ -719,7 +784,7 @@ function BarkerTableCard({
 
   return (
     <motion.div
-      className="relative rounded-2xl border-2 transition-all duration-300 overflow-hidden group select-none flex flex-col justify-between"
+      className="relative rounded-2xl border-2 transition-all duration-300 overflow-hidden group flex flex-col justify-between glass"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
@@ -728,23 +793,24 @@ function BarkerTableCard({
       onMouseEnter={() => onHoverTable(categoryKey)}
       onMouseLeave={() => onHoverTable(null)}
       style={{
-        background: "rgba(6, 19, 28, 0.95)",
-        borderColor: isHovered ? "#4edea3" : "rgba(78, 222, 163, 0.45)",
+        background: "var(--card-dark-fill)",
+        borderColor: isHovered ? "var(--color-emerald)" : "var(--color-border-hi)",
         boxShadow: isHovered
-          ? "0 0 30px rgba(78, 222, 163, 0.35), inset 0 0 15px rgba(78, 222, 163, 0.15)"
-          : "0 0 15px rgba(78, 222, 163, 0.12), inset 0 0 8px rgba(78, 222, 163, 0.05)",
+          ? "0 0 30px rgba(78, 222, 163, 0.3), inset 0 0 15px rgba(78, 222, 163, 0.12)"
+          : "var(--glass-shadow)",
       }}
     >
       {/* ── Card Header: Table Icon & Title ── */}
       <div
-        className="px-4 py-3 border-b flex items-center justify-between transition-colors"
+        className="px-4 py-3 border-b border-border flex items-center justify-between transition-colors duration-300"
         style={{
-          borderColor: isHovered ? "#4edea3" : "rgba(78, 222, 163, 0.35)",
-          background: isHovered ? "rgba(78, 222, 163, 0.15)" : "rgba(78, 222, 163, 0.08)",
+          background: isHovered ? "rgba(78, 222, 163, 0.14)" : "rgba(78, 222, 163, 0.06)",
         }}
       >
         <div className="flex items-center gap-2">
-          <Icon size={16} className="text-emerald" />
+          <span className="text-emerald flex items-center justify-center">
+            <Icon size={16} />
+          </span>
           <h3 className="font-mono text-xs sm:text-[13px] font-extrabold text-ink tracking-wider">
             {data.title}
           </h3>
@@ -752,50 +818,125 @@ function BarkerTableCard({
       </div>
 
       {/* ── Card Body / Column Rows ── */}
-      <div className="p-3 font-mono text-xs">
+      <div className="p-3 font-mono text-xs relative">
         {/* Primary UID Row (# skill_id) in Barker Notation */}
-        <div
-          className="flex items-center px-2 py-1.5 border-b mb-1 text-xs"
-          style={{ borderColor: "rgba(78, 222, 163, 0.2)" }}
-        >
+        <div className="flex items-center px-2 py-1.5 border-b mb-1.5 text-xs border-border">
           <div className="flex items-center gap-1.5 font-bold text-ink">
             <span className="text-emerald font-black text-sm leading-none">#</span>
-            <span className="text-muted/90">skill_id</span>
+            <span className="text-muted">skill_id</span>
           </div>
         </div>
 
-        {/* Skill Field Rows (* Mandatory) with Enhanced Tech Visibility */}
-        <div className="space-y-1">
-          {data.skills.map((item) => {
-            const isRowHovered = hoveredSkill === item.name;
-
-            return (
-              <div
-                key={item.name}
-                onMouseEnter={() => onHoverSkill(item.name)}
-                onMouseLeave={() => onHoverSkill(null)}
-                className="flex items-center px-2.5 py-1.5 rounded-lg transition-all"
-                style={{
-                  background: isRowHovered ? "rgba(78, 222, 163, 0.18)" : "transparent",
-                }}
-              >
-                {/* Barker Marker (*) + Tech Logo + Larger Skill Name */}
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <span className="font-bold text-sm text-emerald leading-none shrink-0">*</span>
-                  <TechLogo name={item.name} size={18} />
-                  <span
-                    className={`font-semibold text-[13px] sm:text-[13.5px] truncate transition-colors ${
-                      isRowHovered ? "text-emerald font-bold" : "text-ink/95"
-                    }`}
-                  >
-                    {item.name}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
+        {/* Skill Rows */}
+        <div className="space-y-1 relative z-20">
+          {data.skills.map((item) => (
+            <SkillRowNode
+              key={item.name}
+              skill={item}
+              isSelfHovered={hoveredSkill === item.name}
+              onHoverSkill={onHoverSkill}
+            />
+          ))}
         </div>
       </div>
     </motion.div>
+  );
+}
+
+{
+  /* ── SKILL ROW NODE (Subtle Brand Shadow/Glow on Hover) ── */
+}
+interface SkillRowNodeProps {
+  skill: { name: string; type: string; marker?: "#" | "*" | "o" };
+  isSelfHovered: boolean;
+  onHoverSkill: (name: string | null) => void;
+}
+
+function SkillRowNode({ skill, isSelfHovered, onHoverSkill }: SkillRowNodeProps) {
+  const brandColor = getTechBrandColor(skill.name);
+
+  return (
+    <div
+      onMouseEnter={() => onHoverSkill(skill.name)}
+      onMouseLeave={() => onHoverSkill(null)}
+      className="relative flex items-center justify-between px-2.5 py-1.5 rounded-lg transition-all duration-200 border cursor-text select-text"
+      style={{
+        background: isSelfHovered ? `${brandColor}18` : "transparent",
+        borderColor: isSelfHovered ? `${brandColor}50` : "transparent",
+        boxShadow: isSelfHovered
+          ? `0 0 16px ${brandColor}35, inset 0 0 8px ${brandColor}12`
+          : "none",
+      }}
+    >
+      {/* Barker Marker (*) + Tech Logo + Skill Name */}
+      <div className="flex items-center gap-2.5 min-w-0 select-text">
+        {/* Barker Marker */}
+        <span
+          className="font-bold text-sm leading-none shrink-0 transition-colors duration-200 select-none"
+          style={{
+            color: isSelfHovered ? brandColor : "var(--color-emerald)",
+          }}
+        >
+          *
+        </span>
+
+        {/* Tech Logo with Dynamic Scale on hover */}
+        <motion.div
+          animate={isSelfHovered ? { scale: 1.12 } : { scale: 1 }}
+          transition={{ duration: 0.2 }}
+          className="select-none"
+        >
+          <TechLogo name={skill.name} size={18} />
+        </motion.div>
+
+        {/* Skill Title */}
+        <span
+          className="font-semibold text-[13px] sm:text-[13.5px] truncate transition-colors duration-200 select-text text-ink"
+          style={{
+            fontWeight: isSelfHovered ? 700 : 600,
+            textShadow: isSelfHovered ? `0 0 8px ${brandColor}50` : "none",
+          }}
+        >
+          {skill.name}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+{
+  /* ── LEARNING NOW BADGE (Subtle Brand Glow + Scale) ── */
+}
+function LearningBadge({ name }: { name: string }) {
+  const brandColor = getTechBrandColor(name);
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="flex items-center gap-2 font-mono text-[13px] font-semibold text-ink border px-3 py-1.5 rounded-lg transition-all duration-200 cursor-text select-text"
+      style={{
+        borderColor: isHovered ? `${brandColor}60` : "rgba(0, 212, 180, 0.3)",
+        background: isHovered ? `${brandColor}18` : "rgba(0, 212, 180, 0.08)",
+        boxShadow: isHovered ? `0 0 16px ${brandColor}40, inset 0 0 8px ${brandColor}12` : "none",
+      }}
+    >
+      <motion.div
+        animate={isHovered ? { scale: 1.12 } : { scale: 1 }}
+        transition={{ duration: 0.2 }}
+        className="select-none"
+      >
+        <TechLogo name={name} size={17} />
+      </motion.div>
+      <span
+        className="select-text text-ink"
+        style={{
+          textShadow: isHovered ? `0 0 8px ${brandColor}50` : "none",
+        }}
+      >
+        {name}
+      </span>
+    </div>
   );
 }

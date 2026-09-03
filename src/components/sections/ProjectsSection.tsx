@@ -18,7 +18,6 @@ import {
   Send,
   Mail,
   CheckCircle2,
-  Layers,
   Maximize2,
   Copy,
   Check,
@@ -33,7 +32,6 @@ export default function ProjectsSection() {
   const [activeIdx, setActiveIdx] = useState<number | "collab">(0);
   const [direction, setDirection] = useState(1);
   const [isCollabOpen, setIsCollabOpen] = useState(false);
-  const [isTabMenuOpen, setIsTabMenuOpen] = useState(false);
   const [lightboxProject, setLightboxProject] = useState<(typeof PROJECTS)[0] | null>(null);
   const [copiedCommand, setCopiedCommand] = useState(false);
 
@@ -69,25 +67,31 @@ export default function ProjectsSection() {
     }
   }, [activeIdx, isCollabOpen, total]);
 
-  // Auto-scroll active tab in titlebar whenever selection changes
+  const isInitialMount = useRef(true);
+
+  // Auto-scroll active tab in titlebar whenever user switches tabs (skip initial mount to prevent window scrolling to projects on page load)
   useEffect(() => {
-    if (typeof activeIdx === "number" && tabRefs.current[activeIdx]) {
-      tabRefs.current[activeIdx]?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "nearest",
-      });
-    } else if (activeIdx === "collab" && collabTabRef.current) {
-      collabTabRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "nearest",
-      });
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    const container = tabsContainerRef.current;
+    if (typeof activeIdx === "number" && tabRefs.current[activeIdx] && container) {
+      const target = tabRefs.current[activeIdx];
+      if (target) {
+        const targetLeft = target.offsetLeft - container.offsetWidth / 2 + target.offsetWidth / 2;
+        container.scrollTo({ left: targetLeft, behavior: "smooth" });
+      }
+    } else if (activeIdx === "collab" && collabTabRef.current && container) {
+      const target = collabTabRef.current;
+      const targetLeft = target.offsetLeft - container.offsetWidth / 2 + target.offsetWidth / 2;
+      container.scrollTo({ left: targetLeft, behavior: "smooth" });
     }
   }, [activeIdx]);
 
-  // Auto-scroll active thumbnail in bottom filmstrip
+  // Auto-scroll active thumbnail in bottom filmstrip (only when user actively changes tab)
   useEffect(() => {
+    if (isInitialMount.current) return;
     if (typeof activeIdx === "number" && filmstripThumbRefs.current[activeIdx]) {
       filmstripThumbRefs.current[activeIdx]?.scrollIntoView({
         behavior: "smooth",
@@ -184,17 +188,14 @@ export default function ProjectsSection() {
 
         {/* ── AUTHENTIC WINDOWS TABBED APPLICATION CONTAINER ── */}
         <div
-          className="rounded-2xl border-2 border-purple/30 overflow-hidden mb-8 shadow-2xl transition-all duration-300"
+          className="rounded-2xl border-2 border-purple/35 overflow-hidden mb-8 shadow-2xl transition-all duration-300 terminal"
           style={{
-            background: "linear-gradient(160deg, rgba(13,24,44,0.95) 0%, rgba(6,14,28,0.98) 100%)",
-            boxShadow: "0 20px 60px -15px rgba(168,85,247,0.22), 0 0 30px rgba(168,85,247,0.08)",
+            background: "var(--terminal-bg)",
+            boxShadow: "var(--glass-shadow)",
           }}
         >
           {/* ── AUTHENTIC WINDOWS TITLEBAR WITH ELASTIC TABS & TAB MANAGER ── */}
-          <div
-            className="flex items-stretch justify-between select-none border-b border-purple/25 relative"
-            style={{ background: "rgba(6, 12, 24, 0.98)" }}
-          >
+          <div className="flex items-stretch justify-between select-none border-b border-purple/25 relative bg-surface/75 backdrop-blur-md">
             {/* ── Left: Project Tabs List (.exe Tabs) with Mouse Wheel & Auto-Scroll ── */}
             <div
               ref={tabsContainerRef}
@@ -231,10 +232,10 @@ export default function ProjectsSection() {
                     className={`group relative flex items-center gap-2 px-2.5 sm:px-3 py-2 rounded-t-xl font-mono text-xs cursor-pointer transition-all duration-200 flex-1 min-w-[85px] sm:min-w-[110px] max-w-[150px] sm:max-w-[180px] border-t-2 ${
                       isActive
                         ? "text-ink font-bold border-purple shadow-sm z-10"
-                        : "text-muted/70 hover:text-ink hover:bg-white/[0.04] border-transparent"
+                        : "text-muted hover:text-ink hover:bg-surface/50 border-transparent"
                     }`}
                     style={{
-                      background: isActive ? "rgba(13, 24, 44, 0.95)" : "transparent",
+                      background: isActive ? "var(--card-dark-fill)" : "transparent",
                     }}
                   >
                     {/* App / Executable Icon */}
@@ -289,7 +290,7 @@ export default function ProjectsSection() {
                       : "text-teal/70 hover:text-teal hover:bg-teal/[0.06] border-transparent"
                   }`}
                   style={{
-                    background: isCollabActive ? "rgba(13, 24, 44, 0.95)" : "transparent",
+                    background: isCollabActive ? "var(--card-dark-fill)" : "transparent",
                   }}
                 >
                   <Sparkles size={12} className="text-teal animate-pulse shrink-0" />
@@ -309,9 +310,9 @@ export default function ProjectsSection() {
               )}
             </div>
 
-            {/* ── Fixed Right Tab Actions: Always-Visible '+' New Tab & '⌄' All Tabs Dropdown ── */}
-            <div className="flex items-center gap-1 px-1.5 py-1 shrink-0 border-l border-white/8 bg-[#070e1e] relative">
-              {/* New Tab '+' Button (Always visible) */}
+            {/* ── Fixed Right Tab Actions: '+' New Tab ── */}
+            <div className="flex items-center px-1.5 py-1 shrink-0 border-l border-border bg-surface/60 backdrop-blur-md relative">
+              {/* New Tab '+' Button (Opens Collab Tab) */}
               <button
                 type="button"
                 onClick={openCollabTab}
@@ -325,112 +326,10 @@ export default function ProjectsSection() {
               >
                 <Plus size={15} />
               </button>
-
-              {/* All Tabs List '⌄' Dropdown Trigger (Chrome Tab Search Style) */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => setIsTabMenuOpen((prev) => !prev)}
-                  title="Search & browse all project tabs"
-                  aria-label="Open all tabs list"
-                  className={`flex items-center justify-center w-7 h-7 rounded-lg transition-all active:scale-95 cursor-pointer ${
-                    isTabMenuOpen
-                      ? "bg-purple/25 text-purple border border-purple/50 shadow-[0_0_10px_rgba(168,85,247,0.3)]"
-                      : "text-muted hover:text-ink hover:bg-white/10 border border-transparent hover:border-white/15"
-                  }`}
-                >
-                  <ChevronDown
-                    size={14}
-                    className={
-                      isTabMenuOpen
-                        ? "rotate-180 transition-transform duration-200"
-                        : "transition-transform duration-200"
-                    }
-                  />
-                </button>
-
-                {/* All Tabs Dropdown Popover */}
-                <AnimatePresence>
-                  {isTabMenuOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute right-0 top-full mt-2 w-72 max-h-80 overflow-y-auto rounded-xl border border-purple/40 bg-[#081122]/95 backdrop-blur-xl shadow-2xl p-2 z-50 flex flex-col gap-1"
-                    >
-                      <div className="px-2.5 py-1.5 flex items-center justify-between border-b border-white/8 font-mono text-[10px] text-muted tracking-wider uppercase">
-                        <span className="flex items-center gap-1.5 text-purple font-bold">
-                          <Layers size={11} /> Open Tabs ({PROJECTS.length + (isCollabOpen ? 1 : 0)}
-                          )
-                        </span>
-                        <span>Tab List</span>
-                      </div>
-
-                      {PROJECTS.map((p, i) => {
-                        const isSelected = activeIdx === i;
-                        return (
-                          <button
-                            key={p.id}
-                            type="button"
-                            onClick={() => {
-                              setDirection(
-                                typeof activeIdx === "number" ? (i > activeIdx ? 1 : -1) : -1
-                              );
-                              setActiveIdx(i);
-                              setIsTabMenuOpen(false);
-                            }}
-                            className={`flex items-center justify-between px-3 py-2 rounded-lg font-mono text-xs transition-all text-left cursor-pointer ${
-                              isSelected
-                                ? "bg-purple/20 text-purple border border-purple/40 shadow-sm font-bold"
-                                : "text-muted/80 hover:text-ink hover:bg-white/[0.06]"
-                            }`}
-                          >
-                            <div className="flex items-center gap-2 truncate">
-                              <AppWindow
-                                size={13}
-                                className={
-                                  isSelected ? "text-purple shrink-0" : "text-muted/60 shrink-0"
-                                }
-                              />
-                              <span className="truncate">{p.title}</span>
-                            </div>
-                            <span className="font-mono text-[10px] text-dim shrink-0 ml-2">
-                              {p.technologies[0]}
-                            </span>
-                          </button>
-                        );
-                      })}
-
-                      {/* Collab tab in dropdown */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          openCollabTab();
-                          setIsTabMenuOpen(false);
-                        }}
-                        className={`flex items-center justify-between px-3 py-2 rounded-lg font-mono text-xs transition-all text-left cursor-pointer border-t border-white/5 mt-1 ${
-                          isCollabActive
-                            ? "bg-teal/20 text-teal border border-teal/40 font-bold"
-                            : "text-teal/80 hover:text-teal hover:bg-teal/[0.08]"
-                        }`}
-                      >
-                        <div className="flex items-center gap-2 truncate">
-                          <Sparkles size={13} className="text-teal shrink-0" />
-                          <span className="truncate">YourProject.exe (New Tab)</span>
-                        </div>
-                        <span className="font-mono text-[10px] text-teal/70 shrink-0">
-                          ✨ Collab
-                        </span>
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
             </div>
 
             {/* ── Right: Authentic Windows Window Controls (—, □, ✕) ── */}
-            <div className="flex items-center shrink-0 border-l border-white/5">
+            <div className="flex items-center shrink-0 border-l border-border">
               {/* Minimize Button '—' (Navigates to Previous Project ←) */}
               <button
                 type="button"
@@ -499,7 +398,7 @@ export default function ProjectsSection() {
                   {/* Left: Interactive Simulated Terminal Workspace */}
                   <div
                     className="md:w-[48%] p-5 sm:p-6 md:p-7 flex flex-col justify-between border-b md:border-b-0 md:border-r border-teal/20 font-mono text-xs md:h-full"
-                    style={{ background: "rgba(4, 10, 22, 0.9)" }}
+                    style={{ background: "var(--card-dark-fill)" }}
                   >
                     <div className="space-y-2.5">
                       {/* Terminal Header */}
@@ -637,7 +536,7 @@ export default function ProjectsSection() {
                   {/* Left: Project Image with Lightbox Zoom */}
                   <div
                     onClick={() => project.image && setLightboxProject(project)}
-                    className={`relative md:w-[54%] h-60 md:h-full shrink-0 overflow-hidden group bg-[#040814] border-b md:border-b-0 md:border-r border-white/10 flex items-center justify-center ${
+                    className={`relative md:w-[54%] h-60 md:h-full shrink-0 overflow-hidden group bg-void/80 border-b md:border-b-0 md:border-r border-border flex items-center justify-center ${
                       project.image ? "cursor-zoom-in" : ""
                     }`}
                   >
@@ -653,13 +552,13 @@ export default function ProjectsSection() {
                           className="w-full h-full object-contain md:object-cover md:object-top transition-transform duration-500 group-hover:scale-105"
                         />
                         {/* Hover Zoom Overlay Badge */}
-                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0b1525]/85 backdrop-blur-md border border-purple/40 text-purple text-[11px] font-mono shadow-lg">
+                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface/90 backdrop-blur-md border border-purple/40 text-purple text-[11px] font-mono shadow-lg">
                           <Maximize2 size={11} />
                           <span>Zoom Preview</span>
                         </div>
                       </>
                     ) : (
-                      <div className="w-full h-full min-h-[220px] flex flex-col items-center justify-center p-6 bg-gradient-to-br from-purple/15 via-[#081020] to-[#040814] relative overflow-hidden select-none">
+                      <div className="w-full h-full min-h-[220px] flex flex-col items-center justify-center p-6 bg-gradient-to-br from-purple/15 via-surface/80 to-void relative overflow-hidden select-none">
                         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple/20 via-transparent to-transparent pointer-events-none" />
                         <div className="w-14 h-14 rounded-2xl bg-purple/10 border border-purple/30 flex items-center justify-center text-purple mb-3 shadow-[0_0_30px_rgba(168,85,247,0.25)] group-hover:scale-110 transition-transform duration-300">
                           <Terminal size={28} />
@@ -711,9 +610,9 @@ export default function ProjectsSection() {
                     </div>
 
                     {/* Direct Action Buttons */}
-                    <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-white/5">
+                    <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-border">
                       {project.id === "portfolio" ? (
-                        <div className="flex items-center gap-2 font-mono text-sm font-bold px-5 py-2.5 rounded-lg border border-purple/60 bg-purple/25 text-[#d8b4fe] shadow-[0_0_20px_rgba(168,85,247,0.25)] select-none">
+                        <div className="flex items-center gap-2 font-mono text-sm font-bold px-5 py-2.5 rounded-lg border border-purple/60 bg-purple/20 text-purple shadow-sm select-none">
                           <span className="w-2 h-2 rounded-full bg-purple shadow-[0_0_8px_#a855f7] animate-pulse" />
                           <span>This Site</span>
                         </div>
@@ -723,7 +622,7 @@ export default function ProjectsSection() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`View live demo of ${project.title}`}
-                          className="flex items-center gap-2 font-mono text-sm font-bold px-5 py-2.5 rounded-lg border border-purple/60 bg-purple/25 text-[#d8b4fe] transition-all duration-200 hover:scale-[1.03] hover:bg-purple/35 hover:border-purple/80 hover:shadow-[0_0_20px_rgba(168,85,247,0.35)]"
+                          className="flex items-center gap-2 font-mono text-sm font-bold px-5 py-2.5 rounded-lg border border-purple/60 bg-purple/20 text-purple transition-all duration-200 hover:scale-[1.03] hover:bg-purple/30 hover:border-purple/80 hover:shadow-sm"
                         >
                           <span>Live Preview</span>
                           <ExternalLink size={14} />

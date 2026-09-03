@@ -404,7 +404,7 @@ export default function UniversityJourneySection() {
               type="button"
               onClick={handleResetOrientation}
               title="Reset 3D Sphere Orientation"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-white/[0.03] text-muted hover:text-ink hover:border-ruby/40 hover:bg-ruby/10 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-border bg-surface/70 backdrop-blur-md text-muted hover:text-ink hover:border-ruby/40 hover:bg-ruby/10 transition-all cursor-pointer shadow-sm"
             >
               <RotateCcw size={12} />
               <span>Reset View</span>
@@ -414,10 +414,10 @@ export default function UniversityJourneySection() {
               type="button"
               onClick={() => setAutoRotate((r) => !r)}
               title={autoRotate ? "Pause Auto-Rotation" : "Resume Rotation"}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all cursor-pointer backdrop-blur-md shadow-sm ${
                 autoRotate
                   ? "border-ruby/40 bg-ruby/15 text-ruby font-bold"
-                  : "border-white/10 text-muted"
+                  : "border-border bg-surface/70 text-muted"
               }`}
             >
               <Sparkles size={12} className={autoRotate ? "animate-pulse" : ""} />
@@ -471,13 +471,13 @@ export default function UniversityJourneySection() {
                 >
                   {/* Photo Tile Card */}
                   <div
-                    className="relative w-[140px] h-[94px] rounded-xl overflow-hidden border transition-[border-color,box-shadow] duration-200 shadow-2xl"
+                    className="relative w-[140px] h-[94px] rounded-xl overflow-hidden border transition-[border-color,box-shadow] duration-200 shadow-2xl glass"
                     style={{
-                      background: "rgba(6, 12, 24, 0.95)",
+                      background: "var(--card-dark-fill)",
                       borderColor: isHovered ? "#fb176f" : "rgba(251, 23, 111, 0.6)",
                       boxShadow: isHovered
                         ? "0 0 32px rgba(251, 23, 111, 0.85), 0 0 12px #fb176f"
-                        : "0 14px 28px rgba(0,0,0,0.7), 0 0 14px rgba(251,23,111,0.25)",
+                        : "0 14px 28px rgba(0,0,0,0.3), 0 0 14px rgba(251,23,111,0.2)",
                     }}
                   >
                     {/* Image View with Shimmer Placeholder */}
@@ -543,17 +543,12 @@ export default function UniversityJourneySection() {
                 onClick={(e) => e.stopPropagation()}
                 className="relative w-full max-w-4xl rounded-3xl border-2 border-ruby/50 overflow-hidden shadow-2xl flex flex-col"
                 style={{
-                  background:
-                    "linear-gradient(150deg, rgba(25,8,25,0.98) 0%, rgba(6,10,22,0.99) 100%)",
-                  boxShadow:
-                    "0 25px 80px -15px rgba(251,23,111,0.5), 0 0 30px rgba(251,23,111,0.25)",
+                  background: "var(--terminal-bg)",
+                  boxShadow: "var(--glass-shadow)",
                 }}
               >
                 {/* Modal Titlebar */}
-                <div
-                  className="px-6 py-4 border-b border-ruby/30 flex items-center justify-between"
-                  style={{ background: "rgba(10, 6, 16, 0.9)" }}
-                >
+                <div className="px-6 py-4 border-b border-ruby/30 flex items-center justify-between bg-surface/80 backdrop-blur-md">
                   <div className="flex items-center gap-3">
                     <span className="w-3 h-3 rounded-full bg-ruby animate-pulse" />
                     <span className="font-mono text-xs font-bold text-ink uppercase tracking-wider">

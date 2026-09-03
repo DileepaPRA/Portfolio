@@ -30,14 +30,14 @@ export default function SocialSidebar() {
               target={external ? "_blank" : undefined}
               rel={external ? "noopener noreferrer" : undefined}
               aria-label={label}
-              className="group relative p-3 rounded-xl border border-white/5 bg-white/[0.02] text-muted transition-all duration-300 hover:scale-110"
+              className="group relative p-3 rounded-xl border border-border bg-surface/70 backdrop-blur-md text-muted transition-all duration-300 hover:scale-110 shadow-sm"
               style={{ "--glow": color } as React.CSSProperties}
               onMouseEnter={(e) => {
                 const el = e.currentTarget;
                 el.style.color = color;
                 el.style.borderColor = `${color}50`;
                 el.style.boxShadow = `0 0 18px ${color}30`;
-                el.style.background = `${color}10`;
+                el.style.background = `${color}15`;
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget;
@@ -49,7 +49,7 @@ export default function SocialSidebar() {
             >
               <Icon style={{ width: 18, height: 18 }} />
               {/* Tooltip */}
-              <span className="pointer-events-none absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-[#111d34] border border-white/10 text-ink font-mono text-[10px] tracking-wide px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              <span className="pointer-events-none absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-surface border border-border text-ink font-mono text-[10px] tracking-wide px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md">
                 {label}
               </span>
             </a>
@@ -57,7 +57,7 @@ export default function SocialSidebar() {
         })}
 
         {/* Vertical line */}
-        <div className="w-px h-16 bg-gradient-to-b from-white/10 to-transparent" />
+        <div className="w-px h-16 bg-gradient-to-b from-border-hi to-transparent" />
       </div>
     </aside>
   );
