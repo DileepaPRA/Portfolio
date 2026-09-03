@@ -21,7 +21,7 @@ export const PERSONAL_INFO = {
   resumeUrl: "#", // Replace with your actual CV/Resume URL (e.g., "/cv.pdf" or Google Drive link)
   stats: [
     { label: "Projects", value: "10+" },
-    { label: "Year", value: "2nd" },
+    { label: "Year", value: "3rd" },
   ],
   academicStanding: {
     title: "Academic Standing",
