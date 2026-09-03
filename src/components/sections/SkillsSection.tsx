@@ -2,17 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import {
-  Terminal,
-  Layers,
-  Cpu,
-  Database,
-  Cloud,
-  Wrench,
-  Sparkles,
-  Network,
-  Zap,
-} from "lucide-react";
+import { Terminal, Layers, Cpu, Database, Cloud, Wrench, Sparkles, Network } from "lucide-react";
 import { LEARNING_NOW, SECTION_COLORS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";

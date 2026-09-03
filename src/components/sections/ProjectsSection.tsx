@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   ChevronLeft,
   ChevronRight,
-  ChevronDown,
   ExternalLink,
   Plus,
   X,
