@@ -16,10 +16,7 @@ export const PERSONAL_INFO = {
   location: "Sri Lanka 🇱🇰",
   bio: "Driven by curiosity, passionate about building secure, intelligent, and scalable systems that merge innovation with real-world impact—turning complex ideas into elegant code.",
   avatar: "/images/profile/Avatar.jpg",
-  siteUrl:
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.HOSTED_SITE_URL ||
-    "https://dileepaprabhath.dev",
+  siteUrl: process.env.HOSTED_SITE_URL || "https://dilee.vercel.app/",
   email: "d.prabath115@gmail.com",
   resumeUrl: "#", // Replace with your actual CV/Resume URL (e.g., "/cv.pdf" or Google Drive link)
   stats: [
