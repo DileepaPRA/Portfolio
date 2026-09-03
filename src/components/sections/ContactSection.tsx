@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Mail, MapPin, Send, FileText } from "lucide-react";
+import { Mail, MapPin, Send, FileText, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../icons";
 import { SOCIAL_LINKS, PERSONAL_INFO } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
@@ -16,12 +16,60 @@ const CONTACT_ICONS: Record<string, React.ComponentType<{ size?: number; classNa
 
 export default function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [statusLog, setStatusLog] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
+    if (status === "loading") return;
+
+    const accessKey =
+      process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "6173dc34-ae3b-42bf-a410-7c847606ebca";
+
+    setStatus("loading");
+    setStatusLog("initializing handshake... transmitting payload to SMTP gateway...");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          from_name: `${form.name} (Portfolio Contact)`,
+          subject: `[Portfolio Contact] Message from ${form.name}`,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("success");
+        setStatusLog("[STATUS 200 OK] Payload delivered successfully to d.prabath115@gmail.com ✓");
+        setForm({ name: "", email: "", message: "" });
+        setTimeout(() => {
+          setStatus("idle");
+          setStatusLog(null);
+        }, 7000);
+      } else {
+        setStatus("error");
+        setStatusLog(`[ERROR] Transmission failed: ${data.message || "Please try again"}`);
+        setTimeout(() => {
+          setStatus("idle");
+        }, 5000);
+      }
+    } catch {
+      setStatus("error");
+      setStatusLog("[NETWORK ERROR] Gateway unreachable. Please check connection and retry.");
+      setTimeout(() => {
+        setStatus("idle");
+      }, 5000);
+    }
   };
 
   const contactList = [
@@ -84,8 +132,8 @@ export default function ContactSection() {
             </p>
 
             {/* Info terminal */}
-            <div className="terminal">
-              <div className="flex items-center justify-between px-4 py-2.5 bg-black/30 border-b border-white/5">
+            <div className="terminal rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-2.5 bg-surface/60 border-b border-border backdrop-blur-md">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                   <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
@@ -114,7 +162,7 @@ export default function ContactSection() {
                   </a>
                 ))}
 
-                <div className="pt-4 border-t border-white/5">
+                <div className="pt-4 border-t border-border">
                   <a
                     href={PERSONAL_INFO.resumeUrl}
                     target={PERSONAL_INFO.resumeUrl.startsWith("http") ? "_blank" : undefined}
@@ -147,8 +195,8 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            <div className="terminal">
-              <div className="flex items-center justify-between px-4 py-2.5 bg-black/30 border-b border-white/5">
+            <div className="terminal rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-2.5 bg-surface/60 border-b border-border backdrop-blur-md">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                   <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
@@ -188,7 +236,7 @@ export default function ContactSection() {
                       placeholder={placeholder}
                       value={form[key as keyof typeof form]}
                       onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
-                      className="w-full bg-transparent border-0 border-b border-white/10 py-2 font-mono text-sm text-ink placeholder-dim/50 outline-none transition-colors focus:border-teal"
+                      className="w-full bg-transparent border-0 border-b border-border py-2 font-mono text-sm text-ink placeholder:text-muted/50 outline-none transition-colors focus:border-teal"
                       required
                     />
                   </div>
@@ -207,24 +255,86 @@ export default function ContactSection() {
                     placeholder="Hello world..."
                     value={form.message}
                     onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                    className="w-full bg-transparent border-0 border-b border-white/10 py-2 font-mono text-sm text-ink placeholder-dim/50 outline-none resize-none transition-colors focus:border-teal"
+                    className="w-full bg-transparent border-0 border-b border-border py-2 font-mono text-sm text-ink placeholder:text-muted/50 outline-none resize-none transition-colors focus:border-teal"
                     required
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="mt-2 flex items-center gap-2 font-mono text-sm font-bold px-5 py-2.5 rounded-lg border border-teal text-teal bg-transparent transition-all duration-300 hover:scale-105 hover:bg-teal hover:text-[#060c1a] hover:shadow-[0_0_22px_rgba(0,212,180,0.3)]"
-                >
-                  {sent ? (
-                    "✓ Sent!"
-                  ) : (
-                    <>
-                      ./send_message.sh
-                      <Send size={13} />
-                    </>
+                <div className="pt-2 space-y-3">
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="flex items-center gap-2 font-mono text-sm font-bold px-5 py-2.5 rounded-lg border transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:scale-105"
+                    style={{
+                      borderColor:
+                        status === "success"
+                          ? "#10b981"
+                          : status === "error"
+                            ? "#f43f5e"
+                            : "#00d4b4",
+                      color:
+                        status === "success"
+                          ? "#10b981"
+                          : status === "error"
+                            ? "#f43f5e"
+                            : "#00d4b4",
+                      background:
+                        status === "success"
+                          ? "rgba(16, 185, 129, 0.12)"
+                          : status === "error"
+                            ? "rgba(244, 63, 94, 0.12)"
+                            : "transparent",
+                      boxShadow:
+                        status === "success" ? "0 0 20px rgba(16, 185, 129, 0.25)" : undefined,
+                    }}
+                  >
+                    {status === "loading" ? (
+                      <>
+                        <Loader2 size={13} className="animate-spin" />
+                        ./send_message.sh [transmitting...]
+                      </>
+                    ) : status === "success" ? (
+                      <>
+                        <CheckCircle2 size={13} />✓ Delivered!
+                      </>
+                    ) : status === "error" ? (
+                      <>
+                        <AlertCircle size={13} />✕ Retry ./send_message.sh
+                      </>
+                    ) : (
+                      <>
+                        ./send_message.sh
+                        <Send size={13} />
+                      </>
+                    )}
+                  </button>
+
+                  {/* Terminal Console Output */}
+                  {statusLog && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="font-mono text-xs p-3 rounded-lg border bg-surface/80 backdrop-blur-md flex items-start gap-2 leading-relaxed"
+                      style={{
+                        borderColor:
+                          status === "success"
+                            ? "rgba(16, 185, 129, 0.4)"
+                            : status === "error"
+                              ? "rgba(244, 63, 94, 0.4)"
+                              : "rgba(0, 212, 180, 0.4)",
+                        color:
+                          status === "success"
+                            ? "#10b981"
+                            : status === "error"
+                              ? "#f43f5e"
+                              : "#00d4b4",
+                      }}
+                    >
+                      <span className="font-bold shrink-0">&gt;</span>
+                      <span>{statusLog}</span>
+                    </motion.div>
                   )}
-                </button>
+                </div>
               </form>
             </div>
           </motion.div>

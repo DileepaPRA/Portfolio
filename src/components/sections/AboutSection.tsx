@@ -14,13 +14,13 @@ const fadeUp = {
 };
 
 const tokenColors: Record<string, string> = {
-  comment: "#4a5568",
-  keyword: "#c792ea",
-  var: "#dce4f5",
-  key: "#7ecbff",
-  string: "#84cc16",
-  number: "#f78c6c",
-  operator: "#6b7a99",
+  comment: "var(--color-dim)",
+  keyword: "var(--color-purple)",
+  var: "var(--color-ink)",
+  key: "var(--color-blue)",
+  string: "var(--color-lime)",
+  number: "var(--color-amber)",
+  operator: "var(--color-muted)",
 };
 
 export default function AboutSection() {
@@ -121,17 +121,14 @@ export default function AboutSection() {
               ref={terminalRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="rounded-xl overflow-hidden border border-white/[0.06] cursor-default select-none transition-transform duration-100"
+              className="rounded-xl overflow-hidden border border-border terminal cursor-default select-none transition-transform duration-100"
               style={{
-                background: "rgba(5,8,18,0.96)",
+                background: "var(--terminal-bg)",
                 willChange: "transform",
               }}
             >
               {/* Window chrome */}
-              <div
-                className="flex items-center justify-between px-4 py-2.5 border-b"
-                style={{ background: "rgba(0,0,0,0.35)", borderColor: "rgba(255,255,255,0.05)" }}
-              >
+              <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-surface/60 backdrop-blur-md">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                   <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
@@ -144,17 +141,13 @@ export default function AboutSection() {
               {/* Code body */}
               <div className="p-5 flex gap-4 font-mono text-[13px] leading-6 overflow-x-auto scrollbar-hide">
                 {/* Line numbers */}
-                <div
-                  className="flex flex-col text-right select-none shrink-0 text-xs"
-                  style={{ color: "rgba(255,255,255,0.15)" }}
-                >
+                <div className="flex flex-col text-right select-none shrink-0 text-xs opacity-40 text-dim">
                   {PERSONAL_INFO.aboutCodeLines.map((_, i) => (
                     <span
                       key={i}
                       className="leading-6 transition-colors duration-100"
                       style={{
-                        color:
-                          hoveredLine === i ? "rgba(132,204,22,0.5)" : "rgba(255,255,255,0.15)",
+                        color: hoveredLine === i ? "var(--color-lime)" : undefined,
                       }}
                     >
                       {i + 1}

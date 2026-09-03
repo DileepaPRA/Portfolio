@@ -363,7 +363,7 @@ export const PROJECTS: Project[] = [
     tags: ["Portfolio", "Frontend", "UIUX", "Performance"],
     live: "",
     repo: "https://github.com/DileepaPRA/Portfolio",
-    image: "/images/projects/Portfolio.jpg?v=2",
+    image: "/images/projects/Portfolio.jpg",
   },
   {
     id: "lyntra",

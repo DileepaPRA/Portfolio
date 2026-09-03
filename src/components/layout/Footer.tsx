@@ -12,7 +12,7 @@ const FOOTER_ICONS: Record<string, React.ComponentType<{ size?: number; classNam
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 lg:ml-20 border-t border-white/[0.04] bg-[#060c1a] py-5 px-6 md:px-10">
+    <footer className="relative z-10 lg:ml-20 border-t border-border bg-void/80 backdrop-blur-xl transition-colors duration-300 py-5 px-6 md:px-10">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
         {/* Brand */}
         <div className="flex items-center gap-3">
@@ -22,7 +22,7 @@ export default function Footer() {
               DevShell
             </span>
           </div>
-          <span className="text-white/20 text-xs hidden sm:inline">•</span>
+          <span className="text-muted/40 text-xs hidden sm:inline">•</span>
           <p className="font-mono text-[11px] text-muted">{PERSONAL_INFO.name}</p>
         </div>
 

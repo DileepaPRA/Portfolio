@@ -50,10 +50,10 @@ export default function EducationSection() {
           </div>
 
           <div
-            className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-xl border font-mono text-xs"
+            className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-xl border border-blue/25 font-mono text-xs glass"
             style={{
-              background: "rgba(6, 12, 26, 0.8)",
-              borderColor: "rgba(59, 130, 246, 0.2)",
+              background: "var(--card-dark-fill)",
+              boxShadow: "var(--glass-shadow)",
             }}
           >
             <div className="flex items-center gap-3">
@@ -61,7 +61,7 @@ export default function EducationSection() {
                 <GitBranch size={13} className="animate-pulse" />
                 <span className="font-bold">academic-history</span>
                 <span className="text-muted">/</span>
-                <span className="text-ink">main</span>
+                <span className="text-ink font-semibold">main</span>
               </div>
               <span className="text-muted hidden sm:inline">—</span>
               <span className="text-muted hidden sm:inline text-[11px]">
@@ -74,12 +74,12 @@ export default function EducationSection() {
                 {TIMELINE.length} commits
               </span>
               <span className="text-muted">|</span>
-              <span className="flex items-center gap-1 text-emerald-400 font-semibold">
+              <span className="flex items-center gap-1 text-emerald-500 dark:text-emerald-400 font-semibold">
                 <CheckCircle2 size={12} />
                 verified
               </span>
               <span className="text-muted">|</span>
-              <span className="flex items-center gap-1 text-blue/60">
+              <span className="flex items-center gap-1 text-blue/80">
                 <GitMerge size={12} />0 conflicts
               </span>
             </div>
@@ -133,13 +133,17 @@ export default function EducationSection() {
                       <motion.div
                         className="w-8 h-8 rounded-full border-2 flex items-center justify-center relative z-10"
                         animate={{
-                          borderColor: isHovered ? "#60a5fa" : item.current ? "#3b82f6" : "#384d6c",
+                          borderColor: isHovered
+                            ? "#60a5fa"
+                            : item.current
+                              ? "#3b82f6"
+                              : "var(--color-dim)",
                           boxShadow: isHovered
                             ? "0 0 22px rgba(59,130,246,0.95), inset 0 0 10px rgba(59,130,246,0.5)"
                             : item.current
                               ? "0 0 16px rgba(59,130,246,0.6), inset 0 0 8px rgba(59,130,246,0.3)"
                               : "0 0 8px rgba(56,77,108,0.3)",
-                          backgroundColor: "#060c1a",
+                          backgroundColor: "var(--color-void)",
                         }}
                         transition={{ duration: 0.25 }}
                       >
@@ -150,7 +154,7 @@ export default function EducationSection() {
                               ? "#93c5fd"
                               : item.current
                                 ? "#3b82f6"
-                                : "#6b80a0",
+                                : "var(--color-muted)",
                             scale: isHovered ? 1.3 : 1,
                           }}
                           transition={{ duration: 0.2 }}
@@ -159,10 +163,7 @@ export default function EducationSection() {
                     </div>
 
                     {/* Period & tag */}
-                    <div
-                      className="text-center mt-2.5 font-mono relative z-10 px-1.5 py-1 rounded"
-                      style={{ background: "rgba(6, 12, 26, 0.95)" }}
-                    >
+                    <div className="text-center mt-2.5 font-mono relative z-10 px-1.5 py-1 rounded bg-surface/90 border border-border backdrop-blur-md">
                       <span className="text-[11px] font-bold text-ink block leading-snug">
                         {item.period.split("–")[0]?.trim()}
                       </span>
@@ -177,13 +178,16 @@ export default function EducationSection() {
                               ? "rgba(59,130,246,0.28)"
                               : item.current
                                 ? "rgba(59,130,246,0.15)"
-                                : "rgba(255,255,255,0.05)",
+                                : "var(--color-border)",
                             borderColor: isHovered
                               ? "rgba(59,130,246,0.7)"
                               : item.current
                                 ? "rgba(59,130,246,0.4)"
-                                : "rgba(255,255,255,0.1)",
-                            color: item.current || isHovered ? "#3b82f6" : "#6b80a0",
+                                : "var(--color-border-hi)",
+                            color:
+                              item.current || isHovered
+                                ? "var(--color-blue)"
+                                : "var(--color-muted)",
                           }}
                           transition={{ duration: 0.2 }}
                         >
@@ -205,31 +209,23 @@ export default function EducationSection() {
                         ? "rgba(59,130,246,0.7)"
                         : item.current
                           ? "rgba(59,130,246,0.4)"
-                          : "rgba(56,77,108,0.3)",
+                          : "var(--color-border)",
                       transition: "background 0.25s",
                     }}
                   />
 
                   {/* ── Release Card ── */}
                   <motion.div
-                    className="flex-1 relative rounded-2xl border overflow-hidden cursor-default"
+                    className="flex-1 relative rounded-2xl border overflow-hidden cursor-default glass"
                     animate={{
                       borderColor: isHovered
-                        ? "rgba(59,130,246,0.55)"
+                        ? "rgba(59,130,246,0.6)"
                         : item.current
-                          ? "rgba(59,130,246,0.3)"
-                          : "rgba(255,255,255,0.08)",
-                      boxShadow: isHovered
-                        ? "0 16px 50px -10px rgba(59,130,246,0.28), inset 0 1px 0 rgba(255,255,255,0.1)"
-                        : item.current
-                          ? "0 10px 40px -10px rgba(59,130,246,0.15), inset 0 1px 0 rgba(255,255,255,0.08)"
-                          : "0 10px 30px -10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)",
+                          ? "rgba(59,130,246,0.35)"
+                          : "var(--glass-border)",
+                      boxShadow: isHovered ? "0 16px 50px -10px rgba(59,130,246,0.25)" : undefined,
                     }}
                     transition={{ duration: 0.25 }}
-                    style={{
-                      background:
-                        "linear-gradient(145deg, rgba(11,21,37,0.85) 0%, rgba(6,12,26,0.95) 100%)",
-                    }}
                   >
                     {/* Scanline */}
                     <AnimatePresence>
@@ -329,13 +325,15 @@ export default function EducationSection() {
                         <div className="lg:col-span-9">
                           {/* Degree (main) + Institution (sub) */}
                           <motion.h3
-                            className="font-display text-xl md:text-2xl font-extrabold leading-tight pr-24 sm:pr-36"
-                            animate={{ color: isHovered ? "#93c5fd" : "#e2e8f0" }}
+                            className="font-display text-xl md:text-2xl font-extrabold leading-tight pr-24 sm:pr-36 text-ink"
+                            animate={{
+                              color: isHovered ? "var(--color-blue)" : "var(--color-ink)",
+                            }}
                             transition={{ duration: 0.2 }}
                           >
                             {item.degree}
                           </motion.h3>
-                          <p className="font-mono text-sm text-blue/80 font-medium mt-0.5 mb-3">
+                          <p className="font-mono text-sm text-blue/90 font-medium mt-0.5 mb-3">
                             {item.institution}
                           </p>
 
@@ -357,15 +355,15 @@ export default function EducationSection() {
                                         ? "rgba(59,130,246,0.2)"
                                         : "rgba(59,130,246,0.12)"
                                       : isHovered
-                                        ? "rgba(255,255,255,0.06)"
-                                        : "rgba(255,255,255,0.03)",
+                                        ? "var(--color-border-hi)"
+                                        : "var(--color-border)",
                                     borderColor: stat.highlight
                                       ? isHovered
                                         ? "rgba(59,130,246,0.6)"
                                         : "rgba(59,130,246,0.35)"
                                       : isHovered
-                                        ? "rgba(255,255,255,0.12)"
-                                        : "rgba(255,255,255,0.06)",
+                                        ? "var(--color-border-hi)"
+                                        : "var(--color-border)",
                                   }}
                                   transition={{ duration: 0.2 }}
                                 >
