@@ -173,4 +173,5 @@ _IT Undergraduate @ University of Moratuwa | Full Stack Developer | Backend Engi
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+- **Source Code**: Licensed under the **[MIT License](LICENSE)** — feel free to explore, learn from, and adapt the component architecture, styling, and animations.
+- **Personal Content & Branding**: All personal photography, avatars, certificates, awards, and biographical details are **Copyright © 2026 Dileepa Prabhath (All Rights Reserved)**. Please substitute them with your own original content if adapting this codebase.
