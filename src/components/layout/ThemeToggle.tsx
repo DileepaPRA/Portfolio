@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { flushSync } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { Moon, Sun } from "lucide-react";
 
@@ -11,36 +12,93 @@ interface ThemeToggleProps {
 export default function ThemeToggle({ activeColor = "#4edea3" }: ThemeToggleProps) {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [mounted, setMounted] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
+  const isTransitioningRef = useRef(false);
+
+  const applyThemeClasses = (t: "dark" | "light") => {
+    if (t === "light") {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
     const savedTheme = (localStorage.getItem("portfolio-theme") as "dark" | "light") || "dark";
     setTheme(savedTheme);
-    if (savedTheme === "light") {
-      document.documentElement.classList.add("light");
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-    }
+    applyThemeClasses(savedTheme);
   }, []);
 
-  const toggleTheme = () => {
-    setIsClicking(true);
-    setTimeout(() => setIsClicking(false), 500);
+  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (isTransitioningRef.current) return;
 
     const nextTheme = theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
-    localStorage.setItem("portfolio-theme", nextTheme);
 
-    if (nextTheme === "light") {
-      document.documentElement.classList.add("light");
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
+    // Extract exact click coordinates (rounded) or fallback to button center
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.round(e.clientX || rect.left + rect.width / 2);
+    const y = Math.round(e.clientY || rect.top + rect.height / 2);
+
+    // Add safe margin buffer to prevent subpixel edge clipping on high-DPI scaling
+    const endRadius =
+      Math.ceil(
+        Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y))
+      ) + 30;
+
+    const isReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Fallback for browsers without View Transitions API or users with reduced motion
+    if (!("startViewTransition" in document) || !document.startViewTransition || isReducedMotion) {
+      setTheme(nextTheme);
+      localStorage.setItem("portfolio-theme", nextTheme);
+      applyThemeClasses(nextTheme);
+      return;
     }
+
+    isTransitioningRef.current = true;
+    document.documentElement.classList.add("theme-transitioning");
+
+    const cleanup = () => {
+      document.documentElement.classList.remove("theme-transitioning");
+      isTransitioningRef.current = false;
+    };
+
+    const transition = document.startViewTransition(() => {
+      flushSync(() => {
+        setTheme(nextTheme);
+        localStorage.setItem("portfolio-theme", nextTheme);
+        applyThemeClasses(nextTheme);
+      });
+    });
+
+    transition.ready
+      .then(() => {
+        const clipPath = [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`,
+        ];
+
+        const animation = document.documentElement.animate(
+          {
+            clipPath,
+          },
+          {
+            duration: 850,
+            easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+            pseudoElement: "::view-transition-new(root)",
+            fill: "both",
+          } as KeyframeAnimationOptions
+        );
+
+        animation.onfinish = cleanup;
+      })
+      .catch(cleanup);
+
+    transition.finished.finally(cleanup);
   };
 
   if (!mounted) {
@@ -102,20 +160,6 @@ export default function ThemeToggle({ activeColor = "#4edea3" }: ThemeToggleProp
           </>
         )}
       </div>
-
-      {/* ── Click Solar / Lunar Burst Flare ── */}
-      {isClicking && (
-        <motion.div
-          initial={{ scale: 0.6, opacity: 1 }}
-          animate={{ scale: 2.2, opacity: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          className="absolute inset-0 rounded-full pointer-events-none"
-          style={{
-            border: `2px solid ${isDark ? "#a855f7" : "#fbbf24"}`,
-            boxShadow: `0 0 15px ${isDark ? "#a855f7" : "#fbbf24"}`,
-          }}
-        />
-      )}
 
       {/* ── Sliding Celestial Orb (Moon 🌙 in Dark / Sun ☀️ in Light) ── */}
       <motion.div

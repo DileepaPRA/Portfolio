@@ -415,3 +415,28 @@ html.light .liquid-glass-pill {
   animation: shimmer 1.8s infinite;
   pointer-events: none;
 }
+
+/* ── Modern Circular View Transition (Theme Reveal Animation) ── */
+::view-transition-group(root) {
+  animation: none;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* Suppress background DOM CSS transitions during theme transition for 100% GPU smoothness */
+.theme-transitioning,
+.theme-transitioning * {
+  transition: none !important;
+}

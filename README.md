@@ -61,7 +61,7 @@ A modern, cybernetic personal developer portfolio engineered with **Next.js 15 (
 | **Icons & Media**    | Lucide React, Custom SVG Icons                                     |
 | **Form Backend**     | Web3Forms API                                                      |
 | **Code Quality**     | ESLint 9, Prettier, Husky, Lint-Staged                             |
-| **Deployment**       | Vercel Edge Network, Worldwide CDN, SSL                            |
+| **Deployment**       | Vercel Edge Network                                                |
 
 ---
 

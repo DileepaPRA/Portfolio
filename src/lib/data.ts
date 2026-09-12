@@ -431,7 +431,18 @@ export const UNIVERSITY_IMAGES = [
   },
 ];
 
-export const AWARDS = [
+export interface Award {
+  id: string;
+  title: string;
+  type: string;
+  org: string;
+  year: string;
+  image: string;
+  cert: string;
+  note?: string;
+}
+
+export const AWARDS: Award[] = [
   {
     id: "genzcipher",
     title: "Champions — GenZipher",
@@ -460,14 +471,13 @@ export const AWARDS = [
     cert: "https://www.hackerrank.com/contests/fit-coderush-2024/leaderboard?limit=50&page=1",
   },
   {
-    id: "deans-list",
-    title: "Dean's List",
-    type: "Academic Excellence Award",
-    org: "University of Moratuwa",
-    year: "2024–2025",
-    image: null as string | null,
-    cert: "https://github.com/DileepaPRA",
-    note: "Levels: L1S1, L1S2, L2S1",
+    id: "coderally-7",
+    title: "Finalist - CodeRally 7.0",
+    type: "Coding Challenge",
+    org: "IIT Sri Lanka",
+    year: "2026",
+    image: "/images/awards/coderally7.jpeg",
+    cert: "",
   },
   {
     id: "Fit-Expo",
@@ -485,15 +495,23 @@ export const CERTIFICATIONS = [
     id: "cisco-network",
     title: "Network Technician Career Path",
     issuer: "Cisco Academy",
-    year: "2023",
+    year: "2025",
     image: "/images/certifications/Cisco Network Technicial.png",
     cert: "https://www.credly.com/badges/db8380cc-ffdf-4b91-ae7e-153e6fd92f58/public_url",
+  },
+  {
+    id: "Docker-beginner-Kodekloud",
+    title: "Docker Training Course for the Absolute Beginner",
+    issuer: "KodeKloud",
+    year: "2026",
+    image: "/images/certifications/Docker_Beginners.jpg",
+    cert: "https://learn.kodekloud.com/learn/certificate/42d29da1-5cd0-408b-b2b7-92fb28c3da37",
   },
   {
     id: "fcc-web",
     title: "Responsive Web Design",
     issuer: "freeCodeCamp",
-    year: "2023",
+    year: "2024",
     image: "/images/certifications/FreeCodeCamp.png",
     cert: "https://www.freecodecamp.org/certification/fcc-cece4546-7f12-4035-8846-3a437567e3c4/responsive-web-design",
   },
@@ -501,7 +519,7 @@ export const CERTIFICATIONS = [
     id: "cisco-cyber",
     title: "Introduction to Cybersecurity",
     issuer: "Cisco Academy",
-    year: "2023",
+    year: "2025",
     image: "/images/certifications/Cisco Introduction Cybersecurity Path.png",
     cert: "https://www.credly.com/badges/dfa134e3-4370-4757-aa34-16d0d9820de8/public_url",
   },
@@ -509,7 +527,7 @@ export const CERTIFICATIONS = [
     id: "aws-cloud-practitioner",
     title: "AWS Cloud Practitioner Essentials",
     issuer: "Amazon Web Services (AWS)",
-    year: "2024",
+    year: "2026",
     image: "/images/certifications/AWS Cloud Practitioner.png",
     cert: "https://drive.google.com/file/d/1HkT073fADDscy0txx9fEwmRKlTQDrRTh/view?usp=sharing",
   },
