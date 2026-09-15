@@ -92,7 +92,10 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    google:
+      process.env.GOOGLE_SITE_VERIFICATION ||
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+      "oaQ7GcNIGUpHZpE5KNahdJj2srQteyu5WGyRRkZsh2Y",
   },
   icons: {
     icon: "/images/logo_no_bg.png",
