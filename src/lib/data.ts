@@ -10,13 +10,13 @@ export interface SocialLink {
 export const PERSONAL_INFO = {
   name: "Dileepa Prabhath",
   shortName: "DP",
-  title: "Full Stack Developer",
-  roles: ["Full Stack Developer", "Backend Engineer"],
+  title: "Software Engineer",
+  roles: ["Software Engineer", "Full Stack Developer", "Backend Engineer"],
   tagline: "IT Undergraduate @ University of Moratuwa",
   location: "Sri Lanka 🇱🇰",
   bio: "Driven by curiosity, passionate about building secure, intelligent, and scalable systems that merge innovation with real-world impact—turning complex ideas into elegant code.",
   avatar: "/images/profile/Avatar.jpg",
-  siteUrl: process.env.HOSTED_SITE_URL || "https://dilee.vercel.app/",
+  siteUrl: (process.env.HOSTED_SITE_URL || "https://dilee.vercel.app").replace(/\/$/, ""),
   email: "d.prabath115@gmail.com",
   resumeUrl: "#", // Replace with your actual CV/Resume URL (e.g., "/cv.pdf" or Google Drive link)
   stats: [
@@ -36,9 +36,7 @@ export const PERSONAL_INFO = {
     },
     {
       indent: 0,
-      tokens: [
-        { type: "comment", text: " * Aspiring full stack developer with strong foundation" },
-      ],
+      tokens: [{ type: "comment", text: " * Aspiring software engineer with strong foundation" }],
     },
     { indent: 0, tokens: [{ type: "comment", text: " */" }] },
     { indent: 0, tokens: [] },
@@ -64,7 +62,7 @@ export const PERSONAL_INFO = {
       tokens: [
         { type: "key", text: "role" },
         { type: "operator", text: ": " },
-        { type: "string", text: '"Full-Stack Developer | Backend Developer"' },
+        { type: "string", text: '"Software Engineer | Full Stack Developer"' },
         { type: "operator", text: "," },
       ],
     },

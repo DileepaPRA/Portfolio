@@ -27,8 +27,10 @@ export default function JsonLd() {
         },
         sameAs: SOCIAL_LINKS.map((s) => s.href).filter((href) => href.startsWith("http")),
         knowsAbout: [
-          "Full Stack Development",
           "Software Engineering",
+          "Full Stack Development",
+          "Backend Engineering",
+          "Distributed Systems",
           "React",
           "Next.js",
           "TypeScript",
@@ -59,7 +61,7 @@ export default function JsonLd() {
         "@type": "ProfilePage",
         "@id": `${baseUrl}/#profilepage`,
         url: baseUrl,
-        name: `${PERSONAL_INFO.name} — Full Stack Developer`,
+        name: `${PERSONAL_INFO.name} — Software Engineer`,
         mainEntity: {
           "@id": `${baseUrl}/#person`,
         },

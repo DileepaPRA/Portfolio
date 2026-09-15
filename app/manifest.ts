@@ -3,7 +3,7 @@ import { PERSONAL_INFO } from "@/lib/data";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${PERSONAL_INFO.name} — Full Stack Developer`,
+    name: `${PERSONAL_INFO.name} — Software Engineer`,
     short_name: PERSONAL_INFO.name,
     description: PERSONAL_INFO.bio,
     start_url: "/",

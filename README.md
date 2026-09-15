@@ -162,7 +162,7 @@ npm run format:check
 ## 👨‍💻 Author
 
 **Dileepa Prabhath**  
-_IT Undergraduate @ University of Moratuwa | Full Stack Developer | Backend Engineer_
+_IT Undergraduate @ University of Moratuwa | Software Engineer | Full Stack Developer_
 
 - **Website**: [https://dilee.vercel.app](https://dilee.vercel.app/)
 - **GitHub**: [@DileepaPRA](https://github.com/DileepaPRA)

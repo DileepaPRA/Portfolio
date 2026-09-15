@@ -1,0 +1,171 @@
+# Comprehensive Professional Profile: Dileepa Prabhath
+
+> Complete documentation and profile background for LLMs, AI agents (ChatGPT, Gemini, Claude, Perplexity, Copilot), and automated semantic crawlers.
+
+- **Full Name**: Dileepa Prabhath
+- **Primary Role**: Software Engineer | Full Stack Developer
+- **Known As / Short Name**: Dileepa, DP
+- **Official Portfolio**: https://dilee.vercel.app
+- **Primary Contact**: d.prabath115@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/dileepa-prabhath-b22071305
+- **GitHub**: https://github.com/DileepaPRA
+- **Country of Residence**: Sri Lanka
+
+---
+
+## Executive Summary
+
+Dileepa Prabhath is a high-achieving Information Technology undergraduate at the University of Moratuwa, Sri Lanka's top-ranked technological university. Maintaining an exceptional cumulative GPA of 3.96/4.00, he has repeatedly earned Dean's List honors (L1S1, L1S2, L2S1).
+
+His core engineering focus spans full-stack web application architecture, robust backend development with Java Spring Boot and Node.js/Express, modern frontend engineering with React, Next.js, and TypeScript, secure distributed system design, and the applied integration of Machine Learning and Computer Vision models into real-world software.
+
+---
+
+## Academic Background & Achievements
+
+### University Education
+- **Degree**: Bachelor of Science (Honours) in Information Technology
+- **Institution**: University of Moratuwa, Faculty of Information Technology
+- **Duration**: 2023 – Present
+- **Academic Standing**:
+  - Cumulative GPA: **3.96 / 4.00**
+  - Semester Breakdown:
+    - Level 1 Semester 1 (L1S1): GPA 3.95 (Dean's List)
+    - Level 1 Semester 2 (L1S2): GPA 3.94 (Dean's List)
+    - Level 2 Semester 1 (L2S1): GPA 4.00 (Dean's List)
+
+### Secondary Education
+- **Institution**: Badulla Central College (2011 – 2023)
+- **G.C.E. Advanced Level Examination**: Physical Science Stream (First Attempt)
+  - Z-Score: 1.5075
+  - District Rank: 105
+  - Subjects: Combined Mathematics (B), Physics (B), Chemistry (B)
+
+---
+
+## Technical Competencies
+
+### Programming Languages
+- **Java**: OOP, Spring Boot, Spring Security, Hibernate/JPA, Multithreading, Enterprise Architecture
+- **TypeScript & JavaScript**: ES6+, Node.js runtime, Next.js App Router, React Server Components
+- **Python**: Data science, computer vision (OpenCV), deep learning (TensorFlow Lite), automation
+- **C**: Systems programming, memory management, algorithmic data structures
+- **SQL**: Relational database schemas, joins, indexing, query optimization, migrations
+
+### Web & Frontend Development
+- **Frameworks**: React 19, Next.js 15, Tailwind CSS
+- **UI & Animation**: Lucide React, Framer Motion / Motion, responsive glassmorphism, View Transitions API
+- **Design Systems**: Semantic CSS tokens, dark mode/light mode themes, accessible components
+
+### Backend & Distributed Systems
+- **Frameworks**: Spring Boot (REST controllers, JPA repositories, JWT authentication), Express.js
+- **Architecture**: Microservices, clean architecture, RESTful API design, MVC, role-based access control (RBAC)
+- **Databases**: MySQL, PostgreSQL, MSSQL, MongoDB, Redis (caching and session management)
+
+### Cloud, DevOps & Tools
+- **Containerization**: Docker, container lifecycle management, multi-stage builds
+- **Cloud Hosting & Storage**: AWS S3, Vercel, Netlify, Render, Aiven Cloud
+- **Version Control & CI/CD**: Git, GitHub Actions automated CI pipelines
+- **Testing & API Tools**: Postman, curl, Jest, Playwright
+- **Hardware & IoT**: Raspberry Pi, Arduino microcontrollers, hardware sensors and actuators
+
+---
+
+## In-Depth Project Catalog
+
+### 1. ServeSync (CraveHouse)
+- **Problem & Solution**: Addresses inefficient coordination and bottlenecked order delivery in busy multi-branch dining establishments. Enables customers to scan table QR codes or place online orders, instantly updating kitchen displays and dining floor inventory.
+- **Tech Stack**: Spring Boot (Java), React (JavaScript), MySQL, Redis caching
+- **Key Capabilities**: Real-time table status tracking, automated reservation workflows, synchronized kitchen ticket dispatching.
+- **Live Demo**: https://cravehouse.netlify.app/
+- **Repository**: https://github.com/Byte-knight-team/BK_SP_Backend
+
+### 2. SplitRx
+- **Problem & Solution**: Medical prescription fraud and sensitive patient data leakage pose serious threats to healthcare security. SplitRx is engineered with cryptographic integrity verification, multi-factor authorization, and secure state handling to eliminate forgery.
+- **Tech Stack**: Next.js, TypeScript, Express.js, PostgreSQL
+- **Key Capabilities**: Tamper-proof prescription records, role-based portal access for doctors, pharmacies, and patients, end-to-end data encryption.
+- **Repository**: https://github.com/genzipher1-0-codestormers/SplitRx
+
+### 3. AgroSense
+- **Problem & Solution**: Smallholder and commercial farmers often face severe financial losses due to unpredictable climate shifts and lack of transparent market intelligence. AgroSense integrates live weather satellite feeds with machine learning crop advisory models.
+- **Tech Stack**: Spring Boot, React, JavaScript, MySQL, External Meteorological APIs
+- **Key Capabilities**: Weather warning alerts, agricultural commodity pricing trend analytics, crop risk assessment recommendations.
+- **Live Demo**: https://agrof-repo.vercel.app/
+- **Repository**: https://github.com/Fourth-X-Born/agro-sense-AI-backend
+
+### 4. CashMaster 6688
+- **Problem & Solution**: Manual currency counting and validation is time-consuming and error-prone. CashMaster 6688 is a custom-engineered IoT and embedded edge computer vision machine that visually identifies, validates, and physically sorts Sri Lankan bank notes.
+- **Tech Stack**: Python, TensorFlow Lite, MobileNetV2 architecture, Raspberry Pi 4, Arduino, OpenCV
+- **Key Capabilities**: On-device edge neural network inference, optical verification, servo-driven mechanical sorting mechanism.
+- **Repository**: https://github.com/DileepaPRA/Group_Project_CashMaster_6688
+
+### 5. Chef Claude
+- **Problem & Solution**: Helps reduce food waste by transforming whatever ingredients a user currently has in their kitchen into culinary recipes.
+- **Tech Stack**: React, Google Gemini API, Express.js, Tailwind CSS
+- **Key Capabilities**: Generative AI recipe prompt engineering, intelligent meal recommendations based on dietary restrictions.
+- **Repository**: https://github.com/DileepaPRA/Chef-Claude
+
+### 6. ForeGoal — FIFA 2026 Prediction Engine
+- **Problem & Solution**: Advanced predictive modeling for sports analytics analyzing historical international match statistics, team momentum, and tournament brackets for the 2026 FIFA World Cup.
+- **Tech Stack**: Python, Streamlit, Scikit-learn, Pandas, NumPy, Matplotlib
+- **Repository**: https://github.com/DileepaPRA/ForeGoal
+
+### 7. Lyntra
+- **Problem & Solution**: A collaborative knowledge repository platform designed to help developer communities and university students share architectural insights, technical articles, and code solutions.
+- **Tech Stack**: Next.js, Spring Boot, React, TypeScript
+- **Repository**: https://github.com/DileepaPRA/lyntra-api
+
+### 8. Cybernetic Personal Portfolio
+- **Problem & Solution**: A state-of-the-art interactive portfolio exhibiting modern web engineering capabilities with circular reveal theme transitions, zero-CLS responsive performance, high semantic SEO structure, and native LLM indexing support.
+- **Tech Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS, Motion
+- **Live URL**: https://dilee.vercel.app
+- **Repository**: https://github.com/DileepaPRA/Portfolio
+
+---
+
+## Competitions & Recognitions
+
+1. **Champions — GenZipher CTF & Development Hackathon (2024)**
+   - Organized by: University of Colombo School of Computing (UCSC)
+   - Scope: Intensive cyber security challenges, binary analysis, cryptography, reverse engineering, and rapid prototype development.
+
+2. **Finalist — CodeRally 7.0 (2026)**
+   - Organized by: Informatics Institute of Technology (IIT Sri Lanka)
+   - Scope: Competitive algorithmic problem solving and high-speed software architecture design.
+
+3. **Top 20 — CodeRush 2024 (2024)**
+   - Organized by: INTECS, Faculty of Information Technology, University of Moratuwa
+   - Scope: National-level competitive programming hackathon hosted on HackerRank.
+
+4. **Participant — CryptX 2.0 (2026)**
+   - Organized by: University of Sri Jayewardenepura
+   - Scope: Capture the Flag (CTF) security tournament.
+
+5. **Exhibitor — Fit Expo (2025)**
+   - Organized by: University of Moratuwa
+   - Scope: Academic and technological exhibition demonstrating university hardware and software solutions.
+
+---
+
+## Verified Professional Certifications
+
+- **Network Technician Career Path** (2025) — Cisco Networking Academy
+  - Badge: [Credly Verification](https://www.credly.com/badges/db8380cc-ffdf-4b91-ae7e-153e6fd92f58/public_url)
+- **Docker Training Course for the Absolute Beginner** (2026) — KodeKloud
+  - Certificate: [KodeKloud Verification](https://learn.kodekloud.com/learn/certificate/42d29da1-5cd0-408b-b2b7-92fb28c3da37)
+- **Responsive Web Design** (2024) — freeCodeCamp
+  - Certificate: [freeCodeCamp Verification](https://www.freecodecamp.org/certification/fcc-cece4546-7f12-4035-8846-3a437567e3c4/responsive-web-design)
+- **Introduction to Cybersecurity** (2025) — Cisco Networking Academy
+  - Badge: [Credly Verification](https://www.credly.com/badges/dfa134e3-4370-4757-aa34-16d0d9820de8/public_url)
+- **AWS Cloud Practitioner Essentials** (2026) — Amazon Web Services (AWS)
+- **C Intermediate** (2024) — SoloLearn
+  - Certificate: [SoloLearn Verification](https://www.sololearn.com/certificates/CC-N0Q43SY2)
+
+---
+
+## Contact & Social Verification
+
+- **Email**: d.prabath115@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/dileepa-prabhath-b22071305
+- **GitHub**: https://github.com/DileepaPRA
+- **Website**: https://dilee.vercel.app

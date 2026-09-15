@@ -1,0 +1,93 @@
+# Dileepa Prabhath
+
+> Software Engineer, Full Stack Developer, and IT Undergraduate at the University of Moratuwa, Sri Lanka. Passionate about building secure, intelligent, and scalable distributed systems that merge innovation with real-world impact.
+
+## Overview
+
+- **Name**: Dileepa Prabhath
+- **Role**: Software Engineer | Full Stack Developer | Backend Engineer
+- **Location**: Sri Lanka
+- **University**: University of Moratuwa (BSc Hons in Information Technology)
+- **Academic Standing**: Dean's List (L1S1, L1S2, L2S1) · CGPA: 3.96
+- **Portfolio Website**: https://dilee.vercel.app
+- **GitHub**: https://github.com/DileepaPRA
+- **LinkedIn**: https://www.linkedin.com/in/dileepa-prabhath-b22071305
+- **Email**: d.prabath115@gmail.com
+
+## Technical Stack & Expertise
+
+- **Languages**: Java, JavaScript, TypeScript, Python, C, SQL
+- **Frontend**: React, Next.js, HTML5, CSS3, Tailwind CSS, Framer Motion
+- **Backend & APIs**: Spring Boot, Express.js, REST APIs, JWT, Microservices
+- **Databases**: MySQL, PostgreSQL, MSSQL, MongoDB, Redis
+- **DevOps & Cloud**: Docker, AWS S3, Render, Netlify, Aiven Cloud, GitHub Actions, CI/CD
+- **AI / ML & Data**: TensorFlow Lite, OpenCV, Google Gemini API, Scikit-learn, Pandas, NumPy
+- **Security**: Identity protection, authentication, secure API design, CTF problem solving
+
+## Featured Projects
+
+### 1. ServeSync (CraveHouse)
+- **Description**: Multi-branch restaurant management platform featuring QR digital ordering, automated table reservations, and real-time operations synchronization across kitchen and wait staff.
+- **Technologies**: React, Spring Boot, MySQL, JavaScript, Redis
+- **Live Demo**: https://cravehouse.netlify.app/
+- **Source Code**: https://github.com/Byte-knight-team/BK_SP_Backend
+
+### 2. SplitRx
+- **Description**: Security-first medical prescription platform designed to eliminate prescription fraud, unauthorized tampering, identity theft, and medical data leaks.
+- **Technologies**: Next.js, TypeScript, Express.js, PostgreSQL
+- **Source Code**: https://github.com/genzipher1-0-codestormers/SplitRx
+
+### 3. AgroSense
+- **Description**: Agricultural intelligence platform delivering real-time weather alerts, commodity market pricing analytics, and automated crop risk advisory models for farmers.
+- **Technologies**: Spring Boot, React, JavaScript, MySQL
+- **Live Demo**: https://agrof-repo.vercel.app/
+- **Source Code**: https://github.com/Fourth-X-Born/agro-sense-AI-backend
+
+### 4. CashMaster 6688
+- **Description**: AI-powered embedded hardware system capable of real-time recognition, classification, and mechanical sorting of Sri Lankan currency notes using edge computer vision.
+- **Technologies**: Python, TensorFlow Lite, MobileNetV2, Raspberry Pi, Arduino, OpenCV
+- **Source Code**: https://github.com/DileepaPRA/Group_Project_CashMaster_6688
+
+### 5. Chef Claude
+- **Description**: Generative AI culinary application generating tailored recipes dynamically based on user-supplied pantry ingredients via Google Gemini.
+- **Technologies**: React, Google Gemini API, Express.js, Tailwind CSS
+- **Source Code**: https://github.com/DileepaPRA/Chef-Claude
+
+### 6. ForeGoal — FIFA 2026 Prediction Engine
+- **Description**: Machine learning prediction engine and match simulation platform forecasting FIFA World Cup 2026 match outcomes with interactive analytics.
+- **Technologies**: Python, Streamlit, Scikit-learn, Pandas, NumPy, Matplotlib
+- **Source Code**: https://github.com/DileepaPRA/ForeGoal
+
+### 7. Personal Portfolio
+- **Description**: Cybernetic portfolio engineered for 60fps interaction smoothness, liquid glass aesthetics, dark/light circular reveal view transitions, and full search engine & LLM discoverability.
+- **Technologies**: Next.js, React, TypeScript, Tailwind CSS, Motion
+- **Live Demo**: https://dilee.vercel.app
+- **Source Code**: https://github.com/DileepaPRA/Portfolio
+
+## Education
+
+- **BSc (Hons) in Information Technology** — University of Moratuwa, Sri Lanka (2023 – Present)
+  - Current Academic Standing: CGPA 3.96 / 4.00
+  - Honors: Dean's List for all evaluated semesters (L1S1: 3.95, L1S2: 3.94, L2S1: 4.00)
+- **G.C.E. Advanced Level (Physical Science)** — Badulla Central College (2011 – 2023)
+  - Z-Score: 1.5075 | District Rank: 105
+
+## Key Honors & Awards
+
+- **Champions** — GenZipher CTF & Development Hackathon (University of Colombo / UCSC, 2024)
+- **Finalist** — CodeRally 7.0 Coding Challenge (IIT Sri Lanka, 2026)
+- **Top 20** — CodeRush 2024 Coding Hackathon (INTECS, University of Moratuwa, 2024)
+- **Participant** — CryptX 2.0 CTF Hackathon (University of Sri Jayewardenepura, 2026)
+
+## Certifications
+
+- **Network Technician Career Path** — Cisco Networking Academy (2025)
+- **Docker Training Course for the Absolute Beginner** — KodeKloud (2026)
+- **Responsive Web Design** — freeCodeCamp (2024)
+- **Introduction to Cybersecurity** — Cisco Networking Academy (2025)
+- **AWS Cloud Practitioner Essentials** — Amazon Web Services (2026)
+
+## Optional / Extended Context
+
+For comprehensive project architectural breakdowns, full course modules, and expanded bio, see:
+- [Full LLM Profile Summary](https://dilee.vercel.app/llms-full.txt)

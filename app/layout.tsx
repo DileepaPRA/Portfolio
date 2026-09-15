@@ -26,18 +26,21 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(PERSONAL_INFO.siteUrl || "https://dilee.vercel.app/"),
+  metadataBase: new URL(PERSONAL_INFO.siteUrl || "https://dilee.vercel.app"),
   alternates: {
     canonical: "/",
   },
-  title: "Dileepa Prabhath — Full Stack Developer",
+  title: {
+    default: "Dileepa Prabhath — Software Engineer",
+    template: "%s | Dileepa Prabhath",
+  },
   description:
-    "Portfolio of Dileepa Prabhath — IT undergraduate at the University of Moratuwa. Full stack developer, backend engineer, and AI/ML enthusiast building secure, scalable systems.",
+    "Portfolio of Dileepa Prabhath — IT undergraduate at University of Moratuwa. Software engineer, full stack developer, and backend engineer building secure, scalable systems.",
   keywords: [
     "Dileepa Prabhath",
+    "Software Engineer",
     "Full Stack Developer",
     "Backend Engineer",
-    "Software Engineer",
     "Portfolio",
     "University of Moratuwa",
     "React",
@@ -48,14 +51,16 @@ export const metadata: Metadata = {
     "Python",
     "AI/ML",
     "Cybersecurity",
+    "Sri Lanka Developer",
   ],
-  authors: [{ name: "Dileepa Prabhath" }],
+  authors: [{ name: "Dileepa Prabhath", url: PERSONAL_INFO.siteUrl }],
   creator: "Dileepa Prabhath",
+  publisher: "Dileepa Prabhath",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: PERSONAL_INFO.siteUrl,
-    title: "Dileepa Prabhath — Full Stack Developer",
+    title: "Dileepa Prabhath — Software Engineer",
     description:
       "IT undergraduate at the University of Moratuwa. Building secure, scalable, and intelligent systems.",
     siteName: "Dileepa Prabhath Portfolio",
@@ -64,13 +69,13 @@ export const metadata: Metadata = {
         url: "/images/projects/Portfolio.jpg",
         width: 1200,
         height: 630,
-        alt: "Dileepa Prabhath — Full Stack Developer Portfolio",
+        alt: "Dileepa Prabhath — Software Engineer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dileepa Prabhath — Full Stack Developer",
+    title: "Dileepa Prabhath — Software Engineer",
     description:
       "IT undergraduate at the University of Moratuwa. Building secure, scalable, and intelligent systems.",
     images: ["/images/projects/Portfolio.jpg"],
@@ -85,6 +90,9 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
   },
   icons: {
     icon: "/images/logo_no_bg.png",
