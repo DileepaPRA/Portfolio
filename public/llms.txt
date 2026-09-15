@@ -1,11 +1,12 @@
 # Dileepa Prabhath
 
-> Software Engineer, Full Stack Developer, and IT Undergraduate at the University of Moratuwa, Sri Lanka. Passionate about building secure, intelligent, and scalable distributed systems that merge innovation with real-world impact.
+> Software Engineer and Backend Developer studying IT at University of Moratuwa, Sri Lanka. Specializing in high-performance enterprise systems,REST APIs,and modern web architectures.
 
 ## Overview
 
 - **Name**: Dileepa Prabhath
-- **Role**: Software Engineer | Full Stack Developer | Backend Engineer
+- **Role**: Software Engineer | Backend Developer | Full Stack Developer
+- **Core Specialization**: Spring Boot, RESTful APIs, Enterprise Architecture
 - **Location**: Sri Lanka
 - **University**: University of Moratuwa (BSc Hons in Information Technology)
 - **Academic Standing**: Dean's List (L1S1, L1S2, L2S1) · CGPA: 3.96
@@ -18,7 +19,7 @@
 
 - **Languages**: Java, JavaScript, TypeScript, Python, C, SQL
 - **Frontend**: React, Next.js, HTML5, CSS3, Tailwind CSS, Framer Motion
-- **Backend & APIs**: Spring Boot, Express.js, REST APIs, JWT, Microservices
+- **Backend & APIs**: Spring Boot, Express.js, REST APIs, JWT, Modular Architecture
 - **Databases**: MySQL, PostgreSQL, MSSQL, MongoDB, Redis
 - **DevOps & Cloud**: Docker, AWS S3, Render, Netlify, Aiven Cloud, GitHub Actions, CI/CD
 - **AI / ML & Data**: TensorFlow Lite, OpenCV, Google Gemini API, Scikit-learn, Pandas, NumPy

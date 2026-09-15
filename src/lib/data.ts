@@ -80,6 +80,8 @@ export const PERSONAL_INFO = {
       tokens: [
         { type: "key", text: "passion" },
         { type: "operator", text: ": [" },
+        { type: "string", text: '"backend engineering"' },
+        { type: "operator", text: ", " },
         { type: "string", text: '"Scalable system design"' },
         { type: "operator", text: ", " },
         { type: "string", text: '"AI/ML innovation"' },

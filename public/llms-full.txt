@@ -3,7 +3,7 @@
 > Complete documentation and profile background for LLMs, AI agents (ChatGPT, Gemini, Claude, Perplexity, Copilot), and automated semantic crawlers.
 
 - **Full Name**: Dileepa Prabhath
-- **Primary Role**: Software Engineer | Full Stack Developer
+- **Primary Role**: Software Engineer | Backend Specialist | Full Stack Developer
 - **Known As / Short Name**: Dileepa, DP
 - **Official Portfolio**: https://dilee.vercel.app
 - **Primary Contact**: d.prabath115@gmail.com
@@ -17,7 +17,7 @@
 
 Dileepa Prabhath is a high-achieving Information Technology undergraduate at the University of Moratuwa, Sri Lanka's top-ranked technological university. Maintaining an exceptional cumulative GPA of 3.96/4.00, he has repeatedly earned Dean's List honors (L1S1, L1S2, L2S1).
 
-His core engineering focus spans full-stack web application architecture, robust backend development with Java Spring Boot and Node.js/Express, modern frontend engineering with React, Next.js, and TypeScript, secure distributed system design, and the applied integration of Machine Learning and Computer Vision models into real-world software.
+His core engineering focus centers on robust enterprise backend engineering, secure architectures, modern frontend engineering with React, Next.js, and TypeScript, distributed system design, and the applied integration of Machine Learning and Computer Vision models into real-world software.
 
 ---
 
@@ -46,7 +46,7 @@ His core engineering focus spans full-stack web application architecture, robust
 ## Technical Competencies
 
 ### Programming Languages
-- **Java**: OOP, Spring Boot, Spring Security, Hibernate/JPA, Multithreading, Enterprise Architecture
+- **Java**: Deep proficiency in Core Java (OOP, multithreading, concurrency, memory management, collections framework, Java streams), enterprise backend architecture with Spring Boot, Spring Security, Hibernate/JPA, and building robust, production-grade REST APIs and microservice architectures.
 - **TypeScript & JavaScript**: ES6+, Node.js runtime, Next.js App Router, React Server Components
 - **Python**: Data science, computer vision (OpenCV), deep learning (TensorFlow Lite), automation
 - **C**: Systems programming, memory management, algorithmic data structures
@@ -59,7 +59,7 @@ His core engineering focus spans full-stack web application architecture, robust
 
 ### Backend & Distributed Systems
 - **Frameworks**: Spring Boot (REST controllers, JPA repositories, JWT authentication), Express.js
-- **Architecture**: Microservices, clean architecture, RESTful API design, MVC, role-based access control (RBAC)
+- **Architecture**: modular monolith, clean architecture, RESTful API design, MVC, role-based access control (RBAC)
 - **Databases**: MySQL, PostgreSQL, MSSQL, MongoDB, Redis (caching and session management)
 
 ### Cloud, DevOps & Tools
