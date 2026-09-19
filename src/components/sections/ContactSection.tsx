@@ -163,26 +163,19 @@ export default function ContactSection() {
                 ))}
 
                 <div className="pt-4 border-t border-border">
-                  <a
-                    href={PERSONAL_INFO.resumeUrl}
-                    target={PERSONAL_INFO.resumeUrl.startsWith("http") ? "_blank" : undefined}
-                    rel={
-                      PERSONAL_INFO.resumeUrl.startsWith("http") ? "noopener noreferrer" : undefined
-                    }
-                    download={
-                      PERSONAL_INFO.resumeUrl.endsWith(".pdf")
-                        ? "Dileepa_Prabhath_CV.pdf"
-                        : undefined
-                    }
-                    className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-mono text-sm font-bold transition-all hover:scale-[1.02] hover:shadow-[0_0_24px_rgba(0,212,180,0.25)]"
-                    style={{
-                      background: "linear-gradient(135deg, #00d4b4, #00b89c)",
-                      color: "#060c1a",
-                    }}
+                  <button
+                    type="button"
+                    disabled
+                    aria-disabled="true"
+                    className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-mono text-sm font-bold opacity-50 cursor-not-allowed border border-border/50 bg-surface/40 text-muted/60 select-none shadow-none"
+                    title="CV will be attached soon"
                   >
                     <FileText size={15} />
-                    Download CV
-                  </a>
+                    <span>Download CV</span>
+                    <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-muted/70">
+                      Soon
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>

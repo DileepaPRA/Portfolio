@@ -14,7 +14,7 @@ export const PERSONAL_INFO = {
   roles: ["Software Engineer", "Full Stack Developer", "Backend Engineer"],
   tagline: "IT Undergraduate @ University of Moratuwa",
   location: "Sri Lanka 🇱🇰",
-  bio: "Driven by curiosity, passionate about building secure, intelligent, and scalable systems that merge innovation with real-world impact—turning complex ideas into elegant code.",
+  bio: "Driven by curiosity, passionate about building secure, intelligent, and scalable systems that merge innovation with real-world impact, turning complex ideas into elegant code.",
   avatar: "/images/profile/Avatar.jpg",
   siteUrl: (process.env.HOSTED_SITE_URL || "https://dilee.vercel.app").replace(/\/$/, ""),
   email: "d.prabath115@gmail.com",

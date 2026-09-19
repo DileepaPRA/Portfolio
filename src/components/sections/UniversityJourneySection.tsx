@@ -7,6 +7,7 @@ import { X, RotateCcw, Sparkles, ChevronLeft, ChevronRight, Crosshair } from "lu
 import { UNIVERSITY_IMAGES, SECTION_COLORS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
+import { useSwipe } from "../../lib/useSwipe";
 
 // ── Subtle 3D Orbital Floating Data Bits ──
 const ORBITAL_DATA_BITS = [
@@ -365,6 +366,12 @@ export default function UniversityJourneySection() {
     }
   };
 
+  // Mobile swipe gestures: left swipe = prev, right swipe = next
+  const photoSwipe = useSwipe({
+    onSwipeLeft: () => prevPhoto(),
+    onSwipeRight: () => nextPhoto(),
+  });
+
   return (
     <section
       id="university"
@@ -568,7 +575,10 @@ export default function UniversityJourneySection() {
                 </div>
 
                 {/* Modal Full-Res Photo Body */}
-                <div className="relative p-4 sm:p-8 flex items-center justify-center bg-black/60 min-h-[360px] md:min-h-[480px]">
+                <div
+                  className="relative p-4 sm:p-8 flex items-center justify-center bg-black/60 min-h-[360px] md:min-h-[480px] touch-pan-y"
+                  {...photoSwipe}
+                >
                   <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl max-h-[70vh] flex items-center justify-center bg-black/40">
                     <Image
                       src={activePhoto.src}
