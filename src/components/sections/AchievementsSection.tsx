@@ -263,15 +263,15 @@ export default function AchievementsSection() {
   const nextCert = () => setCertIndex((prev) => prev + 1);
   const prevCert = () => setCertIndex((prev) => prev - 1);
 
-  // Mobile swipe gestures: left swipe = prev, right swipe = next
+  // Mobile swipe gestures: swipe left = next, swipe right = prev (standard carousel gesture)
   const awardSwipe = useSwipe({
-    onSwipeLeft: prevAward,
-    onSwipeRight: nextAward,
+    onSwipeLeft: nextAward,
+    onSwipeRight: prevAward,
   });
 
   const certSwipe = useSwipe({
-    onSwipeLeft: prevCert,
-    onSwipeRight: nextCert,
+    onSwipeLeft: nextCert,
+    onSwipeRight: prevCert,
   });
 
   const numAwards = AWARDS.length;

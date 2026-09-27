@@ -13,9 +13,9 @@ export interface UseSwipeOptions {
 
 /**
  * Custom hook to detect mobile horizontal swipe gestures on carousels.
- * Specifically configured according to design specs:
- * - Left swipe triggers `onSwipeLeft` (e.g. previous button)
- * - Right swipe triggers `onSwipeRight` (e.g. next button)
+ * Standard mobile carousel behavior:
+ * - Swiping left (dragging right-to-left) triggers `onSwipeLeft` (advance to next item)
+ * - Swiping right (dragging left-to-right) triggers `onSwipeRight` (go to previous item)
  */
 export function useSwipe({
   onSwipeLeft,

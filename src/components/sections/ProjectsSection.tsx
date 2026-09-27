@@ -67,10 +67,10 @@ export default function ProjectsSection() {
     }
   }, [activeIdx, isCollabOpen, total]);
 
-  // Mobile swipe gestures: left swipe = prev, right swipe = next
+  // Mobile swipe gestures: swipe left = next, swipe right = prev (standard carousel gesture)
   const projectSwipe = useSwipe({
-    onSwipeLeft: prev,
-    onSwipeRight: next,
+    onSwipeLeft: next,
+    onSwipeRight: prev,
   });
 
   const prevLightbox = useCallback(() => {
@@ -90,8 +90,8 @@ export default function ProjectsSection() {
   }, [lightboxProject]);
 
   const lightboxSwipe = useSwipe({
-    onSwipeLeft: prevLightbox,
-    onSwipeRight: nextLightbox,
+    onSwipeLeft: nextLightbox,
+    onSwipeRight: prevLightbox,
   });
 
   const isInitialMount = useRef(true);

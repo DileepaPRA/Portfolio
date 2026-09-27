@@ -366,10 +366,10 @@ export default function UniversityJourneySection() {
     }
   };
 
-  // Mobile swipe gestures: left swipe = prev, right swipe = next
+  // Mobile swipe gestures: swipe left = next, swipe right = prev (standard carousel gesture)
   const photoSwipe = useSwipe({
-    onSwipeLeft: () => prevPhoto(),
-    onSwipeRight: () => nextPhoto(),
+    onSwipeLeft: () => nextPhoto(),
+    onSwipeRight: () => prevPhoto(),
   });
 
   return (
