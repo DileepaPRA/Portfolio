@@ -2,7 +2,16 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Mail, MapPin, Send, FileText, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Send,
+  FileText,
+  Loader2,
+  CheckCircle2,
+  AlertCircle,
+  Terminal,
+} from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../icons";
 import { SOCIAL_LINKS, PERSONAL_INFO } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
@@ -132,14 +141,17 @@ export default function ContactSection() {
             </p>
 
             {/* Info terminal */}
-            <div className="terminal rounded-2xl overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-2.5 bg-surface/60 border-b border-border backdrop-blur-md">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-                  <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+            <div className="terminal rounded-2xl overflow-hidden shadow-xl border border-white/80 dark:border-white/10">
+              <div className="flex items-center justify-between px-5 py-3 border-b border-slate-200/80 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-md">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-[0_0_6px_rgba(255,95,86,0.35)]" />
+                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e] shadow-[0_0_6px_rgba(255,189,46,0.35)]" />
+                  <div className="w-3 h-3 rounded-full bg-[#27c93f] shadow-[0_0_6px_rgba(39,201,63,0.35)]" />
                 </div>
-                <span className="font-mono text-[10px] text-dim">info.json</span>
+                <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-ink/75">
+                  <FileText size={12} className="text-teal" />
+                  <span>info.json</span>
+                </div>
                 <div className="w-14" />
               </div>
 
@@ -188,14 +200,17 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            <div className="terminal rounded-2xl overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-2.5 bg-surface/60 border-b border-border backdrop-blur-md">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-                  <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+            <div className="terminal rounded-2xl overflow-hidden shadow-xl border border-white/80 dark:border-white/10">
+              <div className="flex items-center justify-between px-5 py-3 border-b border-slate-200/80 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-md">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-[0_0_6px_rgba(255,95,86,0.35)]" />
+                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e] shadow-[0_0_6px_rgba(255,189,46,0.35)]" />
+                  <div className="w-3 h-3 rounded-full bg-[#27c93f] shadow-[0_0_6px_rgba(39,201,63,0.35)]" />
                 </div>
-                <span className="font-mono text-[10px] text-dim">contact.sh</span>
+                <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-ink/75">
+                  <Terminal size={12} className="text-teal" />
+                  <span>contact.sh</span>
+                </div>
                 <div className="w-14" />
               </div>
 
@@ -204,24 +219,25 @@ export default function ContactSection() {
                   {
                     key: "name",
                     id: "contact-name",
-                    label: "$> enter_name",
+                    label: "enter_name",
                     type: "text",
-                    placeholder: "John Doe",
+                    placeholder: "e.g. John Doe",
                   },
                   {
                     key: "email",
                     id: "contact-email",
-                    label: "$> enter_email",
+                    label: "enter_email",
                     type: "email",
-                    placeholder: "john@example.com",
+                    placeholder: "e.g. john@example.com",
                   },
                 ].map(({ key, id, label, type, placeholder }) => (
                   <div key={key}>
                     <label
                       htmlFor={id}
-                      className="block font-mono text-xs font-bold mb-1.5 tracking-widest text-teal"
+                      className="flex items-center gap-1.5 font-mono text-xs font-bold mb-2 tracking-wider text-teal"
                     >
-                      {label}
+                      <span className="text-teal/70 font-mono select-none">$&gt;</span>
+                      <span>{label}</span>
                     </label>
                     <input
                       id={id}
@@ -229,7 +245,7 @@ export default function ContactSection() {
                       placeholder={placeholder}
                       value={form[key as keyof typeof form]}
                       onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
-                      className="w-full bg-transparent border-0 border-b border-border py-2 font-mono text-sm text-ink placeholder:text-muted/50 outline-none transition-colors focus:border-teal"
+                      className="w-full px-4 py-2.5 font-mono text-sm terminal-input placeholder:text-slate-400 dark:placeholder:text-muted/40 outline-none"
                       required
                     />
                   </div>
@@ -238,17 +254,18 @@ export default function ContactSection() {
                 <div>
                   <label
                     htmlFor="contact-message"
-                    className="block font-mono text-xs font-bold mb-1.5 tracking-widest text-teal"
+                    className="flex items-center gap-1.5 font-mono text-xs font-bold mb-2 tracking-wider text-teal"
                   >
-                    ${">"} enter_message
+                    <span className="text-teal/70 font-mono select-none">$&gt;</span>
+                    <span>enter_message</span>
                   </label>
                   <textarea
                     id="contact-message"
                     rows={4}
-                    placeholder="Hello world..."
+                    placeholder="Type your message, project scope, or questions here..."
                     value={form.message}
                     onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                    className="w-full bg-transparent border-0 border-b border-border py-2 font-mono text-sm text-ink placeholder:text-muted/50 outline-none resize-none transition-colors focus:border-teal"
+                    className="w-full px-4 py-3 font-mono text-sm terminal-input placeholder:text-slate-400 dark:placeholder:text-muted/40 outline-none resize-none"
                     required
                   />
                 </div>
@@ -257,47 +274,54 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="flex items-center gap-2 font-mono text-sm font-bold px-5 py-2.5 rounded-lg border transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:scale-105"
+                    className="group flex items-center justify-center gap-2.5 font-mono text-sm font-bold px-6 py-3 rounded-xl border transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-95 cursor-pointer shadow-md"
                     style={{
                       borderColor:
                         status === "success"
                           ? "#10b981"
                           : status === "error"
                             ? "#f43f5e"
-                            : "#00d4b4",
+                            : "rgba(13, 148, 136, 0.45)",
                       color:
                         status === "success"
                           ? "#10b981"
                           : status === "error"
                             ? "#f43f5e"
-                            : "#00d4b4",
+                            : "var(--color-teal)",
                       background:
                         status === "success"
-                          ? "rgba(16, 185, 129, 0.12)"
+                          ? "rgba(16, 185, 129, 0.16)"
                           : status === "error"
-                            ? "rgba(244, 63, 94, 0.12)"
-                            : "transparent",
+                            ? "rgba(244, 63, 94, 0.16)"
+                            : "rgba(13, 148, 136, 0.12)",
                       boxShadow:
-                        status === "success" ? "0 0 20px rgba(16, 185, 129, 0.25)" : undefined,
+                        status === "success"
+                          ? "0 0 24px rgba(16, 185, 129, 0.28)"
+                          : "0 4px 18px rgba(13, 148, 136, 0.14)",
                     }}
                   >
                     {status === "loading" ? (
                       <>
-                        <Loader2 size={13} className="animate-spin" />
-                        ./send_message.sh [transmitting...]
+                        <Loader2 size={14} className="animate-spin" />
+                        <span>./send_message.sh [transmitting...]</span>
                       </>
                     ) : status === "success" ? (
                       <>
-                        <CheckCircle2 size={13} />✓ Delivered!
+                        <CheckCircle2 size={14} />
+                        <span>Delivered successfully!</span>
                       </>
                     ) : status === "error" ? (
                       <>
-                        <AlertCircle size={13} />✕ Retry ./send_message.sh
+                        <AlertCircle size={14} />
+                        <span>Retry ./send_message.sh</span>
                       </>
                     ) : (
                       <>
-                        ./send_message.sh
-                        <Send size={13} />
+                        <span>./send_message.sh</span>
+                        <Send
+                          size={14}
+                          className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                        />
                       </>
                     )}
                   </button>

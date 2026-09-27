@@ -193,7 +193,9 @@ export default memo(function SectionAmbient({ color, variant = "a", icons = [] }
 
       if (!isVisibleRef.current) return;
 
-      const t = (now - t0) / 1000;
+      // Enhanced ambient blob drift speed (75% faster for more lively & fluid ambient lighting)
+      const BLOB_SPEED = 1.39;
+      const t = ((now - t0) / 1000) * BLOB_SPEED;
       const { w, h } = dimsRef.current;
 
       // Compute blob positions and transforms
