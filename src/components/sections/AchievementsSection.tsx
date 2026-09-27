@@ -337,7 +337,7 @@ export default function AchievementsSection() {
 
           {/* Awards Carousel Stage */}
           <div
-            className="relative touch-pan-y"
+            className="relative w-full touch-pan-y"
             onMouseEnter={() => setIsAwardPaused(true)}
             onMouseLeave={() => setIsAwardPaused(false)}
             {...awardSwipe}
@@ -348,7 +348,8 @@ export default function AchievementsSection() {
               onClick={prevAward}
               aria-label="Previous award"
               title="Circular Prev: curr = curr->prev"
-              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
+              style={{ position: "absolute" }}
+              className="!absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
             >
               <ChevronLeft size={20} />
             </button>
@@ -359,7 +360,8 @@ export default function AchievementsSection() {
               onClick={nextAward}
               aria-label="Next award"
               title="Circular Next: curr = curr->next"
-              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
+              style={{ position: "absolute" }}
+              className="!absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
             >
               <ChevronRight size={20} />
             </button>
@@ -408,19 +410,19 @@ export default function AchievementsSection() {
                       {/* Award Card Item */}
                       <div
                         style={{ width: `${awardCardW}px` }}
-                        className="shrink-0 h-full group"
+                        className="shrink-0 self-stretch flex flex-col group"
                         onMouseEnter={() => setHoveredAward(i)}
                         onMouseLeave={() => setHoveredAward(null)}
                       >
                         <div
-                          className={`glass p-5 flex flex-col justify-between h-full rounded-2xl border transition-all duration-300 relative overflow-hidden ${
+                          className={`glass p-5 flex flex-col justify-between flex-1 w-full rounded-2xl border transition-all duration-300 relative overflow-hidden min-h-[410px] ${
                             isHovered
                               ? "border-amber/60 shadow-[0_10px_35px_rgba(245,158,11,0.22)] -translate-y-1"
                               : "border-white/10 hover:border-amber/30"
                           }`}
                         >
                           {/* Top Memory Node Header */}
-                          <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-white/[0.08] font-mono text-[10px]">
+                          <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-white/[0.08] font-mono text-[10px] shrink-0">
                             <div className="flex items-center gap-1.5 text-amber font-bold">
                               <span
                                 className={`w-2 h-2 rounded-full ${
@@ -490,21 +492,21 @@ export default function AchievementsSection() {
                           </div>
 
                           {/* Content */}
-                          <div>
-                            <h4 className="font-display text-base font-bold text-ink group-hover:text-amber transition-colors leading-snug mb-1.5">
+                          <div className="flex-1 flex flex-col">
+                            <h4 className="font-display text-base font-bold text-ink group-hover:text-amber transition-colors leading-snug mb-1.5 min-h-[2.75rem]">
                               {award.title}
                             </h4>
-                            <p className="font-mono text-[10px] text-amber font-bold tracking-widest uppercase mb-1">
+                            <p className="font-mono text-[10px] text-amber font-bold tracking-widest uppercase mb-1 shrink-0">
                               {award.type}
                             </p>
-                            <p className="text-muted text-xs mb-1">{award.org}</p>
+                            <p className="text-muted text-xs mb-1 shrink-0">{award.org}</p>
                             {award.note && (
                               <p className="text-dim text-[11px] font-mono mb-2">{award.note}</p>
                             )}
                           </div>
 
                           {/* Footer Link */}
-                          <div className="flex items-center justify-between pt-3 border-t border-white/5 mt-3">
+                          <div className="flex items-center justify-between pt-3 border-t border-white/5 mt-auto shrink-0">
                             <span className="font-mono text-[10px] text-dim">{award.year}</span>
                             <a
                               href={award.cert}
@@ -580,7 +582,7 @@ export default function AchievementsSection() {
 
           {/* Certifications Carousel Stage */}
           <div
-            className="relative touch-pan-y"
+            className="relative w-full touch-pan-y"
             onMouseEnter={() => setIsCertPaused(true)}
             onMouseLeave={() => setIsCertPaused(false)}
             {...certSwipe}
@@ -591,7 +593,8 @@ export default function AchievementsSection() {
               onClick={prevCert}
               aria-label="Previous certification"
               title="Circular Prev: curr = curr->prev"
-              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
+              style={{ position: "absolute" }}
+              className="!absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
             >
               <ChevronLeft size={20} />
             </button>
@@ -602,7 +605,8 @@ export default function AchievementsSection() {
               onClick={nextCert}
               aria-label="Next certification"
               title="Circular Next: curr = curr->next"
-              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
+              style={{ position: "absolute" }}
+              className="!absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
             >
               <ChevronRight size={20} />
             </button>
@@ -650,19 +654,19 @@ export default function AchievementsSection() {
 
                       <div
                         style={{ width: `${certCardW}px` }}
-                        className="shrink-0 h-full group"
+                        className="shrink-0 self-stretch flex flex-col group"
                         onMouseEnter={() => setHoveredCert(i)}
                         onMouseLeave={() => setHoveredCert(null)}
                       >
                         <div
-                          className={`glass p-5 flex flex-col justify-between h-full rounded-2xl border transition-all duration-300 relative overflow-hidden ${
+                          className={`glass p-5 flex flex-col justify-between flex-1 w-full rounded-2xl border transition-all duration-300 relative overflow-hidden min-h-[295px] ${
                             isHovered
                               ? "border-amber/60 shadow-[0_10px_35px_rgba(245,158,11,0.22)] -translate-y-1"
                               : "border-white/10 hover:border-amber/30"
                           }`}
                         >
                           {/* Top Node Header */}
-                          <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/[0.08] font-mono text-[9px]">
+                          <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/[0.08] font-mono text-[9px] shrink-0">
                             <span className="flex items-center gap-1 text-amber font-bold">
                               <span
                                 className={`w-1.5 h-1.5 rounded-full ${
@@ -677,8 +681,8 @@ export default function AchievementsSection() {
                             </span>
                           </div>
 
-                          {/* Logo Slot */}
-                          <div>
+                          {/* Logo & Info Slot */}
+                          <div className="flex-1 flex flex-col">
                             {/* Logo Slot (Click to Expand Modal) */}
                             <div
                               onClick={() => {
@@ -694,7 +698,7 @@ export default function AchievementsSection() {
                               role={cert.image ? "button" : undefined}
                               tabIndex={cert.image ? 0 : undefined}
                               title={cert.image ? "Click to view credential badge" : undefined}
-                              className={`w-12 h-12 rounded-xl border border-white/8 flex items-center justify-center relative overflow-hidden mb-3 transition-all duration-300 ${
+                              className={`w-12 h-12 rounded-xl border border-white/8 flex items-center justify-center relative overflow-hidden mb-3 transition-all duration-300 shrink-0 ${
                                 cert.image
                                   ? "cursor-pointer hover:border-amber/60 hover:scale-105 hover:shadow-[0_0_15px_rgba(245,158,11,0.35)]"
                                   : ""
@@ -719,7 +723,7 @@ export default function AchievementsSection() {
                               <div className="scan-line opacity-15 pointer-events-none" />
                             </div>
 
-                            <div className="flex items-center justify-between mb-1">
+                            <div className="flex items-center justify-between mb-1 shrink-0">
                               <span className="font-mono text-[10px] text-muted truncate pr-1">
                                 {cert.issuer}
                               </span>
@@ -728,7 +732,7 @@ export default function AchievementsSection() {
                                 className="text-dim group-hover:text-amber transition-colors shrink-0"
                               />
                             </div>
-                            <h4 className="font-display text-sm font-bold text-ink leading-snug mb-1">
+                            <h4 className="font-display text-sm font-bold text-ink leading-snug mb-1 min-h-[2.5rem] flex items-start">
                               {cert.title}
                             </h4>
                             <p className="font-mono text-[10px] text-dim">{cert.year}</p>
@@ -738,7 +742,7 @@ export default function AchievementsSection() {
                             href={cert.cert}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-1 font-mono text-[11px] text-amber hover:underline w-fit transition-all pt-3 mt-1"
+                            className="flex items-center gap-1 font-mono text-[11px] text-amber hover:underline w-fit transition-all pt-3 mt-auto shrink-0"
                           >
                             Verify
                             <ExternalLink size={10} />

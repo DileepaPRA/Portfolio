@@ -478,24 +478,22 @@ export default function UniversityJourneySection() {
                 >
                   {/* Photo Tile Card */}
                   <div
-                    className="relative w-[140px] h-[94px] rounded-xl overflow-hidden border transition-[border-color,box-shadow] duration-200 shadow-2xl glass"
+                    className="relative w-[140px] h-[94px] rounded-xl overflow-hidden border transition-[border-color,box-shadow] duration-200 shadow-2xl bg-slate-900"
                     style={{
-                      background: "var(--card-dark-fill)",
                       borderColor: isHovered ? "#fb176f" : "rgba(251, 23, 111, 0.6)",
                       boxShadow: isHovered
                         ? "0 0 32px rgba(251, 23, 111, 0.85), 0 0 12px #fb176f"
                         : "0 14px 28px rgba(0,0,0,0.3), 0 0 14px rgba(251,23,111,0.2)",
                     }}
                   >
-                    {/* Image View with Shimmer Placeholder */}
-                    <div className="absolute inset-0 bg-surface/80">
-                      <div className="skeleton-shimmer opacity-40" />
+                    {/* Photo Container */}
+                    <div className="relative w-full h-full">
                       <Image
                         src={imgData.src}
                         alt={imgData.caption || `University Photo ${index + 1}`}
                         fill
                         sizes="280px"
-                        loading="lazy"
+                        loading="eager"
                         draggable={false}
                         className="w-full h-full object-cover pointer-events-none"
                       />
@@ -503,25 +501,25 @@ export default function UniversityJourneySection() {
 
                     {/* Glowing Bracketed Corners [ ] */}
                     <div
-                      className="absolute top-1 left-1 w-2.5 h-2.5 border-t-2 border-l-2"
+                      className="absolute top-1 left-1 w-2.5 h-2.5 border-t-2 border-l-2 pointer-events-none z-10"
                       style={{ borderColor: isHovered ? "#ffffff" : "#fb176f" }}
                     />
                     <div
-                      className="absolute top-1 right-1 w-2.5 h-2.5 border-t-2 border-r-2"
+                      className="absolute top-1 right-1 w-2.5 h-2.5 border-t-2 border-r-2 pointer-events-none z-10"
                       style={{ borderColor: isHovered ? "#ffffff" : "#fb176f" }}
                     />
                     <div
-                      className="absolute bottom-1 left-1 w-2.5 h-2.5 border-b-2 border-l-2"
+                      className="absolute bottom-1 left-1 w-2.5 h-2.5 border-b-2 border-l-2 pointer-events-none z-10"
                       style={{ borderColor: isHovered ? "#ffffff" : "#fb176f" }}
                     />
                     <div
-                      className="absolute bottom-1 right-1 w-2.5 h-2.5 border-b-2 border-r-2"
+                      className="absolute bottom-1 right-1 w-2.5 h-2.5 border-b-2 border-r-2 pointer-events-none z-10"
                       style={{ borderColor: isHovered ? "#ffffff" : "#fb176f" }}
                     />
 
                     {/* HUD Crosshair Target Overlay on Hover */}
                     {isHovered && (
-                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none bg-ruby/15 backdrop-blur-[1px]">
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none bg-ruby/15 backdrop-blur-[1px] z-10">
                         <Crosshair size={22} className="text-white animate-pulse" />
                       </div>
                     )}
