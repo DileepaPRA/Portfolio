@@ -157,7 +157,7 @@ export default function ScrollToTop() {
             )}
 
             {/* Glassmorphic Core Capsule */}
-            <div className="absolute inset-[3px] rounded-full bg-[#081020]/90 backdrop-blur-xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] group-hover:border-white/25 transition-colors duration-300" />
+            <div className="absolute inset-[3px] rounded-full bg-white/70 dark:bg-[#081020]/90 backdrop-blur-xl border border-white/80 dark:border-white/10 shadow-[inset_0_1.5px_1px_#ffffff,0_4px_16px_rgba(15,23,42,0.08)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] group-hover:border-white/40 transition-all duration-300" />
 
             {/* SVG Progress Ring with 8-Section Gradient Mask */}
             <svg
@@ -244,10 +244,10 @@ export default function ScrollToTop() {
                   size={19}
                   strokeWidth={2.6}
                   style={{
-                    color: isLaunching ? activeColor : isHovered ? "#ffffff" : "#dce4f5",
+                    color: isLaunching ? activeColor : isHovered ? activeColor : "var(--color-ink)",
                     filter: isHovered ? `drop-shadow(0 0 6px ${activeColor})` : "none",
                   }}
-                  className="transition-colors duration-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                  className="transition-colors duration-200 dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                 />
               </motion.div>
 

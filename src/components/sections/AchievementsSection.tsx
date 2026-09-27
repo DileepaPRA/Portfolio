@@ -337,7 +337,7 @@ export default function AchievementsSection() {
 
           {/* Awards Carousel Stage */}
           <div
-            className="relative touch-pan-y"
+            className="relative w-full touch-pan-y"
             onMouseEnter={() => setIsAwardPaused(true)}
             onMouseLeave={() => setIsAwardPaused(false)}
             {...awardSwipe}
@@ -348,7 +348,8 @@ export default function AchievementsSection() {
               onClick={prevAward}
               aria-label="Previous award"
               title="Circular Prev: curr = curr->prev"
-              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
+              style={{ position: "absolute" }}
+              className="!absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
             >
               <ChevronLeft size={20} />
             </button>
@@ -359,7 +360,8 @@ export default function AchievementsSection() {
               onClick={nextAward}
               aria-label="Next award"
               title="Circular Next: curr = curr->next"
-              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
+              style={{ position: "absolute" }}
+              className="!absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
             >
               <ChevronRight size={20} />
             </button>
@@ -580,7 +582,7 @@ export default function AchievementsSection() {
 
           {/* Certifications Carousel Stage */}
           <div
-            className="relative touch-pan-y"
+            className="relative w-full touch-pan-y"
             onMouseEnter={() => setIsCertPaused(true)}
             onMouseLeave={() => setIsCertPaused(false)}
             {...certSwipe}
@@ -591,7 +593,8 @@ export default function AchievementsSection() {
               onClick={prevCert}
               aria-label="Previous certification"
               title="Circular Prev: curr = curr->prev"
-              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
+              style={{ position: "absolute" }}
+              className="!absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
             >
               <ChevronLeft size={20} />
             </button>
@@ -602,7 +605,8 @@ export default function AchievementsSection() {
               onClick={nextCert}
               aria-label="Next certification"
               title="Circular Next: curr = curr->next"
-              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
+              style={{ position: "absolute" }}
+              className="!absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full glass border border-amber/30 flex items-center justify-center text-ink hover:text-amber hover:border-amber hover:bg-amber/15 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.7)] transition-all cursor-pointer active:scale-95"
             >
               <ChevronRight size={20} />
             </button>
