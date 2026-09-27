@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import LoadingScreen from "./layout/LoadingScreen";
-import DustCanvas from "./background/DustCanvas";
+import { useEffect, useState, useCallback } from "react";
 import Navbar from "./layout/Navbar";
 import SocialSidebar from "./layout/SocialSidebar";
 import ScrollToTop from "./layout/ScrollToTop";
@@ -15,11 +13,10 @@ import ProjectsSection from "./sections/ProjectsSection";
 import UniversityJourneySection from "./sections/UniversityJourneySection";
 import AchievementsSection from "./sections/AchievementsSection";
 import ContactSection from "./sections/ContactSection";
-import { SECTION_COLORS, hexToRgb } from "../lib/data";
 
 export default function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("hero");
-  const [dustColor, setDustColor] = useState<[number, number, number]>([78, 222, 163]);
+  const [stormComplete, setStormComplete] = useState(false);
 
   useEffect(() => {
     // Ensure fresh page load starts at the very top (Hero section) unless a URL hash is present
@@ -29,6 +26,29 @@ export default function PortfolioPage() {
       }
       window.scrollTo(0, 0);
     }
+  }, []);
+
+  // Lock body scroll during choreographed assembly & ASCII sequence (max 4.4s safety fallback)
+  useEffect(() => {
+    if (!stormComplete) {
+      document.body.style.overflow = "hidden";
+      const timer = setTimeout(() => {
+        setStormComplete(true);
+      }, 4400);
+      return () => {
+        clearTimeout(timer);
+        document.body.style.overflow = "";
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [stormComplete]);
+
+  const handleStormComplete = useCallback(() => {
+    setStormComplete(true);
   }, []);
 
   useEffect(() => {
@@ -45,16 +65,12 @@ export default function PortfolioPage() {
       // 1. Top of page edge case -> Hero
       if (scrollY < 120) {
         setActiveSection("hero");
-        const colorHex = SECTION_COLORS.hero;
-        if (colorHex) setDustColor(hexToRgb(colorHex));
         return;
       }
 
       // 2. Bottom of page edge case -> Contact
       if (scrollY + viewportHeight >= documentHeight - 80) {
         setActiveSection("contact");
-        const colorHex = SECTION_COLORS.contact;
-        if (colorHex) setDustColor(hexToRgb(colorHex));
         return;
       }
 
@@ -83,15 +99,7 @@ export default function PortfolioPage() {
       });
 
       const finalId = matchedId || fallbackId;
-
-      setActiveSection((prev) => {
-        if (prev !== finalId) {
-          const colorHex = SECTION_COLORS[finalId];
-          if (colorHex) setDustColor(hexToRgb(colorHex));
-          return finalId;
-        }
-        return prev;
-      });
+      setActiveSection((prev) => (prev !== finalId ? finalId : prev));
     };
 
     const onScroll = () => {
@@ -116,21 +124,17 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen overflow-x-hidden relative bg-void text-ink transition-colors duration-300">
-      {/* Boot Splash Loading Screen */}
-      <LoadingScreen />
-
-      {/* Layered background: grid → dust particles */}
+      {/* Background grid */}
       <div className="fixed inset-0 grid-bg pointer-events-none z-0" />
-      <DustCanvas sectionColor={dustColor} />
 
-      {/* Fixed chrome */}
-      <Navbar activeSection={activeSection} />
-      <SocialSidebar />
+      {/* Fixed chrome — hidden until storm completes */}
+      <Navbar activeSection={activeSection} visible={stormComplete} />
+      <SocialSidebar visible={stormComplete} />
       <ScrollToTop />
 
       {/* Page content */}
       <main className="relative z-10">
-        <HeroSection />
+        <HeroSection onStormComplete={handleStormComplete} />
         <AboutSection />
         <EducationSection />
         <SkillsSection />

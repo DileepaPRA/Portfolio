@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 import type { IconEntry } from "../../lib/sectionIcons";
 
 interface Props {
@@ -117,7 +117,7 @@ const VARIANTS: Record<string, BlobDef[]> = {
   ],
 };
 
-export default function SectionAmbient({ color, variant = "a", icons = [] }: Props) {
+export default memo(function SectionAmbient({ color, variant = "a", icons = [] }: Props) {
   const cr = parseInt(color.slice(1, 3), 16);
   const cg = parseInt(color.slice(3, 5), 16);
   const cb = parseInt(color.slice(5, 7), 16);
@@ -216,14 +216,6 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
           b.ry3 * h * Math.cos(b.fy3 * t * 1.25 + b.py3 + 0.35 * Math.cos(t * 0.13 + i)) +
           0.035 * h * Math.sin(t * 0.08 + i * 1.2);
 
-        // 8-point organic liquid surface tension morphing (continuous non-repeating droplet deformation)
-        const morph1 = 50 + 20 * Math.sin(t * 0.42 + i * 1.7 + 0.2 * Math.cos(t * 0.2 + i));
-        const morph2 = 50 + 18 * Math.cos(t * 0.36 + i * 2.3 + 0.3 * Math.sin(t * 0.25));
-        const morph3 = 50 + 19 * Math.sin(t * 0.48 + i * 0.9 + 0.2 * Math.cos(t * 0.3));
-        const morph4 = 50 + 17 * Math.cos(t * 0.39 + i * 3.1 + 0.3 * Math.sin(t * 0.22));
-
-        el.style.borderRadius = `${morph1}% ${100 - morph1}% ${morph2}% ${100 - morph2}% / ${morph3}% ${morph4}% ${100 - morph4}% ${100 - morph3}%`;
-
         // Fluid viscous rotation & hydrodynamic stretching along velocity current
         const rot = Math.sin(t * 0.2 + i * 1.3) * 28 + t * (i % 2 === 0 ? 3.2 : -3.2);
         const scaleX = 1 + 0.14 * Math.sin(t * 0.55 + i * 1.4);
@@ -299,7 +291,7 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
             borderRadius: "50%",
             background: `rgba(${cr},${cg},${cb},${b.opacity})`,
             filter: `blur(${b.blur}px)`,
-            willChange: "transform, border-radius",
+            willChange: "transform",
           }}
         />
       ))}
@@ -332,4 +324,4 @@ export default function SectionAmbient({ color, variant = "a", icons = [] }: Pro
       ))}
     </div>
   );
-}
+});

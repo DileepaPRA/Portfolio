@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   ChevronLeft,
   ChevronRight,
-  ChevronDown,
   ExternalLink,
   Plus,
   X,
@@ -27,6 +26,7 @@ import { PROJECTS, SOCIALS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
 import TechLogo from "../TechLogo";
+import { useSwipe } from "../../lib/useSwipe";
 
 export default function ProjectsSection() {
   const [activeIdx, setActiveIdx] = useState<number | "collab">(0);
@@ -66,6 +66,33 @@ export default function ProjectsSection() {
       }
     }
   }, [activeIdx, isCollabOpen, total]);
+
+  // Mobile swipe gestures: swipe left = next, swipe right = prev (standard carousel gesture)
+  const projectSwipe = useSwipe({
+    onSwipeLeft: next,
+    onSwipeRight: prev,
+  });
+
+  const prevLightbox = useCallback(() => {
+    if (!lightboxProject) return;
+    const curr = PROJECTS.findIndex((p) => p.id === lightboxProject.id);
+    const prevIdx = (curr - 1 + PROJECTS.length) % PROJECTS.length;
+    setLightboxProject(PROJECTS[prevIdx]);
+    setActiveIdx(prevIdx);
+  }, [lightboxProject]);
+
+  const nextLightbox = useCallback(() => {
+    if (!lightboxProject) return;
+    const curr = PROJECTS.findIndex((p) => p.id === lightboxProject.id);
+    const nextIdx = (curr + 1) % PROJECTS.length;
+    setLightboxProject(PROJECTS[nextIdx]);
+    setActiveIdx(nextIdx);
+  }, [lightboxProject]);
+
+  const lightboxSwipe = useSwipe({
+    onSwipeLeft: nextLightbox,
+    onSwipeRight: prevLightbox,
+  });
 
   const isInitialMount = useRef(true);
 
@@ -188,17 +215,20 @@ export default function ProjectsSection() {
 
         {/* ── AUTHENTIC WINDOWS TABBED APPLICATION CONTAINER ── */}
         <div
-          className="rounded-2xl border-2 border-purple/35 overflow-hidden mb-8 shadow-2xl transition-all duration-300 terminal"
+          className="rounded-2xl border-2 border-purple/35 overflow-hidden mb-8 shadow-2xl transition-all duration-300 terminal touch-pan-y"
           style={{
             background: "var(--terminal-bg)",
             boxShadow: "var(--glass-shadow)",
           }}
+          {...projectSwipe}
         >
           {/* ── AUTHENTIC WINDOWS TITLEBAR WITH ELASTIC TABS & TAB MANAGER ── */}
           <div className="flex items-stretch justify-between select-none border-b border-purple/25 relative bg-surface/75 backdrop-blur-md">
             {/* ── Left: Project Tabs List (.exe Tabs) with Mouse Wheel & Auto-Scroll ── */}
             <div
               ref={tabsContainerRef}
+              onTouchStart={(e) => e.stopPropagation()}
+              onTouchEnd={(e) => e.stopPropagation()}
               onWheel={(e) => {
                 if (e.currentTarget) {
                   e.currentTarget.scrollLeft += e.deltaY;
@@ -800,7 +830,10 @@ export default function ProjectsSection() {
               </div>
 
               {/* Modal High-Res Screenshot Body */}
-              <div className="relative p-4 sm:p-6 flex items-center justify-center bg-black/50 min-h-[300px] md:min-h-[420px]">
+              <div
+                className="relative p-4 sm:p-6 flex items-center justify-center bg-black/50 min-h-[300px] md:min-h-[420px] touch-pan-y"
+                {...lightboxSwipe}
+              >
                 <div className="relative rounded-xl overflow-hidden border border-white/15 shadow-2xl max-h-[70vh] flex items-center justify-center bg-black/40">
                   <Image
                     src={lightboxProject.image}

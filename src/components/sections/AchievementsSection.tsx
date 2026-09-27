@@ -17,6 +17,7 @@ import {
 import { AWARDS, CERTIFICATIONS, SECTION_COLORS } from "../../lib/data";
 import SectionAmbient from "../background/SectionAmbient";
 import { SECTION_ICONS } from "../../lib/sectionIcons";
+import { useSwipe } from "../../lib/useSwipe";
 
 // ── Interactive Bidirectional Pointer Conduit Between Nodes ──
 function PointerBridge({
@@ -262,6 +263,17 @@ export default function AchievementsSection() {
   const nextCert = () => setCertIndex((prev) => prev + 1);
   const prevCert = () => setCertIndex((prev) => prev - 1);
 
+  // Mobile swipe gestures: swipe left = next, swipe right = prev (standard carousel gesture)
+  const awardSwipe = useSwipe({
+    onSwipeLeft: nextAward,
+    onSwipeRight: prevAward,
+  });
+
+  const certSwipe = useSwipe({
+    onSwipeLeft: nextCert,
+    onSwipeRight: prevCert,
+  });
+
   const numAwards = AWARDS.length;
   const numCerts = CERTIFICATIONS.length;
 
@@ -325,9 +337,10 @@ export default function AchievementsSection() {
 
           {/* Awards Carousel Stage */}
           <div
-            className="relative"
+            className="relative touch-pan-y"
             onMouseEnter={() => setIsAwardPaused(true)}
             onMouseLeave={() => setIsAwardPaused(false)}
+            {...awardSwipe}
           >
             {/* Floating Left Carousel Button */}
             <button
@@ -567,9 +580,10 @@ export default function AchievementsSection() {
 
           {/* Certifications Carousel Stage */}
           <div
-            className="relative"
+            className="relative touch-pan-y"
             onMouseEnter={() => setIsCertPaused(true)}
             onMouseLeave={() => setIsCertPaused(false)}
+            {...certSwipe}
           >
             {/* Floating Left Carousel Button */}
             <button

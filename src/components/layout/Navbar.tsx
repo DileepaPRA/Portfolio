@@ -8,9 +8,10 @@ import ThemeToggle from "./ThemeToggle";
 
 interface Props {
   activeSection: string;
+  visible?: boolean;
 }
 
-export default function Navbar({ activeSection }: Props) {
+export default function Navbar({ activeSection, visible = true }: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -40,7 +41,15 @@ export default function Navbar({ activeSection }: Props) {
   };
 
   return (
-    <header className="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none transition-all duration-300">
+    <motion.header
+      className="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none transition-all duration-300"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{
+        opacity: visible ? 1 : 0,
+        y: visible ? 0 : -20,
+      }}
+      transition={{ type: "spring", stiffness: 120, damping: 18, delay: visible ? 0.1 : 0 }}
+    >
       <motion.nav
         initial={false}
         animate={{
@@ -189,6 +198,6 @@ export default function Navbar({ activeSection }: Props) {
           </>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

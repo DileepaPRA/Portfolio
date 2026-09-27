@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail } from "lucide-react";
+import { motion } from "motion/react";
 import { GithubIcon, LinkedinIcon } from "../icons";
 import { SOCIAL_LINKS } from "../../lib/data";
 
@@ -13,9 +14,21 @@ const SIDEBAR_ICONS: Record<
   email: Mail,
 };
 
-export default function SocialSidebar() {
+interface SocialSidebarProps {
+  visible?: boolean;
+}
+
+export default function SocialSidebar({ visible = true }: SocialSidebarProps) {
   return (
-    <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 w-20 z-40 flex-col items-center justify-between py-8">
+    <motion.aside
+      className="hidden lg:flex fixed left-0 top-0 bottom-0 w-20 z-40 flex-col items-center justify-between py-8"
+      initial={{ opacity: 0, x: -20 }}
+      animate={{
+        opacity: visible ? 1 : 0,
+        x: visible ? 0 : -20,
+      }}
+      transition={{ type: "spring", stiffness: 120, damping: 18, delay: visible ? 0.2 : 0 }}
+    >
       {/* Top spacer for nav */}
       <div className="mt-16" />
 
@@ -59,6 +72,6 @@ export default function SocialSidebar() {
         {/* Vertical line */}
         <div className="w-px h-16 bg-gradient-to-b from-border-hi to-transparent" />
       </div>
-    </aside>
+    </motion.aside>
   );
 }

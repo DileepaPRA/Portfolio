@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Sora, Inter, JetBrains_Mono } from "next/font/google";
 import "@/index.css";
+import { PERSONAL_INFO } from "@/lib/data";
+import JsonLd from "@/components/seo/JsonLd";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -24,42 +26,82 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dileepa Prabhath — Full Stack Developer",
+  metadataBase: new URL(PERSONAL_INFO.siteUrl || "https://dilee.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
+  title: {
+    default: "Dileepa Prabhath — Software Engineer",
+    template: "%s | Dileepa Prabhath",
+  },
   description:
-    "Portfolio of Dileepa Prabhath — IT undergraduate at the University of Moratuwa. Full stack developer, backend engineer, and AI/ML enthusiast building secure, scalable systems.",
+    "Portfolio of Dileepa Prabhath — IT undergraduate at University of Moratuwa. Software Engineer, backend engineer, and AI/ML enthusiast building secure, scalable systems.",
   keywords: [
     "Dileepa Prabhath",
+    "Software Engineer",
     "Full Stack Developer",
     "Backend Engineer",
     "Portfolio",
     "University of Moratuwa",
+    "Spring Boot",
+    "Java",
     "React",
     "Next.js",
     "TypeScript",
-    "Spring Boot",
+    "Python",
+    "REST APIs",
     "AI/ML",
     "Cybersecurity",
+    "Sri Lanka Developer",
+    "Java Backend Developer",
+    "AI Developer",
+    "AI Engineer",
+    "ML Engineer",
+    "Computer Vision Engineer",
   ],
-  authors: [{ name: "Dileepa Prabhath" }],
+  authors: [{ name: "Dileepa Prabhath", url: PERSONAL_INFO.siteUrl }],
   creator: "Dileepa Prabhath",
+  publisher: "Dileepa Prabhath",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://dileepaprabhath.dev",
-    title: "Dileepa Prabhath — Full Stack Developer",
+    url: PERSONAL_INFO.siteUrl,
+    title: "Dileepa Prabhath — Software Engineer",
     description:
       "IT undergraduate at the University of Moratuwa. Building secure, scalable, and intelligent systems.",
     siteName: "Dileepa Prabhath Portfolio",
+    images: [
+      {
+        url: "/images/projects/Portfolio.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dileepa Prabhath — Software Engineer Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dileepa Prabhath — Full Stack Developer",
+    title: "Dileepa Prabhath — Software Engineer",
     description:
       "IT undergraduate at the University of Moratuwa. Building secure, scalable, and intelligent systems.",
+    images: ["/images/projects/Portfolio.jpg"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google:
+      process.env.GOOGLE_SITE_VERIFICATION ||
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+      "oaQ7GcNIGUpHZpE5KNahdJj2srQteyu5WGyRRkZsh2Y",
   },
   icons: {
     icon: "/images/logo_no_bg.png",
@@ -106,6 +148,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
+        <JsonLd />
       </head>
       <body>{children}</body>
     </html>
